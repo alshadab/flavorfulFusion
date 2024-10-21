@@ -1,27 +1,35 @@
-
-import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
 import {
-  ArchiveBoxIcon,
-  ArrowRightCircleIcon,
-  ChevronDownIcon,
-  DocumentDuplicateIcon,
-  HeartIcon,
-  PencilSquareIcon,
-  TrashIcon,
-  UserPlusIcon,
-} from '@heroicons/react/20/solid'
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+  Transition,
+} from "@headlessui/react";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
+
+import { LuVegan } from "react-icons/lu";
+import { GiFruitTree } from "react-icons/gi";
+import { GiFruiting } from "react-icons/gi";
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
 export default function NavDropDown() {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
-        <MenuButton className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-transparent border border-green-500 px-3 py-2 text-sm font-semibold text-green-500 shadow-sm ring-1 ring-inset ring-green-500 hover:border-green-500">
-          Options
-          <ChevronDownIcon className="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
+        <MenuButton className="bg-white inline-flex w-full justify-center items-center gap-x-4 rounded-md bg-transparent border border-white px-3 py-2 text-xs font-bold text-green-600 shadow-sm ring-1 ring-inset ring-white hover:border-white">
+          <div className="flex items-center gap-x-2">
+            <span className="text-lg">
+              <LuVegan />
+            </span>
+            <span>Vegetables</span>
+          </div>
+          <ChevronDownIcon
+            className="-mr-1 h-5 w-5 text-green-600"
+            aria-hidden="true"
+          />
         </MenuButton>
       </div>
 
@@ -33,22 +41,22 @@ export default function NavDropDown() {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <MenuItems className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <MenuItems className="absolute -right-2 z-10 mt-2 w-40 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
             <MenuItem>
               {({ focus }) => (
                 <p
                   href="#"
                   className={classNames(
-                    focus ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'group flex items-center px-4 py-2 text-sm'
+                    focus ? "bg-gray-100 text-slate-900" : "text-slate-600",
+                    "group flex items-center px-4 py-2 text-xs font-semibold"
                   )}
                 >
-                  <PencilSquareIcon
-                    className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                  <GiFruiting
+                    className="mr-3 h-5 w-5 text-slate-600 group-hover:text-slate-500"
                     aria-hidden="true"
                   />
-                  Edit
+                  Fruits
                 </p>
               )}
             </MenuItem>
@@ -57,94 +65,15 @@ export default function NavDropDown() {
                 <p
                   href="#"
                   className={classNames(
-                    focus ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'group flex items-center px-4 py-2 text-sm'
+                    focus ? "bg-gray-100 text-slate-900" : "text-slate-600",
+                    "group flex items-center px-4 py-2 text-xs font-semibold"
                   )}
                 >
-                  <DocumentDuplicateIcon
-                    className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                  <GiFruitTree
+                    className="mr-3 h-5 w-5 text-slate-600 group-hover:text-slate-500"
                     aria-hidden="true"
                   />
-                  Duplicate
-                </p>
-              )}
-            </MenuItem>
-          </div>
-          <div className="py-1">
-            <MenuItem>
-              {({ focus }) => (
-                <p
-                  href="#"
-                  className={classNames(
-                    focus ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'group flex items-center px-4 py-2 text-sm'
-                  )}
-                >
-                  <ArchiveBoxIcon className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500" aria-hidden="true" />
-                  Archive
-                </p>
-              )}
-            </MenuItem>
-            <MenuItem>
-              {({ focus }) => (
-                <p
-                  href="#"
-                  className={classNames(
-                    focus ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'group flex items-center px-4 py-2 text-sm'
-                  )}
-                >
-                  <ArrowRightCircleIcon
-                    className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                    aria-hidden="true"
-                  />
-                  Move
-                </p>
-              )}
-            </MenuItem>
-          </div>
-          <div className="py-1">
-            <MenuItem>
-              {({ focus }) => (
-                <p
-                  href="#"
-                  className={classNames(
-                    focus ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'group flex items-center px-4 py-2 text-sm'
-                  )}
-                >
-                  <UserPlusIcon className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500" aria-hidden="true" />
-                  Share
-                </p>
-              )}
-            </MenuItem>
-            <MenuItem>
-              {({ focus }) => (
-                <p
-                  href="#"
-                  className={classNames(
-                    focus ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'group flex items-center px-4 py-2 text-sm'
-                  )}
-                >
-                  <HeartIcon className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500" aria-hidden="true" />
-                  Add to favorites
-                </p>
-              )}
-            </MenuItem>
-          </div>
-          <div className="py-1">
-            <MenuItem>
-              {({ focus }) => (
-                <p
-                  href="#"
-                  className={classNames(
-                    focus ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                    'group flex items-center px-4 py-2 text-sm'
-                  )}
-                >
-                  <TrashIcon className="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500" aria-hidden="true" />
-                  Delete
+                  Others
                 </p>
               )}
             </MenuItem>
@@ -152,5 +81,5 @@ export default function NavDropDown() {
         </MenuItems>
       </Transition>
     </Menu>
-  )
+  );
 }
