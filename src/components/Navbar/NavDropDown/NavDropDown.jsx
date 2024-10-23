@@ -19,7 +19,7 @@ export default function NavDropDown() {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
-        <MenuButton className="bg-white inline-flex w-full justify-center items-center gap-x-4 rounded-md bg-transparent border border-white px-3 py-2 text-xs font-bold text-green-600 shadow-sm ring-1 ring-inset ring-white hover:border-white">
+        <MenuButton className="bg-white inline-flex w-full justify-center items-center gap-x-4 rounded-md border border-white px-3 py-2.5 text-sm font-bold text-orange-600 shadow-sm ring-1 ring-inset ring-white duration-200 hover:border-white hover:cursor-pointer hover:scale-110">
           <div className="flex items-center gap-x-2">
             <span className="text-lg">
               <LuVegan />
@@ -27,7 +27,7 @@ export default function NavDropDown() {
             <span>Vegetables</span>
           </div>
           <ChevronDownIcon
-            className="-mr-1 h-5 w-5 text-green-600"
+            className="-mr-1 h-5 w-5 text-orange-600"
             aria-hidden="true"
           />
         </MenuButton>
@@ -41,15 +41,15 @@ export default function NavDropDown() {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <MenuItems className="absolute -right-2 z-10 mt-2 w-40 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <MenuItems className="absolute right-0 z-10 mt-2 w-40 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
             <MenuItem>
               {({ focus }) => (
                 <p
                   href="#"
                   className={classNames(
-                    focus ? "bg-gray-100 text-slate-900" : "text-slate-600",
-                    "group flex items-center px-4 py-2 text-xs font-semibold"
+                    focus ? "bg-gray-100 text-slate-900 duration-200 hover:duration-200 hover:cursor-pointer hover:scale-105" : "text-slate-600",
+                    "group flex items-center px-4 py-2 text-sm font-semibold"
                   )}
                 >
                   <GiFruiting
@@ -65,8 +65,8 @@ export default function NavDropDown() {
                 <p
                   href="#"
                   className={classNames(
-                    focus ? "bg-gray-100 text-slate-900" : "text-slate-600",
-                    "group flex items-center px-4 py-2 text-xs font-semibold"
+                    focus ? "bg-gray-100 text-slate-900 duration-200 hover:duration-200 hover:cursor-pointer hover:scale-105" : "text-slate-600",
+                    "group flex items-center px-4 py-2 text-sm font-semibold"
                   )}
                 >
                   <GiFruitTree
