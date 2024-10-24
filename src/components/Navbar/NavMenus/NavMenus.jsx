@@ -6,7 +6,7 @@ function NavMenus() {
   const links = (
     <>
       <NavLink
-        to="/messages"
+        to="/shops"
         className={({ isActive, isPending }) =>
           isPending
             ? "pending"
@@ -18,7 +18,7 @@ function NavMenus() {
         Shops
       </NavLink>
       <NavLink
-        to="/messages"
+        to="/offers"
         className={({ isActive, isPending }) =>
           isPending
             ? "pending"
