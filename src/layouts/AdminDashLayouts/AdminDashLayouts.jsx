@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
 import { Fragment, useState } from "react";
 import logo from "../../assets/logo.png";
+import { CiShop } from "react-icons/ci";
 import {
   Dialog,
   DialogPanel,
@@ -13,7 +14,6 @@ import {
 } from "@headlessui/react";
 import {
   Bars3Icon,
-  BellIcon,
   ShoppingBagIcon,
   ChartPieIcon,
   Cog6ToothIcon,
@@ -219,6 +219,99 @@ export default function AdminDashLayouts() {
                         <li>
                           <ul role="list" className="-mx-2 space-y-1">
                             {navigation.map((item) => (
+                              <li key={item.name}>
+                                <a
+                                  href={item.href}
+                                  className={classNames(
+                                    item.current
+                                      ? "bg-orange-700 text-white"
+                                      : "text-orange-200 hover:text-white hover:bg-orange-700",
+                                    "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                                  )}
+                                >
+                                  <item.icon
+                                    className={classNames(
+                                      item.current
+                                        ? "text-white"
+                                        : "text-orange-200 group-hover:text-white",
+                                      "h-6 w-6 shrink-0"
+                                    )}
+                                    aria-hidden="true"
+                                  />
+                                  {item.name}
+                                </a>
+                              </li>
+                            ))}
+                          </ul>
+                        </li>
+                        <p className="text-orange-200 font-poppins font-semibold text-sm">
+                          E-Commerce Management
+                        </p>
+                        <li>
+                          <ul role="list" className="-mx-2 -mt-4">
+                            {navigationTwo.map((item) => (
+                              <li key={item.name}>
+                                <a
+                                  href={item.href}
+                                  className={classNames(
+                                    item.current
+                                      ? "bg-orange-700 text-white"
+                                      : "text-orange-200 hover:text-white hover:bg-orange-700",
+                                    "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                                  )}
+                                >
+                                  <item.icon
+                                    className={classNames(
+                                      item.current
+                                        ? "text-white"
+                                        : "text-orange-200 group-hover:text-white",
+                                      "h-6 w-6 shrink-0"
+                                    )}
+                                    aria-hidden="true"
+                                  />
+                                  {item.name}
+                                </a>
+                              </li>
+                            ))}
+                          </ul>
+                        </li>
+                        <p className="text-orange-200 font-poppins font-semibold text-sm">
+                          Layout Controlls
+                        </p>
+                        <li>
+                          <ul role="list" className="-mx-2 -mt-4">
+                            {navigationThree.map((item) => (
+                              <li key={item.name}>
+                                <a
+                                  href={item.href}
+                                  className={classNames(
+                                    item.current
+                                      ? "bg-orange-700 text-white"
+                                      : "text-orange-200 hover:text-white hover:bg-orange-700",
+                                    "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                                  )}
+                                >
+                                  <item.icon
+                                    className={classNames(
+                                      item.current
+                                        ? "text-white"
+                                        : "text-orange-200 group-hover:text-white",
+                                      "h-6 w-6 shrink-0"
+                                    )}
+                                    aria-hidden="true"
+                                  />
+                                  {item.name}
+                                </a>
+                              </li>
+                            ))}
+                          </ul>
+                        </li>
+                        <p className="text-orange-200 font-poppins font-semibold text-sm">
+                          User Controlls
+                        </p>
+                        <li>
+                          <ul role="list" className="-mx-2 -mt-4">
+                            {navigationFour.map((item) => (
                               <li key={item.name}>
                                 <a
                                   href={item.href}
@@ -451,15 +544,10 @@ export default function AdminDashLayouts() {
                 />
               </form>
               <div className="flex items-center gap-x-4 lg:gap-x-6">
-                <button
-                  type="button"
-                  className="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500"
-                >
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
+                <button className="px-4 py-2 rounded-3xl text-sm font-semibold bg-orange-600 text-white duration-200 hover:duration-200 hover:cursor-pointer hover:bg-orange-700">Visit Site</button>
 
-                {/* Separator */}
+                <button className="flex items-center gap-x-2 px-4 py-2 rounded-3xl text-sm font-semibold border border-orange-600 text-orange-600 duration-200 hover:duration-200 hover:cursor-pointer hover:bg-orange-500 hover:text-white"><CiShop className="text-xl"/>Create Shop</button>
+
                 <div
                   className="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-900/10"
                   aria-hidden="true"
