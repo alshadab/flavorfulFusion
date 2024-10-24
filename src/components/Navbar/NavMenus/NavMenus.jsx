@@ -30,7 +30,7 @@ function NavMenus() {
         Offers
       </NavLink>
       <NavLink
-        to="/messages"
+        to="/contact"
         className={({ isActive, isPending }) =>
           isPending
             ? "pending"

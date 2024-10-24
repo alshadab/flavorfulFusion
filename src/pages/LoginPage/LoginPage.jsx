@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import img from "../../assets/logo.png";
-import signupLogo from "../../assets/signupPage.png";
+import loginImage from "../../assets/loginImage.png"
 
 function LoginPage() {
   const [selectedRole, setSelectedRole] = useState("buyer"); // Default selected role
@@ -11,7 +11,7 @@ function LoginPage() {
       <div className="w-full h-full bg-orange-200 rounded-lg shadow-lg">
         <div className="w-full h-full grid grid-cols-2">
           <div className="w-full h-full flex justify-center items-center">
-            <img src={signupLogo} className="w-92" alt="Sign Up Logo" />
+            <img src={loginImage} className="w-92" alt="Sign Up Logo" />
           </div>
           <form className="w-full h-full px-28 py-20 flex flex-col justify-center">
             <div className="">
