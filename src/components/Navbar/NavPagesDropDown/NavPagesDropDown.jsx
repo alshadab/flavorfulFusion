@@ -106,32 +106,6 @@ function NavPagesDropDown() {
                   </p>
                 )}
               </MenuItem>
-              <MenuItem>
-                {({ focus }) => (
-                  <p
-                    href="#"
-                    className={classNames(
-                      focus ? "bg-gray-100 text-slate-900 duration-200 hover:cursor-pointer hover:scale-105 hover:duration-200" : "text-slate-600",
-                      "group flex items-center px-4 py-2 text-sm font-semibold"
-                    )}
-                  >
-                    Customer Refund Policy
-                  </p>
-                )}
-              </MenuItem>
-              <MenuItem>
-                {({ focus }) => (
-                  <p
-                    href="#"
-                    className={classNames(
-                      focus ? "bg-gray-100 text-slate-900 duration-200 hover:cursor-pointer hover:scale-105 hover:duration-200" : "text-slate-600",
-                      "group flex items-center px-4 py-2 text-sm font-semibold"
-                    )}
-                  >
-                    Vendor Refund Policy
-                  </p>
-                )}
-              </MenuItem>
             </div>
           </MenuItems>
         </Transition>
