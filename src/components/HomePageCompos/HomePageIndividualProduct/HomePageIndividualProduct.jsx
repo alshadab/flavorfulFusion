@@ -3,7 +3,7 @@ import appleImg from "../../../assets/appleImage.png";
 
 function HomePageIndividualProduct() {
   return (
-    <div class="w-full p-4 bg-white rounded-lg shadow-md">
+    <div class="w-full p-4 bg-white border rounded-lg shadow-md">
       <div class="relative">
         <img
           class="w-full h-60 object-cover rounded-t-lg"
@@ -15,7 +15,7 @@ function HomePageIndividualProduct() {
         </span>
       </div>
 
-      <div class="mt-10 text-left">
+      <div class="mt-5 text-left">
         <h3 class="text-lg font-semibold">Apples</h3>
         <p class="text-sm text-gray-500">1lb</p>
         <div class="mt-10 flex items-end justify-between">
