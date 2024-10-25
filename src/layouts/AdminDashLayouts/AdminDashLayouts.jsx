@@ -244,7 +244,7 @@ export default function AdminDashLayouts() {
                             ))}
                           </ul>
                         </li>
-                        <p className="text-orange-200 font-poppins font-semibold text-sm">
+                        <p className="text-orange-600 font-poppins font-semibold text-sm">
                           E-Commerce Management
                         </p>
                         <li>
@@ -275,7 +275,7 @@ export default function AdminDashLayouts() {
                             ))}
                           </ul>
                         </li>
-                        <p className="text-orange-200 font-poppins font-semibold text-sm">
+                        <p className="text-orange-600 font-poppins font-semibold text-sm">
                           Layout Controlls
                         </p>
                         <li>
@@ -306,7 +306,7 @@ export default function AdminDashLayouts() {
                             ))}
                           </ul>
                         </li>
-                        <p className="text-orange-200 font-poppins font-semibold text-sm">
+                        <p className="text-orange-600 font-poppins font-semibold text-sm">
                           User Controlls
                         </p>
                         <li>
@@ -399,7 +399,7 @@ export default function AdminDashLayouts() {
                     ))}
                   </ul>
                 </li>
-                <p className="text-orange-200 font-poppins font-semibold">
+                <p className="text-orange-600 font-poppins font-semibold">
                   E-Commerce Management
                 </p>
                 <li>
@@ -430,7 +430,7 @@ export default function AdminDashLayouts() {
                     ))}
                   </ul>
                 </li>
-                <p className="text-orange-200 font-poppins font-semibold">
+                <p className="text-orange-600 font-poppins font-semibold">
                   Layout Controls
                 </p>
                 <li>
@@ -461,7 +461,7 @@ export default function AdminDashLayouts() {
                     ))}
                   </ul>
                 </li>
-                <p className="text-orange-200 font-poppins font-semibold">
+                <p className="text-orange-600 font-poppins font-semibold">
                   User Controlls
                 </p>
                 <li>
@@ -495,10 +495,10 @@ export default function AdminDashLayouts() {
                 <li className="mt-auto">
                   <p
                     href="#"
-                    className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-orange-200 hover:bg-orange-700 hover:text-white"
+                    className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-orange-600 hover:bg-orange-700 hover:text-white"
                   >
                     <Cog6ToothIcon
-                      className="h-6 w-6 shrink-0 text-orange-200 group-hover:text-white"
+                      className="h-6 w-6 shrink-0 text-orange-600 group-hover:text-white"
                       aria-hidden="true"
                     />
                     Settings
@@ -606,8 +606,8 @@ export default function AdminDashLayouts() {
             </div>
           </div>
 
-          <main className="py-10">
-            <div className="px-4 sm:px-6 lg:px-8">
+          <main className="py-10 w-full h-[91vh] bg-slate-200">
+            <div className="px-4 sm:px-6 lg:px-8 w-full h-full">
               <Outlet />
             </div>
           </main>
