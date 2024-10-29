@@ -17,6 +17,7 @@ function AdminDashHomePage() {
   const [postRequest, getRequest] = useRequest();
   const [totalOrderNumber, setTotalOrderNumber] = useState(0);
   const [totalUserNumber, setTotalUserNumber] = useState(0);
+  const [totalVendorNumber, setTotalVendorNumber] = useState(0);
   const [totalPendingOrdersNumber, setTotalPendingOrdersNumber] = useState(0);
   const [totalConfirmedOrdersNumber, setTotalConfirmedOrdersNumber] = useState(0);
   const [totalDeliveredOrdersNumber, setTotalDeliveredOrdersNumber] = useState(0);
@@ -31,6 +32,11 @@ function AdminDashHomePage() {
   const fetchTotalUserNumbers = async () => {
     let totalNumber = await getRequest("/users/src/all");
     setTotalUserNumber(totalNumber?.data?.data?.length);
+  };
+
+  const fetchTotalVendorNumbers = async () => {
+    let totalNumber = await getRequest("/shop/src/all");
+    setTotalVendorNumber(totalNumber?.data?.data);
   };
 
   const fetchTotalPendingOrderNumbers = async () => {
@@ -61,6 +67,7 @@ function AdminDashHomePage() {
   useEffect(() => {
     fetchTotalOrderNumbers();
     fetchTotalUserNumbers();
+    fetchTotalVendorNumbers();
     fetchTotalPendingOrderNumbers();
     fetchTotalConfirmedOrderNumbers();
     fetchTotalDeliveredOrderNumbers();
@@ -68,7 +75,7 @@ function AdminDashHomePage() {
     fetchPopularProducts();
   }, []);
 
-  console.log(popularProductsList, "All Popular Product Lists");
+  console.log(totalVendorNumber.length, "All Popular Product Lists");
 
   return (
     <div className="w-full h-full rounded-lg shadow-md px-5 py-10 bg-white">
@@ -94,7 +101,7 @@ function AdminDashHomePage() {
         />
         <SummaryDataCards
           title="Vendor"
-          amount="32"
+          amount={totalVendorNumber.length}
           borderLColor="border-blue-400"
           borderBColor="border-b-blue-400"
           isAmount={false}
