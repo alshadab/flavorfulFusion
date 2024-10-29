@@ -634,8 +634,8 @@ export default function AdminDashLayouts() {
             </div>
           </div>
 
-          <main className="py-10 w-full bg-white">
-            <div className="px-4 sm:px-6 lg:px-8 w-full h-full bg-white">
+          <main className="py-5 w-full bg-white">
+            <div className="px-4 sm:px-6 lg:px-5 w-full h-full bg-white">
               <Outlet />
             </div>
           </main>

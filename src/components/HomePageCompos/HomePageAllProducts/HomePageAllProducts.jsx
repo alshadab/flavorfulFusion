@@ -82,7 +82,7 @@ function HomePageAllProducts() {
         onSortChange={handleSortChange}
       />
 
-      <div className="col-span-9 overflow-y-auto max-h-screen">
+      <div className="col-span-9">
         <div className="grid grid-cols-5 gap-x-5 gap-y-10">
           {currentProducts.map((product) => (
             <HomePageIndividualProduct key={product.id} product={product} />

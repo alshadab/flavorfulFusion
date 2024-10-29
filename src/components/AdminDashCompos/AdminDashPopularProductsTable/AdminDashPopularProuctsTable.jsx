@@ -13,13 +13,13 @@ const people = [
   },
 ];
 
-export default function AdminDashPopularProuctsTable() {
+export default function AdminDashPopularProuctsTable({popularProductsList}) {
   const [currentPage, setCurrentPage] = useState(1);
   const entriesPerPage = 5;
-  const totalPages = Math.ceil(people.length / entriesPerPage);
+  const totalPages = Math.ceil(popularProductsList.length / entriesPerPage);
 
   // Slice the data for the current page
-  const displayedPeople = people.slice(
+  const displayedPeople = popularProductsList.slice(
     (currentPage - 1) * entriesPerPage,
     currentPage * entriesPerPage
   );
@@ -46,27 +46,27 @@ export default function AdminDashPopularProuctsTable() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
-                {displayedPeople.map((person, index) => (
-                  <tr key={`${person.email}-${index}`}>
+                {displayedPeople.map((prod, index) => (
+                  <tr key={`${prod.email}-${index}`}>
                     <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                       <div className="flex items-center">
                         <div className="h-11 w-11 flex-shrink-0">
-                          <img className="h-11 w-11 rounded-lg" src={person.image} alt="" />
+                          <img className="h-11 w-11 rounded-lg" src={prod.image} alt="" />
                         </div>
                         <div className="ml-4">
-                          <div className="font-medium text-gray-900">{'Gucchi Shoes'}</div>
-                          <div className="mt-1 text-gray-500">{'Shoes'}</div>
+                          <div className="font-medium text-gray-900">{prod.productName}</div>
+                          <div className="mt-1 text-gray-500">{prod.shopCategory}</div>
                         </div>
                       </div>
                     </td>
-                    <td className="whitespace-nowrap py-5 text-sm text-center text-gray-500">200</td>
-                    <td className="whitespace-nowrap pl-5 pr-3 py-5 text-sm text-gray-500">2500 $</td>
-                    <td className="whitespace-nowrap pl-5 pr-3 py-5 text-sm text-gray-500">2,354 $</td>
+                    <td className="whitespace-nowrap py-5 text-sm text-center text-gray-500"></td>
+                    <td className="whitespace-nowrap pl-5 pr-3 py-5 text-sm text-gray-500">{prod.buyingPrice} $</td>
+                    <td className="whitespace-nowrap pl-5 pr-3 py-5 text-sm text-gray-500">{prod.sellingPrice} $</td>
                     <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                       <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Active</span>
                     </td>
                     <td className="relative whitespace-nowrap py-5 pl-10 text-center text-sm font-medium sm:pr-0">
-                      <p className="text-indigo-600 hover:text-indigo-900">Edit<span className="sr-only">, {person.name}</span></p>
+                      <p className="text-indigo-600 hover:text-indigo-900">Edit<span className="sr-only">, {prod.name}</span></p>
                     </td>
                   </tr>
                 ))}

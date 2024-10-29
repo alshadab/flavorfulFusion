@@ -10,10 +10,10 @@ function SummaryDataCards({
 }) {
   return (
     <div
-      className={`flex flex-wrap flex-row-reverse items-start justify-between border border-b-4 ${borderBColor} rounded-lg gap-x-4 gap-y-2 px-4 py-10 sm:px-6 xl:px-8`}
+      className={`flex flex-wrap flex-row-reverse items-start justify-between border border-b-4 ${borderBColor} rounded-lg gap-x-4 gap-y-2 px-4 py-5 sm:px-6 xl:px-4`}
     >
       <div>
-        <Icon className="text-4xl" />  {/* Rendering icon as a component */}
+        <Icon className="text-4xl" /> 
       </div>
       <div>
         <dt

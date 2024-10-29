@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SummaryDataCards from "../../../components/AdminDashCompos/SummaryDataCards/SummaryDataCards";
 import { FcMoneyTransfer } from "react-icons/fc";
 import { FcCurrencyExchange } from "react-icons/fc";
 import { FcFactoryBreakdown } from "react-icons/fc";
-import { FcShop } from "react-icons/fc";
+import { FcBusinessman } from "react-icons/fc";
 import { FcAlarmClock } from "react-icons/fc";
 import { FcBarChart } from "react-icons/fc";
 import { FcApproval } from "react-icons/fc";
@@ -11,10 +11,67 @@ import { FcCancel } from "react-icons/fc";
 import AdminDashRecentOrdersTable from "../../../components/AdminDashCompos/AdminDashRecentOrdersTable/AdminDashRecentOrdersTable";
 import { FaSearch } from "react-icons/fa";
 import AdminDashPopularProuctsTable from "../../../components/AdminDashCompos/AdminDashPopularProductsTable/AdminDashPopularProuctsTable";
+import useRequest from "../../../APIServices/useRequest";
 
 function AdminDashHomePage() {
+  const [postRequest, getRequest] = useRequest();
+  const [totalOrderNumber, setTotalOrderNumber] = useState(0);
+  const [totalUserNumber, setTotalUserNumber] = useState(0);
+  const [totalPendingOrdersNumber, setTotalPendingOrdersNumber] = useState(0);
+  const [totalConfirmedOrdersNumber, setTotalConfirmedOrdersNumber] = useState(0);
+  const [totalDeliveredOrdersNumber, setTotalDeliveredOrdersNumber] = useState(0);
+  const [totalCancelledOrdersNumber, setTotalCancelledOrdersNumber] = useState(0);
+  const [popularProductsList, setPopularProductList] = useState([]);
+
+  const fetchTotalOrderNumbers = async () => {
+    let totalNumber = await getRequest("/orders/src/all");
+    setTotalOrderNumber(totalNumber?.data?.data?.length);
+  };
+
+  const fetchTotalUserNumbers = async () => {
+    let totalNumber = await getRequest("/users/src/all");
+    setTotalUserNumber(totalNumber?.data?.data?.length);
+  };
+
+  const fetchTotalPendingOrderNumbers = async () => {
+    let totalNumber = await getRequest('/orders/src/pending/all');
+    setTotalPendingOrdersNumber(totalNumber?.data?.data.length);
+  };
+
+  const fetchTotalConfirmedOrderNumbers = async () => {
+    let totalNumber = await getRequest('/orders/src/confirmed/all');
+    setTotalConfirmedOrdersNumber(totalNumber?.data?.data.length);
+  };
+
+  const fetchTotalDeliveredOrderNumbers = async () => {
+    let totalNumber = await getRequest('/orders/src/delivered/all');
+    setTotalDeliveredOrdersNumber(totalNumber?.data?.data.length);
+  };
+
+  const fetchTotalCancelledOrderNumbers = async () => {
+    let totalNumber = await getRequest('/orders/src/cancel/all');
+    setTotalCancelledOrdersNumber(totalNumber?.data?.data.length);
+  };
+
+  const fetchPopularProducts = async ()=>{
+    let allProducts = await getRequest('/products/src/popular');
+    setPopularProductList(allProducts?.data?.data);
+  }
+
+  useEffect(() => {
+    fetchTotalOrderNumbers();
+    fetchTotalUserNumbers();
+    fetchTotalPendingOrderNumbers();
+    fetchTotalConfirmedOrderNumbers();
+    fetchTotalDeliveredOrderNumbers();
+    fetchTotalCancelledOrderNumbers();
+    fetchPopularProducts();
+  }, []);
+
+  console.log(popularProductsList, "All Popular Product Lists");
+
   return (
-    <div className="w-full h-full rounded-lg shadow-md px-10 py-10 bg-white">
+    <div className="w-full h-full rounded-lg shadow-md px-5 py-10 bg-white">
       <h1 className="pl-5 border-l-4 border-orange-600 font-extrabold">
         Summary
       </h1>
@@ -29,7 +86,7 @@ function AdminDashHomePage() {
         />
         <SummaryDataCards
           title="Total Order"
-          amount="45"
+          amount={totalOrderNumber}
           borderLColor="border-red-400"
           borderBColor="border-b-red-400"
           isAmount={false}
@@ -44,12 +101,12 @@ function AdminDashHomePage() {
           icons={FcFactoryBreakdown}
         />
         <SummaryDataCards
-          title="Total Shops"
-          amount="9"
+          title="Total Users"
+          amount={totalUserNumber}
           borderLColor="border-orange-400"
           borderBColor="border-b-orange-400"
           isAmount={false}
-          icons={FcShop}
+          icons={FcBusinessman}
         />
       </div>
 
@@ -59,23 +116,23 @@ function AdminDashHomePage() {
       <div className="mt-5 w-full grid grid-cols-4 gap-x-4">
         <SummaryDataCards
           title="Pending Orders"
-          amount="5"
+          amount={totalPendingOrdersNumber}
           borderLColor="border-purple-400"
           borderBColor="border-b-purple-400"
-          isAmount={true}
+          isAmount={false}
           icons={FcAlarmClock}
         />
         <SummaryDataCards
-          title="Processing Orders"
-          amount="90"
+          title="Confirmed Orders"
+          amount={totalConfirmedOrdersNumber}
           borderLColor="border-orange-400"
           borderBColor="border-b-orange-400"
           isAmount={false}
           icons={FcBarChart}
         />
         <SummaryDataCards
-          title="Completed Orders"
-          amount="0"
+          title="Delivered Orders"
+          amount={totalDeliveredOrdersNumber}
           borderLColor="border-sky-400"
           borderBColor="border-b-sky-400"
           isAmount={false}
@@ -83,7 +140,7 @@ function AdminDashHomePage() {
         />
         <SummaryDataCards
           title="Cancelled Orders"
-          amount="0"
+          amount={totalCancelledOrdersNumber}
           borderLColor="border-red-400"
           borderBColor="border-b-red-400"
           isAmount={false}
@@ -107,9 +164,9 @@ function AdminDashHomePage() {
       <AdminDashRecentOrdersTable />
 
       <h1 className="mt-20 pl-5 border-l-4 border-orange-600 font-extrabold">
-         Popular Products
+        Popular Products
       </h1>
-      <AdminDashPopularProuctsTable/>
+      <AdminDashPopularProuctsTable popularProductsList={popularProductsList} />
     </div>
   );
 }
