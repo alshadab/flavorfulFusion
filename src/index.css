@@ -20,17 +20,26 @@ body {
   font-family: "Quicksand", sans-serif;
 }
 
-/* Hide scrollbar for Chrome, Safari, and Edge */
+/* Scrollbar container */
 ::-webkit-scrollbar {
-  display: none;
+  width: 6px; /* Adjust the width to make it thin */
+  height: 6px; /* Adjust the height if there's a horizontal scrollbar */
 }
 
-/* Hide scrollbar for Firefox */
-html {
-  scrollbar-width: none;
+/* Scrollbar track */
+::-webkit-scrollbar-track {
+  background: #f0f0f0; /* Light background color for the track */
+  border-radius: 10px; /* Rounded edges */
 }
 
-/* Hide scrollbar for Internet Explorer, older Edge */
-body {
-  -ms-overflow-style: none;
+/* Scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  background-color: orangered; /* Darker color for the scrollbar thumb */
+  border-radius: 10px; /* Rounded thumb edges */
 }
+
+/* Scrollbar thumb on hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a0a0a0; /* Slightly darker on hover */
+}
+

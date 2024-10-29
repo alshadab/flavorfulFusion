@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import img from "../../assets/logo.png";
 import signupLogo from "../../assets/signupPage.png";
 import { Link } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
 
 function SignUpPage() {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -34,7 +35,7 @@ function SignUpPage() {
                   <label htmlFor="userName">User Name</label>
                   <input
                     type="text"
-                    className="border-2 w-full py-2 rounded-lg px-2"
+                    className="border border-gray-200 focus:ring-0 focus:border-gray-400 w-full py-2 rounded-lg px-2"
                     name="userName"
                     id="userName"
                     placeholder="username"
@@ -44,7 +45,7 @@ function SignUpPage() {
                   <label htmlFor="userFullName">Full Name</label>
                   <input
                     type="text"
-                    className="border-2 w-full py-2 rounded-lg px-2"
+                    className="border border-gray-200 focus:ring-0 focus:border-gray-400 w-full py-2 rounded-lg px-2"
                     name="userFullName"
                     id="userFullName"
                     placeholder="full name"
@@ -56,7 +57,7 @@ function SignUpPage() {
                   <label htmlFor="userEmail">User Email</label>
                   <input
                     type="email"
-                    className="border-2 w-full py-2 rounded-lg px-2"
+                    className="border border-gray-200 focus:ring-0 focus:border-gray-400 w-full py-2 rounded-lg px-2"
                     name="userEmail"
                     id="userEmail"
                     placeholder="email"
@@ -66,7 +67,7 @@ function SignUpPage() {
                   <label htmlFor="password">Password</label>
                   <input
                     type="password"
-                    className="border-2 w-full py-2 rounded-lg px-2"
+                    className="border border-gray-200 focus:ring-0 focus:border-gray-400 w-full py-2 rounded-lg px-2"
                     name="password"
                     id="password"
                     placeholder="password"
@@ -78,7 +79,7 @@ function SignUpPage() {
                   <label htmlFor="address">Address</label>
                   <input
                     type="text"
-                    className="border-2 w-full py-2 rounded-lg px-2"
+                    className="border border-gray-200 focus:ring-0 focus:border-gray-400 w-full py-2 rounded-lg px-2"
                     name="address"
                     id="address"
                     placeholder="address"
@@ -90,7 +91,7 @@ function SignUpPage() {
                   <label htmlFor="phoneNumber">Phone Number</label>
                   <input
                     type="text"
-                    className="border-2 w-full py-2 rounded-lg px-2"
+                    className="border border-gray-200 focus:ring-0 focus:border-gray-400 w-full py-2 rounded-lg px-2"
                     name="phoneNumber"
                     id="phoneNumber"
                     placeholder="phone number"
@@ -100,7 +101,7 @@ function SignUpPage() {
                   <label htmlFor="state">State</label>
                   <input
                     type="text"
-                    className="border-2 w-full py-2 rounded-lg px-2"
+                    className="border border-gray-200 focus:ring-0 focus:border-gray-400 w-full py-2 rounded-lg px-2"
                     name="state"
                     id="state"
                     placeholder="state"
@@ -110,7 +111,7 @@ function SignUpPage() {
                   <label htmlFor="postalCode">Postal Code</label>
                   <input
                     type="text"
-                    className="border-2 w-full py-2 rounded-lg px-2"
+                    className="border border-gray-200 focus:ring-0 focus:border-gray-400 w-full py-2 rounded-lg px-2"
                     name="postalCode"
                     id="postalCode"
                     placeholder="postal code"
@@ -119,7 +120,7 @@ function SignUpPage() {
                 <div className="flex flex-col items-start">
                   <label htmlFor="gender">Gender</label>
                   <select
-                    className="border-2 w-full py-2 rounded-lg px-2"
+                    className="border border-gray-200 focus:ring-0 focus:border-gray-400 w-full py-2 rounded-lg px-2"
                     name="gender"
                     id="gender"
                   >
@@ -160,7 +161,7 @@ function SignUpPage() {
                 <div className="col-span-1 flex flex-col items-start">
                   <label htmlFor="userType">User Type</label>
                   <select
-                    className="border-2 w-full py-2 rounded-lg px-2"
+                    className="border border-gray-200 focus:ring-0 focus:border-gray-400 w-full py-2 rounded-lg px-2"
                     name="userType"
                     id="userType"
                   >
@@ -187,11 +188,9 @@ function SignUpPage() {
                   </p>
                 </Link>
               </div>
-              <div className="mt-8 text-center grid grid-cols-2 gap-x-4 text-sm">
-                <button className="px-4 py-2 rounded bg-blue-500 text-white font-bold duration-200 hover:duration-200 hover:scale-105">
-                  Sign In With Facebook
-                </button>
-                <button className="px-4 py-2 rounded bg-gray-400 text-white font-bold duration-200 hover:duration-200 hover:scale-105">
+              <div className="flex items-center justify-center mt-5">
+                <button className="flex items-center gap-x-2 px-4 py-2 rounded bg-blue-500 text-white font-bold duration-200 hover:duration-200 hover:bg-blue-600">
+                  <FcGoogle className="bg-white text-2xl" />
                   Sign In With Google Account
                 </button>
               </div>

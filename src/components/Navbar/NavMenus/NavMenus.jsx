@@ -54,9 +54,11 @@ function NavMenus() {
             Join
           </button>
         </Link>
-        <button className="px-4 py-1 font-semibold rounded bg-orange-600 text-white duraiton-200 hover:duration-200 hover:bg-orange-700 hover:scale-110">
-          Become a Seller
-        </button>
+        <Link to="/signup">
+          <button className="px-4 py-1 font-semibold rounded bg-orange-600 text-white duraiton-200 hover:duration-200 hover:bg-orange-700 hover:scale-110">
+            Become a Seller
+          </button>
+        </Link>
       </div>
     </div>
   );

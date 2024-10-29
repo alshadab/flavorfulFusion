@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import img from "../../assets/logo.png";
 import loginImage from "../../assets/loginImage.png"
+import { FcGoogle } from "react-icons/fc";
 
 function LoginPage() {
   const [selectedRole, setSelectedRole] = useState("buyer"); // Default selected role
 
   return (
     <div className="w-[100vw] h-[100vh] bg-white flex justify-center items-center px-20 py-10">
-      <div className="w-full h-full bg-orange-200 rounded-lg shadow-lg">
+      <div className="w-full h-full rounded-lg shadow-lg">
         <div className="w-full h-full grid grid-cols-2">
-          <div className="w-full h-full flex justify-center items-center">
+          <div className="bg-orange-100 w-full h-full flex justify-center items-center">
             <img src={loginImage} className="w-92" alt="Sign Up Logo" />
           </div>
           <form className="w-full h-full px-28 py-20 flex flex-col justify-center">
@@ -29,7 +30,7 @@ function LoginPage() {
                   <label htmlFor="email">Email</label>
                   <input
                     type="email"
-                    className="border-2 w-full py-2 rounded-lg px-2"
+                    className="border focus:ring-0 focus:border focus:border-gray-400 border-gray-200 w-full py-2 rounded-lg px-2"
                     name="email"
                     id="email"
                     placeholder="email"
@@ -39,7 +40,7 @@ function LoginPage() {
                   <label htmlFor="password">Password</label>
                   <input
                     type="password"
-                    className="border-2 w-full py-2 rounded-lg px-2"
+                    className="border focus:ring-0 focus:border focus:border-gray-400 border-gray-200 w-full py-2 rounded-lg px-2"
                     name="password"
                     id="password"
                     placeholder="password"
@@ -90,12 +91,10 @@ function LoginPage() {
                   </Link>
                 </div>
 
-                <div className="mt-10 text-center grid grid-cols-2 gap-x-4 text-sm">
-                  <button className="px-4 py-2 rounded bg-gray-400 text-white font-bold duration-200 hover:duration-200 hover:scale-105">
+                <div className="flex items-center justify-center mt-10">
+                  <button className="flex items-center gap-x-2 px-4 py-2 rounded bg-blue-500 text-white font-bold duration-200 hover:duration-200 hover:bg-blue-600">
+                    <FcGoogle className="bg-white text-2xl"/>
                     Sign In With Google Account
-                  </button>
-                  <button className="px-4 py-2 rounded bg-blue-500 text-white font-bold duration-200 hover:duration-200 hover:scale-105">
-                    Sign In With Facebook
                   </button>
                 </div>
               </div>

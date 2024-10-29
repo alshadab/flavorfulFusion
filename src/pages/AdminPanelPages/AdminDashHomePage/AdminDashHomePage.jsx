@@ -1,5 +1,5 @@
 import React from "react";
-import SummaryDataCards from "../../components/AdminDashCompos/SummaryDataCards/SummaryDataCards";
+import SummaryDataCards from "../../../components/AdminDashCompos/SummaryDataCards/SummaryDataCards";
 import { FcMoneyTransfer } from "react-icons/fc";
 import { FcCurrencyExchange } from "react-icons/fc";
 import { FcFactoryBreakdown } from "react-icons/fc";
@@ -8,13 +8,13 @@ import { FcAlarmClock } from "react-icons/fc";
 import { FcBarChart } from "react-icons/fc";
 import { FcApproval } from "react-icons/fc";
 import { FcCancel } from "react-icons/fc";
-import AdminDashRecentOrdersTable from "../../components/AdminDashCompos/AdminDashRecentOrdersTable/AdminDashRecentOrdersTable";
+import AdminDashRecentOrdersTable from "../../../components/AdminDashCompos/AdminDashRecentOrdersTable/AdminDashRecentOrdersTable";
 import { FaSearch } from "react-icons/fa";
-import AdminDashPopularProuctsTable from "../../components/AdminDashCompos/AdminDashPopularProductsTable/AdminDashPopularProuctsTable";
+import AdminDashPopularProuctsTable from "../../../components/AdminDashCompos/AdminDashPopularProductsTable/AdminDashPopularProuctsTable";
 
 function AdminDashHomePage() {
   return (
-    <div className="w-full h-full overflow-y-scroll rounded-lg shadow-md px-10 py-10 bg-white">
+    <div className="w-full h-full rounded-lg shadow-md px-10 py-10 bg-white">
       <h1 className="pl-5 border-l-4 border-orange-600 font-extrabold">
         Summary
       </h1>

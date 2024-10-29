@@ -14,21 +14,13 @@ import {
 } from "@headlessui/react";
 import {
   Bars3Icon,
-  ShoppingBagIcon,
-  ChartPieIcon,
   Cog6ToothIcon,
-  DocumentDuplicateIcon,
   HomeIcon,
-  FolderIcon,
   XMarkIcon,
   ArchiveBoxIcon,
-  ArrowUturnUpIcon,
-  QuestionMarkCircleIcon,
-  SparklesIcon,
-  UserCircleIcon,
-  UserGroupIcon,
-  HomeModernIcon,
-  XCircleIcon,
+  // ShoppingBagIcon,
+  ChartPieIcon,
+  PlusCircleIcon
 } from "@heroicons/react/24/outline";
 import {
   ChevronDownIcon,
@@ -43,120 +35,39 @@ const navigation = [
     icon: HomeIcon,
     current: false,
     accordion: false,
-    navigation: "/admindash",
+    navigation: "/vendordash",
   },
+  //  {
+  //   name: "My Shops",
+  //   href: "#",
+  //   icon: ShoppingBagIcon,
+  //   current: false,
+  //   accordion: false,
+  //   navigation: "/allshops",
+  // },
   {
-    name: "Products",
+    name: "My Products",
     href: "#",
     icon: ArchiveBoxIcon,
     current: false,
     accordion: false,
     navigation: "/allproducts",
   },
-  // {
-  //   name: "Vendors",
-  //   href: "#",
-  //   icon: FolderIcon,
-  //   current: false,
-  //   accordion: false,
-  //   navigation: "/allvendors",
-  // },
   {
-    name: "Catgories",
+    name: "Add A Product",
     href: "#",
-    icon: DocumentDuplicateIcon,
+    icon: PlusCircleIcon,
     current: false,
     accordion: false,
-    navigation: "/allcategories",
+    navigation: "/addproduct",
   },
-];
-
-const navigationTwo = [
   {
-    name: "Pending",
+    name: "Statistics",
     href: "#",
     icon: ChartPieIcon,
     current: false,
     accordion: false,
-    navigation: "/allpendingorders",
-  },
-  {
-    name: "Cancelled",
-    href: "#",
-    icon: XCircleIcon,
-    current: false,
-    accordion: false,
-    navigation: "/allcancelledorders",
-  },
-  {
-    name: "Refund",
-    href: "#",
-    icon: ArrowUturnUpIcon,
-    current: false,
-    accordion: false,
-    navigation: "/allrefundorders",
-  },
-  {
-    name: "Delivered",
-    href: "#",
-    icon: ShoppingBagIcon,
-    current: false,
-    accordion: false,
-    navigation: "/alldeliveredorders",
-  },
-];
-
-const navigationThree = [
-  {
-    name: "Home Page",
-    href: "#",
-    icon: HomeModernIcon,
-    current: false,
-    accordion: false,
-    navigation: "/",
-  },
-  {
-    name: "FAQs",
-    href: "#",
-    icon: QuestionMarkCircleIcon,
-    current: false,
-    accordion: false,
-    navigation: "/allfaq",
-  },
-  {
-    name: "Reviews",
-    href: "#",
-    icon: SparklesIcon,
-    current: false,
-    accordion: false,
-    navigation: "/allreviews",
-  },
-];
-
-const navigationFour = [
-  {
-    name: "All Users",
-    href: "#",
-    icon: UserGroupIcon,
-    current: false,
-    accordion: false,
-    navigation: "/allusers",
-  },
-  {
-    name: "All Admin",
-    href: "#",
-    icon: UserCircleIcon,
-    current: false,
-    accordion: false,
-    navigation: "/alladmins",
-  },
-  {
-    name: "All Vendors",
-    href: "#",
-    icon: UserGroupIcon,
-    current: false,
-    accordion: false,
-    navigation: "/allvendors",
+    navigation: "/statistics",
   },
 ];
 
@@ -169,7 +80,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function AdminDashLayouts() {
+export default function VendorDashLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -259,99 +170,6 @@ export default function AdminDashLayouts() {
                             ))}
                           </ul>
                         </li>
-                        <p className="text-orange-600 font-poppins font-semibold text-sm">
-                          E-Commerce Management
-                        </p>
-                        <li>
-                          <ul role="list" className="-mx-2 -mt-4">
-                            {navigationTwo.map((item) => (
-                              <li key={item.name}>
-                                <a
-                                  href={item.href}
-                                  className={classNames(
-                                    item.current
-                                      ? "bg-orange-700 text-white"
-                                      : "text-orange-200 hover:text-white hover:bg-orange-700",
-                                    "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
-                                  )}
-                                >
-                                  <item.icon
-                                    className={classNames(
-                                      item.current
-                                        ? "text-white"
-                                        : "text-orange-200 group-hover:text-white",
-                                      "h-6 w-6 shrink-0"
-                                    )}
-                                    aria-hidden="true"
-                                  />
-                                  {item.name}
-                                </a>
-                              </li>
-                            ))}
-                          </ul>
-                        </li>
-                        <p className="text-orange-600 font-poppins font-semibold text-sm">
-                          Layout Controlls
-                        </p>
-                        <li>
-                          <ul role="list" className="-mx-2 -mt-4">
-                            {navigationThree.map((item) => (
-                              <li key={item.name}>
-                                <a
-                                  href={item.href}
-                                  className={classNames(
-                                    item.current
-                                      ? "bg-orange-700 text-white"
-                                      : "text-orange-200 hover:text-white hover:bg-orange-700",
-                                    "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
-                                  )}
-                                >
-                                  <item.icon
-                                    className={classNames(
-                                      item.current
-                                        ? "text-white"
-                                        : "text-orange-200 group-hover:text-white",
-                                      "h-6 w-6 shrink-0"
-                                    )}
-                                    aria-hidden="true"
-                                  />
-                                  {item.name}
-                                </a>
-                              </li>
-                            ))}
-                          </ul>
-                        </li>
-                        <p className="text-orange-600 font-poppins font-semibold text-sm">
-                          User Controlls
-                        </p>
-                        <li>
-                          <ul role="list" className="-mx-2 -mt-4">
-                            {navigationFour.map((item) => (
-                              <li key={item.name}>
-                                <a
-                                  href={item.href}
-                                  className={classNames(
-                                    item.current
-                                      ? "bg-orange-700 text-white"
-                                      : "text-orange-200 hover:text-white hover:bg-orange-700",
-                                    "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
-                                  )}
-                                >
-                                  <item.icon
-                                    className={classNames(
-                                      item.current
-                                        ? "text-white"
-                                        : "text-orange-200 group-hover:text-white",
-                                      "h-6 w-6 shrink-0"
-                                    )}
-                                    aria-hidden="true"
-                                  />
-                                  {item.name}
-                                </a>
-                              </li>
-                            ))}
-                          </ul>
-                        </li>
                         <li className="mt-auto">
                           <p
                             href="#"
@@ -378,10 +196,11 @@ export default function AdminDashLayouts() {
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex grow flex-col gap-y-2 overflow-y-auto bg-slate-900 px-6 pb-4">
             <Link to="/">
-              <div className="flex h-16 shrink-0 items-center justify-center">
+              <div className="flex flex-col h-16 shrink-0 items-center justify-center">
                 <h1 className="text-white text-xl font-bold">
                   <span className="text-orange-600">Flavourfull </span> Fushion
                 </h1>
+                <h1 className="text-white">Vendor's Panel</h1>
               </div>
             </Link>
             <nav className="flex flex-1 flex-col">
@@ -390,105 +209,6 @@ export default function AdminDashLayouts() {
                   <ul role="list" className="-mx-2 space-y-1">
                     {navigation.map((item) => (
                       <li>
-                        <NavLink
-                          to={item.navigation}
-                          className={({ isActive }) =>
-                            classNames(
-                              isActive
-                                ? "bg-orange-700 text-white"
-                                : "text-orange-200 hover:text-white hover:bg-orange-700",
-                              "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
-                            )
-                          }
-                        >
-                          <item.icon
-                            className={classNames(
-                              item.current
-                                ? "text-white"
-                                : "text-orange-200 group-hover:text-white",
-                              "h-6 w-6 shrink-0"
-                            )}
-                            aria-hidden="true"
-                          />
-                          {item.name}
-                        </NavLink>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-                <p className="text-orange-600 font-poppins font-semibold">
-                  E-Commerce Management
-                </p>
-                <li>
-                  <ul role="list" className="-mx-2 -mt-4">
-                    {navigationTwo.map((item) => (
-                      <li key={item.name}>
-                        <NavLink
-                          to={item.navigation}
-                          className={({ isActive }) =>
-                            classNames(
-                              isActive
-                                ? "bg-orange-700 text-white"
-                                : "text-orange-200 hover:text-white hover:bg-orange-700",
-                              "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
-                            )
-                          }
-                        >
-                          <item.icon
-                            className={classNames(
-                              item.current
-                                ? "text-white"
-                                : "text-orange-200 group-hover:text-white",
-                              "h-6 w-6 shrink-0"
-                            )}
-                            aria-hidden="true"
-                          />
-                          {item.name}
-                        </NavLink>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-                <p className="text-orange-600 font-poppins font-semibold">
-                  Layout Controls
-                </p>
-                <li>
-                  <ul role="list" className="-mx-2 -mt-4">
-                    {navigationThree.map((item) => (
-                      <li key={item.name}>
-                        <NavLink
-                          to={item.navigation}
-                          className={({ isActive }) =>
-                            classNames(
-                              isActive
-                                ? "bg-orange-700 text-white"
-                                : "text-orange-200 hover:text-white hover:bg-orange-700",
-                              "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
-                            )
-                          }
-                        >
-                          <item.icon
-                            className={classNames(
-                              item.current
-                                ? "text-white"
-                                : "text-orange-200 group-hover:text-white",
-                              "h-6 w-6 shrink-0"
-                            )}
-                            aria-hidden="true"
-                          />
-                          {item.name}
-                        </NavLink>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-                <p className="text-orange-600 font-poppins font-semibold">
-                  User Controlls
-                </p>
-                <li>
-                  <ul role="list" className="-mx-2 -mt-4">
-                  {navigationFour.map((item) => (
-                      <li key={item.name}>
                         <NavLink
                           to={item.navigation}
                           className={({ isActive }) =>
@@ -573,7 +293,7 @@ export default function AdminDashLayouts() {
 
                 <button className="flex items-center gap-x-2 px-4 py-2 rounded-3xl text-sm font-semibold border border-orange-600 text-orange-600 duration-200 hover:duration-200 hover:cursor-pointer hover:bg-orange-500 hover:text-white">
                   <CiShop className="text-xl" />
-                  Create Shop
+                  Create A Product
                 </button>
 
                 <div
