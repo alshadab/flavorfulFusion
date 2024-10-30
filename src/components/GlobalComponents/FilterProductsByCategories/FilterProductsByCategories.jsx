@@ -1,6 +1,6 @@
 import React from "react";
 
-function FilterProductsByCategories() {
+function FilterProductsByCategories({categoryList}) {
   return (
     <div>
       <label className="block text-sm font-bold mb-2 text-gray-700">
@@ -13,7 +13,9 @@ function FilterProductsByCategories() {
         <option value="" disabled>
           Filter by Category
         </option>
-        {/* Add options for Category here */}
+        {
+          categoryList && categoryList.map(item=> <option key={item?._id}>{item?.categoryName}</option>)
+        }
       </select>
     </div>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 
-function FilterProductsByVendors() {
+function FilterProductsByVendors({allVendorsList}) {
   return (
     <div>
       <label className="block text-sm font-bold mb-2 text-gray-700">
@@ -13,7 +13,11 @@ function FilterProductsByVendors() {
         <option value="" disabled>
           Filter by Vendors
         </option>
-        {/* Add options for Group here */}
+        {
+          allVendorsList && allVendorsList.map(shop => <option key={shop?._id}>
+            {shop?.shopName}
+          </option>)
+        }
       </select>
     </div>
   );
