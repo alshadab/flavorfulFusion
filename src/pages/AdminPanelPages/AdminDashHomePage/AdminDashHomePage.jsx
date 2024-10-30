@@ -30,6 +30,11 @@ function AdminDashHomePage() {
     setTotalOrderNumber(totalNumber?.data?.data?.length);
   };
 
+  const fetchTotalRevenueNumbers = async () =>{
+    let totalNumber = await getRequest("/products/src/rev");
+    setTotalRevenue(totalNumber?.data?.data?.totalRevenue);
+  }
+
   const fetchTotalUserNumbers = async () => {
     let totalNumber = await getRequest("/users/src/all");
     setTotalUserNumber(totalNumber?.data?.data?.length);
@@ -66,6 +71,7 @@ function AdminDashHomePage() {
   }
 
   useEffect(() => {
+    fetchTotalRevenueNumbers();
     fetchTotalOrderNumbers();
     fetchTotalUserNumbers();
     fetchTotalVendorNumbers();
@@ -76,7 +82,6 @@ function AdminDashHomePage() {
     fetchPopularProducts();
   }, []);
 
-  console.log(totalVendorNumber.length, "All Popular Product Lists");
 
   return (
     <div className="w-full h-full rounded-lg shadow-md px-5 py-10 bg-white">
@@ -86,7 +91,7 @@ function AdminDashHomePage() {
       <div className="mt-5 w-full grid grid-cols-4 gap-x-4">
         <SummaryDataCards
           title="Total Revenue"
-          amount="22,345"
+          amount={totalRevenue}
           borderLColor="border-green-400"
           borderBColor="border-b-green-400"
           isAmount={true}
