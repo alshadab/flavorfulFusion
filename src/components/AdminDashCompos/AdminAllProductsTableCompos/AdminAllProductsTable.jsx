@@ -71,7 +71,7 @@ export default function AdminAllProductsTable({deleteProduct, activateProduct, a
                   </th>
                   <th
                     scope="col"
-                    className="px-3 py-3.5 text-right text-sm font-semibold text-gray-900"
+                    className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900"
                   >
                     Action
                   </th>

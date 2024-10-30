@@ -79,11 +79,13 @@ function AdminAllProductsPage() {
     setAllProdList(fetchProdListAgain?.data?.data);
   };
 
+  console.log(allProdList, "All Products List");
+
   return (
     <div className="w-full h-full rounded-lg shadow-md px-10 bg-white">
       <div className="w-full bg-white rounded pt-5">
         <GlobalHeaders title={"Products"} searchFilter={"Product Name"} />
-        <div className="mt-5 w-full grid grid-cols-3 gap-x-5">
+        <div className="mt-5 w-full grid grid-cols-2 gap-x-80">
           <FilterProductsByVendors
             allVendorsList={allVendorsList}
             handleSelectVendors={handleSelectVendors}
@@ -92,15 +94,19 @@ function AdminAllProductsPage() {
             categoryList={categoryList}
             handleSelectCategories={handleSelectCategories}
           />
-          <FilterProductsByProductTypes />
+          {/* <FilterProductsByProductTypes /> */}
         </div>
       </div>
 
       <div className="mt-5 bg-white w-full pt-5 pb-10 rounded">
-        <h1 className="font-extrabold pl-5 border-l-4 border-orange-600">
-          All Products
-        </h1>
-        {allProdList && allProdList.length <= 0 ? (
+        {allProdList === null ? (
+          <></>
+        ) : (
+          <h1 className="font-extrabold pl-5 border-l-4 border-orange-600">
+            All Products
+          </h1>
+        )}
+        {allProdList === null ? (
           <div className="w-full flex justify-center">
             <h1 className="text-2xl text-gray-300">No Products Available</h1>
           </div>

@@ -132,7 +132,7 @@ function AdminSingleProductTableData({
             </span>
           )}
         </td>
-        <td className="relative whitespace-nowrap py-5 pl-20 text-center text-xl font-medium sm:pr-0">
+        <td className="relative whitespace-nowrap py-5 pl-14 text-center text-xl font-medium sm:pr-0">
           {product &&
           product?.isActive === true &&
           product?.isDeleted === false ? (
