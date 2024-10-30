@@ -79,8 +79,6 @@ function AdminAllProductsPage() {
     setAllProdList(fetchProdListAgain?.data?.data);
   };
 
-  console.log(allProdList, "All Products List");
-
   return (
     <div className="w-full h-full rounded-lg shadow-md px-10 bg-white">
       <div className="w-full bg-white rounded pt-5">
