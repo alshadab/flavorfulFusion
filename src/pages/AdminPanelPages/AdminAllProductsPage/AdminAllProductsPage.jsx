@@ -11,35 +11,87 @@ function AdminAllProductsPage() {
   const [allVendorsList, setAllVendorsList] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
   const [allProdList, setAllProdList] = useState([]);
+  const [deleteState, setDeleteState] = useState([]);
+  const [activateState, setActivateState] = useState([]);
 
   const fetchAllVendorsList = async () => {
-    let vendorsList = await getRequest("/shop/src/all");
-    setAllVendorsList(vendorsList?.data?.data);
+    try {
+      let vendorsList = await getRequest("/shop/src/all");
+      setAllVendorsList(vendorsList?.data?.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const fetchAllCategoryList = async () => {
-    let categoryList = await getRequest("/categories/src");
-    setCategoryList(categoryList?.data?.data);
+    try {
+      let categoryList = await getRequest("/categories/src");
+      setCategoryList(categoryList?.data?.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const fetchAllProductList = async () => {
-    let productList = await getRequest("/products/src/all");
-    setAllProdList(productList?.data?.data);
+    try {
+      let productList = await getRequest("/products/src/all");
+      setAllProdList(productList?.data?.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
     fetchAllProductList();
     fetchAllVendorsList();
     fetchAllCategoryList();
-  }, []);
+  }, [deleteState, activateState]);
+
+  const deleteProduct = async (id) => {
+    try {
+      const dltProd = await getRequest(`/products/del/${id}`);
+      setDeleteState(dltProd?.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const activateProduct = async (id) => {
+    try {
+      const activateProd = await getRequest(`/products/actv/${id}`);
+      setActivateState(activateProd?.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSelectVendors = async (userId) => {
+    const fetchProdListAgain = await postRequest("/products/src/all/byusrid", {
+      userId: userId.target.value,
+    });
+    setAllProdList(fetchProdListAgain?.data?.data);
+  };
+
+  const handleSelectCategories = async (categoryCode) => {
+    const fetchProdListAgain = await getRequest(
+      `/products/src/category/${categoryCode.target.value}`
+    );
+    setAllProdList(fetchProdListAgain?.data?.data);
+  };
 
   return (
     <div className="w-full h-full rounded-lg shadow-md px-10 bg-white">
       <div className="w-full bg-white rounded pt-5">
         <GlobalHeaders title={"Products"} searchFilter={"Product Name"} />
         <div className="mt-5 w-full grid grid-cols-3 gap-x-5">
-          <FilterProductsByVendors allVendorsList={allVendorsList} />
-          <FilterProductsByCategories categoryList={categoryList} />
+          <FilterProductsByVendors
+            allVendorsList={allVendorsList}
+            handleSelectVendors={handleSelectVendors}
+          />
+          <FilterProductsByCategories
+            categoryList={categoryList}
+            handleSelectCategories={handleSelectCategories}
+          />
           <FilterProductsByProductTypes />
         </div>
       </div>
@@ -48,7 +100,19 @@ function AdminAllProductsPage() {
         <h1 className="font-extrabold pl-5 border-l-4 border-orange-600">
           All Products
         </h1>
-        <AdminAllProductsTable allProdList={allProdList} />
+        {allProdList && allProdList.length <= 0 ? (
+          <div className="w-full flex justify-center">
+            <h1 className="text-2xl text-gray-300">No Products Available</h1>
+          </div>
+        ) : (
+          <AdminAllProductsTable
+            deleteProduct={deleteProduct}
+            activateProduct={activateProduct}
+            activateState={activateState}
+            deleteState={deleteState}
+            allProdList={allProdList}
+          />
+        )}
       </div>
     </div>
   );
