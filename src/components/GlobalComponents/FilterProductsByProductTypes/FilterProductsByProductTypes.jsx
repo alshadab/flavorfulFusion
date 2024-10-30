@@ -11,9 +11,12 @@ function FilterProductsByProductTypes() {
         defaultValue=""
       >
         <option value="" disabled>
-          Filter by product type
+          Filter By Product Types
         </option>
-        {/* Add options for Product Type here */}
+        <option value="allProducts">All Products</option>
+        <option value="bestSelling">Draft Products</option>
+        <option value="priceLowToHigh">Stockout Products</option>
+        <option value="priceHighToLow">Pending Products</option>
       </select>
     </div>
   );

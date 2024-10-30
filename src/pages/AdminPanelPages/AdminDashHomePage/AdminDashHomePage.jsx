@@ -15,6 +15,7 @@ import useRequest from "../../../APIServices/useRequest";
 
 function AdminDashHomePage() {
   const [postRequest, getRequest] = useRequest();
+  const [totalRevenue, setTotalRevenue] = useState(0);
   const [totalOrderNumber, setTotalOrderNumber] = useState(0);
   const [totalUserNumber, setTotalUserNumber] = useState(0);
   const [totalVendorNumber, setTotalVendorNumber] = useState(0);

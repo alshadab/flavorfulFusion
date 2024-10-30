@@ -21,6 +21,10 @@ function AdminAllProductsPage() {
     setCategoryList(categoryList?.data?.data);
   }
 
+  // const fetchAllProductList = async()=>{
+
+  // }
+
   useEffect(()=>{
     fetchAllVendorsList();
     fetchAllCategoryList();
@@ -39,7 +43,7 @@ function AdminAllProductsPage() {
         </div>
       </div>
 
-      <div className="mt-10 bg-white w-full pt-5 pb-10 rounded">
+      <div className="mt-5 bg-white w-full pt-5 pb-10 rounded">
         <h1 className="font-extrabold pl-5 border-l-4 border-orange-600">
           All Products
         </h1>
