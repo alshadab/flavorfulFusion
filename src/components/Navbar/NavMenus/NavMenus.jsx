@@ -55,7 +55,7 @@ function NavMenus() {
           isPending
             ? "pending"
             : isActive
-            ? "active"
+            ? "text-orange-600"
             : "duration-200 hover:duration-200 hover:scale-110"
         }
       >
@@ -67,7 +67,7 @@ function NavMenus() {
           isPending
             ? "pending"
             : isActive
-            ? "active"
+            ? "text-orange-600"
             : "duration-200 hover:duration-200 hover:scale-110"
         }
       >
@@ -79,7 +79,7 @@ function NavMenus() {
           isPending
             ? "pending"
             : isActive
-            ? "active"
+            ? "text-orange-600"
             : "duration-200 hover:duration-200 hover:scale-110"
         }
       >

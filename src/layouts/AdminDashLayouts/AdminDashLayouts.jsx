@@ -487,7 +487,7 @@ export default function AdminDashLayouts() {
                 </p>
                 <li>
                   <ul role="list" className="-mx-2 -mt-4">
-                  {navigationFour.map((item) => (
+                    {navigationFour.map((item) => (
                       <li key={item.name}>
                         <NavLink
                           to={item.navigation}
@@ -567,9 +567,11 @@ export default function AdminDashLayouts() {
                 />
               </form>
               <div className="flex items-center gap-x-4 lg:gap-x-6">
-                <button className="px-4 py-2 rounded-3xl text-sm font-semibold bg-orange-600 text-white duration-200 hover:duration-200 hover:cursor-pointer hover:bg-orange-700">
-                  Visit Site
-                </button>
+                <Link to="/">
+                  <button className="px-4 py-2 rounded-3xl text-sm font-semibold bg-orange-600 text-white duration-200 hover:duration-200 hover:cursor-pointer hover:bg-orange-700">
+                    Visit Site
+                  </button>
+                </Link>
 
                 <button className="flex items-center gap-x-2 px-4 py-2 rounded-3xl text-sm font-semibold border border-orange-600 text-orange-600 duration-200 hover:duration-200 hover:cursor-pointer hover:bg-orange-500 hover:text-white">
                   <CiShop className="text-xl" />
