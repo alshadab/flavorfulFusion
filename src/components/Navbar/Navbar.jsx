@@ -14,7 +14,8 @@ function Navbar() {
             alt="Flavour Full Fushion Logo"
           />
           <h1 className="text-xl">
-            <span className="font-extrabold text-orange-600">Flavourfull </span> Fushion
+            <span className="font-extrabold text-orange-600">Flavourfull </span>{" "}
+            Fushion
           </h1>
         </div>
         <div>
@@ -22,7 +23,7 @@ function Navbar() {
         </div>
       </div>
       <div className="col-span-8">
-          <NavMenus/>
+        <NavMenus />
       </div>
     </div>
   );

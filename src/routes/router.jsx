@@ -35,6 +35,9 @@ import UserCancelledOrders from "../pages/UserPanelPages/UserCancelledOrders/Use
 import UserDeliveredOrders from "../pages/UserPanelPages/UserDeliveredOrders/UserDeliveredOrders";
 import UserPendingOrders from "../pages/UserPanelPages/UserPendingOrders/UserPendingOrders";
 import AdminAllConfirmedOrdersPage from "../pages/AdminPanelPages/AdminAllConfirmedOrdersPage/AdminAllConfirmedOrdersPage";
+import TermsAndConditions from "../pages/TermsAndConditions/TermsAndConditions";
+import FAQs from "../pages/FAQs/FAQs";
+import Manufacturers from "../pages/Manufacturers/Manufacturers";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +59,18 @@ const router = createBrowserRouter([
       {
         path: "/shops",
         element: <ShopsPage />,
+      },
+      {
+        path: "/terms",
+        element: <TermsAndConditions />,
+      },
+      {
+        path: "/faq",
+        element: <FAQs />,
+      },
+      {
+        path: "/manufacturers",
+        element: <Manufacturers />,
       },
     ],
   },

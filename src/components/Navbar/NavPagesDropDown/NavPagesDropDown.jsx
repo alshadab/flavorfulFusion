@@ -7,6 +7,7 @@ import {
   Transition,
 } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { Link } from "react-router-dom";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -37,7 +38,7 @@ function NavPagesDropDown() {
         >
           <MenuItems className="absolute -right-36 z-10 mt-2 w-60 origin-top-right divide-y divide-gray-100 rounded-md bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
             <div className="py-1">
-              <MenuItem>
+              {/* <MenuItem>
                 {({ focus }) => (
                   <p
                     href="#"
@@ -49,21 +50,25 @@ function NavPagesDropDown() {
                     Flash Sale
                   </p>
                 )}
-              </MenuItem>
+              </MenuItem> */}
               <MenuItem>
                 {({ focus }) => (
-                  <p
-                    href="#"
-                    className={classNames(
-                      focus ? "bg-gray-100 text-slate-900 duration-200 hover:cursor-pointer hover:scale-105 hover:duration-200" : "text-slate-600",
-                      "group flex items-center px-4 py-2 text-sm font-semibold"
-                    )}
-                  >
-                    Manufacturers/Publishers
-                  </p>
+                  <Link to="/manufacturers">
+                    <p
+                      href="#"
+                      className={classNames(
+                        focus
+                          ? "bg-gray-100 text-slate-900 duration-200 hover:cursor-pointer hover:scale-105 hover:duration-200"
+                          : "text-slate-600",
+                        "group flex items-center px-4 py-2 text-sm font-semibold"
+                      )}
+                    >
+                      Manufacturers/Publishers
+                    </p>
+                  </Link>
                 )}
               </MenuItem>
-              <MenuItem>
+              {/* <MenuItem>
                 {({ focus }) => (
                   <p
                     href="#"
@@ -75,31 +80,39 @@ function NavPagesDropDown() {
                     Authors
                   </p>
                 )}
-              </MenuItem>
+              </MenuItem> */}
               <MenuItem>
                 {({ focus }) => (
-                  <p
-                    href="#"
-                    className={classNames(
-                      focus ? "bg-gray-100 text-slate-900 duration-200 hover:cursor-pointer hover:scale-105 hover:duration-200" : "text-slate-600",
-                      "group flex items-center px-4 py-2 text-sm font-semibold"
-                    )}
-                  >
-                    FAQ
-                  </p>
+                  <Link to="/faq">
+                    <p
+                      href="#"
+                      className={classNames(
+                        focus
+                          ? "bg-gray-100 text-slate-900 duration-200 hover:cursor-pointer hover:scale-105 hover:duration-200"
+                          : "text-slate-600",
+                        "group flex items-center px-4 py-2 text-sm font-semibold"
+                      )}
+                    >
+                      FAQ
+                    </p>
+                  </Link>
                 )}
               </MenuItem>
               <MenuItem>
                 {({ focus }) => (
-                  <p
-                    href="#"
-                    className={classNames(
-                      focus ? "bg-gray-100 text-slate-900 duration-200 hover:cursor-pointer hover:scale-105 hover:duration-200" : "text-slate-600",
-                      "group flex items-center px-4 py-2 text-sm font-semibold"
-                    )}
-                  >
-                    Terms & Conditions
-                  </p>
+                  <Link to="/terms">
+                    <p
+                      // href="#"
+                      className={classNames(
+                        focus
+                          ? "bg-gray-100 text-slate-900 duration-200 hover:cursor-pointer hover:scale-105 hover:duration-200"
+                          : "text-slate-600",
+                        "group flex items-center px-4 py-2 text-sm font-semibold"
+                      )}
+                    >
+                      Terms & Conditions
+                    </p>
+                  </Link>
                 )}
               </MenuItem>
             </div>
