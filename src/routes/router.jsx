@@ -29,6 +29,12 @@ import VendorDeliveredOrders from "../pages/VendorPanelPages/VendorDeliveredOrde
 import VendorCancelledOrders from "../pages/VendorPanelPages/VendorCancelledOrders/VendorCancelledOrders";
 import VendorAddAProduct from "../pages/VendorPanelPages/VendorAddAProduct/VendorAddAProduct";
 import VendorAllProducts from "../pages/VendorPanelPages/VendorAllProducts/VendorAllProducts";
+import UserDashAllOrders from "../pages/UserPanelPages/UserDashAllOrders/UserDashAllOrders";
+import UserDashAllCarts from "../pages/UserPanelPages/UserDashAllCarts/UserDashAllCarts";
+import UserDashAllReviews from "../pages/UserPanelPages/UserDashAllReviews/UserDashAllReviews";
+import UserCancelledOrders from "../pages/UserPanelPages/UserCancelledOrders/UserCancelledOrders";
+import UserDeliveredOrders from "../pages/UserPanelPages/UserDeliveredOrders/UserDeliveredOrders";
+import UserPendingOrders from "../pages/UserPanelPages/UserPendingOrders/UserPendingOrders";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +66,30 @@ const router = createBrowserRouter([
       {
         path: "/userdash",
         element: <UserDashHomePage />,
+      },
+      {
+        path: "/userallorders",
+        element: <UserDashAllOrders />,
+      },
+      {
+        path: "/usercarts",
+        element: <UserDashAllCarts />,
+      },
+      {
+        path: "/userallreviews",
+        element: <UserDashAllReviews />,
+      },
+      {
+        path: "/usercancelledorders",
+        element: <UserCancelledOrders />,
+      },
+      {
+        path: "/userdeliveredorders",
+        element: <UserDeliveredOrders />,
+      },
+      {
+        path: "/userpendingorders",
+        element: <UserPendingOrders />,
       },
     ],
   },
