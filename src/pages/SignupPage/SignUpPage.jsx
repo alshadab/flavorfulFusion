@@ -8,22 +8,21 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../../providers/AuthProviders";
 
 function SignUpPage() {
-  const {setLoading} = useContext(AuthContext);
+  const { user, setLoading } = useContext(AuthContext);
 
   const [postRequest] = useRequest();
   const [image, setImage] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [userName, setUsername] = useState("");
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [address, setAddress] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [state, setState] = useState("");
-  const [postalCode, setPostalCode] = useState("");
-  const [gender, setGender] = useState("");
-  const [userType, setUserType] = useState(0);
-
+  // const [userName, setUserName] = useState("");
+  // const [userFullName, setUserFullName] = useState("");
+  // const [userEmail, setUserEmail] = useState("");
+  // const [userPass, setUserPass] = useState("");
+  // const [shippingAddress, setShippingAddress] = useState("");
+  // const [phoneNumber, setPhoneNumber] = useState("");
+  // const [shippingState, setShippingState] = useState("");
+  // const [shippingPostalCode, setShippingPostalCode] = useState(0);
+  // const [gender, setGender] = useState("");
+  // const [userType, setUserType] = useState(0);
   const navigate = useNavigate();
 
   // Handle file input change
@@ -40,28 +39,58 @@ function SignUpPage() {
   const handleSignUpUser = async (event) => {
     setLoading(true);
     event.preventDefault();
-    console.log("image", image);
-    const formData = new FormData();
-    formData.append("userName", userName);
-    formData.append("userEmail", email);
-    formData.append("userFullName", fullName);
-    formData.append("userImg", image);
-    formData.append("userPass", password);
-    formData.append("gender", gender);
-    formData.append("phoneNumber", phoneNumber);
-    formData.append("userType", userType);
-    formData.append("shippingState", state);
-    formData.append("shippingAddress", address);
-    formData.append("shippingPostalCode", postalCode);
+    // console.log("image", image);
+    // const formData = new FormData();
+    // formData.append("userName", userName);
+    // formData.append("userEmail", userEmail);
+    // formData.append("userFullName", userFullName);
+    // formData.append("userImg", image);
+    // formData.append("userPass", userPass);
+    // formData.append("gender", gender);
+    // formData.append("phoneNumber", phoneNumber);
+    // formData.append("userType", Number(userType));
+    // formData.append("shippingState", shippingState);
+    // formData.append("shippingAddress", shippingAddress);
+    // formData.append("shippingPostalCode", shippingPostalCode);
 
-    await postRequest("/users/crt", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    setLoading(false);
-    Swal.fire("Created User");
-    navigate("/login");
+    // console.log(typeof userType);
+
+    // await postRequest("/users/crt", formData, {
+    //   headers: {
+    //     "Content-Type": "multipart/form-data",
+    //   },
+    // });
+
+    const form = event.target;
+    const userName = form.userName.value;
+    const userEmail = form.userEmail.value;
+    const userFullName = form.userFullName.value;
+    const userPass = form.userPass.value;
+    const gender = form.gender.value;
+    const phoneNumber = form.phoneNumber.value;
+    const userType = Number(form.userType.value);
+    const shippingState = form.shippingState.value;
+    const shippingAddress = form.shippingAddress.value;
+    const shippingPostalCode = Number(form.shippingPostalCode.value);
+
+    const userDetails = {
+      userName,
+      userEmail,
+      userFullName,
+      userPass,
+      gender,
+      phoneNumber,
+      userType,
+      shippingState,
+      shippingAddress,
+      shippingPostalCode,
+    };
+    const createUser = await postRequest("/users/crt", userDetails);
+    if (createUser?.data?.data) {
+      setLoading(false);
+      Swal.fire("Created User");
+      navigate("/login");
+    }
   };
 
   return (
@@ -73,7 +102,7 @@ function SignUpPage() {
             className="w-full h-full p-4 sm:px-8 lg:pl-20 py-2 text-sm"
           >
             {/* Header with logo and title */}
-            <div className="flex flex-col items-center lg:items-start gap-y-2 lg:flex-row lg:gap-x-2 mb-5">
+            <div className="flex flex-col items-center gap-y-2 lg:flex-row lg:gap-x-2 mb-5">
               <Link to="/">
                 <img src={img} className="w-16 lg:w-20" alt="Logo" />
               </Link>
@@ -88,7 +117,7 @@ function SignUpPage() {
               <div className="flex flex-col col-span-1">
                 <label htmlFor="userName">User Name</label>
                 <input
-                  onChange={(e) => setUsername(e.target.value)}
+                  // onChange={(e) => setUserName(e.target.value)}
                   type="text"
                   className="border border-gray-200 focus:ring-0 focus:border-gray-400 w-full py-2 rounded-lg px-2"
                   name="userName"
@@ -99,7 +128,7 @@ function SignUpPage() {
               <div className="flex flex-col col-span-1 sm:col-span-2">
                 <label htmlFor="userFullName">Full Name</label>
                 <input
-                  onChange={(e) => setFullName(e.target.value)}
+                  // onChange={(e) => setUserFullName(e.target.value)}
                   type="text"
                   className="border border-gray-200 focus:ring-0 focus:border-gray-400 w-full py-2 rounded-lg px-2"
                   name="userFullName"
@@ -114,7 +143,7 @@ function SignUpPage() {
               <div className="flex flex-col col-span-1 sm:col-span-2">
                 <label htmlFor="userEmail">User Email</label>
                 <input
-                  onChange={(e) => setEmail(e.target.value)}
+                  // onChange={(e) => setUserEmail(e.target.value)}
                   type="email"
                   className="border border-gray-200 focus:ring-0 focus:border-gray-400 w-full py-2 rounded-lg px-2"
                   name="userEmail"
@@ -125,11 +154,11 @@ function SignUpPage() {
               <div className="flex flex-col col-span-1">
                 <label htmlFor="password">Password</label>
                 <input
-                  onChange={(e) => setPassword(e.target.value)}
+                  // onChange={(e) => setUserPass(e.target.value)}
                   type="password"
                   className="border border-gray-200 focus:ring-0 focus:border-gray-400 w-full py-2 rounded-lg px-2"
-                  name="password"
-                  id="password"
+                  name="userPass"
+                  id="userPass"
                   placeholder="password"
                 />
               </div>
@@ -139,11 +168,11 @@ function SignUpPage() {
             <div className="flex flex-col mb-5">
               <label htmlFor="address">Address</label>
               <input
-                onChange={(e) => setAddress(e.target.value)}
+                // onChange={(e) => setShippingAddress(e.target.value)}
                 type="text"
                 className="border border-gray-200 focus:ring-0 focus:border-gray-400 w-full py-2 rounded-lg px-2"
-                name="address"
-                id="address"
+                name="shippingAddress"
+                id="shippingAddress"
                 placeholder="address"
               />
             </div>
@@ -153,7 +182,7 @@ function SignUpPage() {
               <div className="flex flex-col">
                 <label htmlFor="phoneNumber">Phone Number</label>
                 <input
-                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  // onChange={(e) => setPhoneNumber(e.target.value)}
                   type="text"
                   className="border border-gray-200 focus:ring-0 focus:border-gray-400 w-full py-2 rounded-lg px-2"
                   name="phoneNumber"
@@ -164,22 +193,22 @@ function SignUpPage() {
               <div className="flex flex-col">
                 <label htmlFor="state">State</label>
                 <input
-                  onChange={(e) => setState(e.target.value)}
+                  // onChange={(e) => setShippingState(e.target.value)}
                   type="text"
                   className="border border-gray-200 focus:ring-0 focus:border-gray-400 w-full py-2 rounded-lg px-2"
-                  name="state"
-                  id="state"
+                  name="shippingState"
+                  id="shippingState"
                   placeholder="state"
                 />
               </div>
               <div className="flex flex-col">
                 <label htmlFor="postalCode">Postal Code</label>
                 <input
-                  onChange={(e) => setPostalCode(e.target.value)}
-                  type="text"
+                  // onChange={(e) => setShippingPostalCode(e.target.value)}
+                  type="number"
                   className="border border-gray-200 focus:ring-0 focus:border-gray-400 w-full py-2 rounded-lg px-2"
-                  name="postalCode"
-                  id="postalCode"
+                  name="shippingPostalCode"
+                  id="shippingPostalCode"
                   placeholder="postal code"
                 />
               </div>
@@ -189,7 +218,7 @@ function SignUpPage() {
                   className="border border-gray-200 focus:ring-0 focus:border-gray-400 w-full py-2 rounded-lg px-2"
                   name="gender"
                   id="gender"
-                  onChange={(e) => setGender(e.target.value)}
+                  // onChange={(e) => setGender(e.target.value)}
                 >
                   <option value="">Gender</option>
                   <option value="male">Male</option>
@@ -212,27 +241,30 @@ function SignUpPage() {
                   onChange={handleImageChange}
                 />
               </div>
-              {selectedImage && (
-                <div className="w-14 h-14 mt-2">
-                  <img
-                    src={selectedImage}
-                    alt="Uploaded"
-                    className="object-cover rounded-xl w-full h-full"
-                  />
+
+              <div className="flex items-end space-x-2">
+                {selectedImage && (
+                  <div className="w-14 h-14">
+                    <img
+                      src={selectedImage}
+                      alt="Uploaded"
+                      className="object-cover rounded-xl w-full h-full"
+                    />
+                  </div>
+                )}
+                <div className="flex flex-col w-full">
+                  <label htmlFor="userType">User Type</label>
+                  <select
+                    className="border border-gray-200 focus:ring-0 focus:border-gray-400 w-full py-2 rounded-lg px-2"
+                    name="userType"
+                    id="userType"
+                    // onChange={(e) => setUserType(e.target.value)}
+                  >
+                    <option value="">Select Type</option>
+                    <option value={101}>Vendor</option>
+                    <option value={103}>Buyer</option>
+                  </select>
                 </div>
-              )}
-              <div className="flex flex-col">
-                <label htmlFor="userType">User Type</label>
-                <select
-                  className="border border-gray-200 focus:ring-0 focus:border-gray-400 w-full py-2 rounded-lg px-2"
-                  name="userType"
-                  id="userType"
-                  onChange={(e) => setUserType(e.target.value)}
-                >
-                  <option value="">Select Type</option>
-                  <option value="male">Vendor</option>
-                  <option value="female">Buyer</option>
-                </select>
               </div>
             </div>
 

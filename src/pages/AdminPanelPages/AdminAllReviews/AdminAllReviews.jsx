@@ -1,13 +1,49 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import AdminAllReviewsTable from '../../../components/AdminDashCompos/AdminAllReviewsTable/AdminAllReviewsTable'
+import useRequest from '../../../APIServices/useRequest'
 
 function AdminAllReviews() {
+  const [postRequest, getRequest] = useRequest();
+  const [allReviews, setAllReviews] = useState([]);
+  const [deleteState, setDeleteState] = useState([]);
+  const [activateState, setActivateState] = useState([]);
+  
+  const fetchAllReviews = async()=>{
+    try{
+      const fetchData = await getRequest('/ratings/src/all');
+      setAllReviews(fetchData?.data?.data);
+    }catch(error){
+      console.log(error);
+    }
+  }
+  useEffect(()=>{
+    fetchAllReviews();
+  },[activateState, deleteState]);
+
+  const activateReview = async (id) => {
+    try {
+      const activateRev = await getRequest(`/ratings/act/byId/${id}`);
+      setActivateState(activateRev?.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+ 
+  const deleteReview = async (id) => {
+    try {
+      const dltRev = await getRequest(`/ratings/del/byId/${id}`);
+      setDeleteState(dltRev?.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="w-full h-full rounded-lg shadow-md px-10 py-10 bg-white">
       <div className="w-full flex items-center justify-between px-6 py-6 bg-white shadow rounded-md">
         <div className="flex items-center space-x-5">
           <div className="w-1 h-6 bg-orange-600 rounded"></div>
-          <h2 className="text-xl font-semibold">ALL FAQs</h2>
+          <h2 className="text-xl font-semibold">ALL Reviews</h2>
         </div>
 
         <div className="flex items-center gap-x-5">
@@ -23,15 +59,11 @@ function AdminAllReviews() {
               </span>
             </div>
           </div>
-
-          <button className="px-4 py-2 text-white bg-orange-600 rounded-3xl hover:bg-orange-500">
-            + Add FAQs
-          </button>
         </div>
       </div>
 
       <div className="bg-white w-full pb-10 rounded">
-        <AdminAllReviewsTable/>
+        <AdminAllReviewsTable activateReview={activateReview} deleteReview={deleteReview} activateState={activateState} deleteState={deleteState} allReviews={allReviews}/>
       </div>
     </div>
   )
