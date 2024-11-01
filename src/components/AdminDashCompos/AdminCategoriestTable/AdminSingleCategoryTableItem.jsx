@@ -42,7 +42,7 @@ function AdminSingleCategoryTableItem({ category, item }) {
             />
           </div> */}
           <div className="ml-4">
-            <div className="font-medium text-gray-900">
+            <div className="font-medium text-lg text-gray-900">
               {category?.categoryName}
             </div>
             <div className="mt-1 text-gray-500 font-semibold">

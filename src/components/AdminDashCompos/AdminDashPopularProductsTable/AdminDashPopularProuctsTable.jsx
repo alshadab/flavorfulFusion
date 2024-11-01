@@ -42,7 +42,7 @@ export default function AdminDashPopularProuctsTable({popularProductsList}) {
                   <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Buying Price</th>
                   <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Selling Price</th>
                   <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
-                  <th scope="col" className="px-3 py-3.5 text-right text-sm font-semibold text-gray-900">Action</th>
+                  {/* <th scope="col" className="px-3 py-3.5 text-right text-sm font-semibold text-gray-900">Action</th> */}
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
@@ -65,9 +65,9 @@ export default function AdminDashPopularProuctsTable({popularProductsList}) {
                     <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                       <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Active</span>
                     </td>
-                    <td className="relative whitespace-nowrap py-5 pl-10 text-center text-sm font-medium sm:pr-0">
+                    {/* <td className="relative whitespace-nowrap py-5 pl-10 text-center text-sm font-medium sm:pr-0">
                       <p className="text-indigo-600 hover:text-indigo-900">Edit<span className="sr-only">, {prod.name}</span></p>
-                    </td>
+                    </td> */}
                   </tr>
                 ))}
               </tbody>

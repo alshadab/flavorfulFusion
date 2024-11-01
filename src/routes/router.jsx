@@ -23,6 +23,12 @@ import AdminAllVendorsPage from "../pages/AdminPanelPages/AdminAllVendorsPage/Ad
 import AdminAllAdminPage from "../pages/AdminPanelPages/AdminAllAdminPages/AdminAllAdminPage";
 import VendorDashPage from "../pages/VendorPanelPages/VendorDashPage/VendorDashPage";
 import VendorDashLayout from "../layouts/VendorDashLayout/VendorDashLayout";
+import VendorPendingOrders from "../pages/VendorPanelPages/VendorPendingOrders/VendorPendingOrders";
+import VendorConfirmedOrders from "../pages/VendorPanelPages/VendorConfirmedOrders/VendorConfirmedOrders";
+import VendorDeliveredOrders from "../pages/VendorPanelPages/VendorDeliveredOrders/VendorDeliveredOrders";
+import VendorCancelledOrders from "../pages/VendorPanelPages/VendorCancelledOrders/VendorCancelledOrders";
+import VendorAddAProduct from "../pages/VendorPanelPages/VendorAddAProduct/VendorAddAProduct";
+import VendorAllProducts from "../pages/VendorPanelPages/VendorAllProducts/VendorAllProducts";
 
 const router = createBrowserRouter([
   {
@@ -65,6 +71,30 @@ const router = createBrowserRouter([
         path: "/vendordash",
         element: <VendorDashPage />,
       },
+      {
+        path: "/vendorpendingorders",
+        element: <VendorPendingOrders />,
+      },
+      {
+        path: "/vendorconfirmorders",
+        element: <VendorConfirmedOrders />,
+      },
+      {
+        path: "/vendordeliveredorders",
+        element: <VendorDeliveredOrders />,
+      },
+      {
+        path: "/vendorcancelledorders",
+        element: <VendorCancelledOrders />,
+      },
+      {
+        path: "/vendoraddproduct",
+        element: <VendorAddAProduct />,
+      },
+      {
+        path: "/vendorproducts",
+        element: <VendorAllProducts />,
+      },
     ],
   },
   {
@@ -77,48 +107,48 @@ const router = createBrowserRouter([
       },
       {
         path: "allproducts",
-        element: <AdminAllProductsPage/>
+        element: <AdminAllProductsPage />,
       },
       {
         path: "allcategories",
-        element: <AdminAllCategoriesPage/>
+        element: <AdminAllCategoriesPage />,
       },
       {
         path: "allpendingorders",
-        element: <AdminAllPendingOrdersPage/>
+        element: <AdminAllPendingOrdersPage />,
       },
       {
         path: "allcancelledorders",
-        element: <AdminAllCancelledOrdersPage/>
+        element: <AdminAllCancelledOrdersPage />,
       },
       {
         path: "allrefundorders",
-        element: <AdminAllRefundOrdersPage/>
+        element: <AdminAllRefundOrdersPage />,
       },
       {
         path: "alldeliveredorders",
-        element: <AdminAllDeliveredOrdersPage/>
+        element: <AdminAllDeliveredOrdersPage />,
       },
       {
         path: "allfaq",
-        element: <AdminFAQ/>
+        element: <AdminFAQ />,
       },
       {
         path: "allreviews",
-        element: <AdminAllReviews/>
+        element: <AdminAllReviews />,
       },
       {
         path: "allusers",
-        element: <AdminAllUsersPage/>
+        element: <AdminAllUsersPage />,
       },
       {
         path: "allvendors",
-        element: <AdminAllVendorsPage/>
+        element: <AdminAllVendorsPage />,
       },
       {
         path: "alladmins",
-        element: <AdminAllAdminPage/>
-      }
+        element: <AdminAllAdminPage />,
+      },
     ],
   },
   {

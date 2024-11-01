@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import SummaryDataCards from "../../../components/AdminDashCompos/SummaryDataCards/SummaryDataCards";
+import SummaryDataCards from "../../../components/GlobalComponents/SummaryDataCards/SummaryDataCards";
 import { FcMoneyTransfer } from "react-icons/fc";
 import { FcCurrencyExchange } from "react-icons/fc";
 import { FcFactoryBreakdown } from "react-icons/fc";

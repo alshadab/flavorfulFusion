@@ -1,72 +1,13 @@
 import React, { useState } from "react";
 import Paginations from "../../GlobalComponents/Paginations/Paginations";
 
-const people = [
-  {
-    name: "Lindsay Walton",
-    title: "Front-end Developer",
-    department: "Optimization",
-    email: "lindsay.walton@example.com",
-    role: "Member",
-    image:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    name: "Lindsay Walton",
-    title: "Front-end Developer",
-    department: "Optimization",
-    email: "lindsay.walton@example.com",
-    role: "Member",
-    image:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    name: "Lindsay Walton",
-    title: "Front-end Developer",
-    department: "Optimization",
-    email: "lindsay.walton@example.com",
-    role: "Member",
-    image:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-
-  {
-    name: "Lindsay Walton",
-    title: "Front-end Developer",
-    department: "Optimization",
-    email: "lindsay.walton@example.com",
-    role: "Member",
-    image:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    name: "Lindsay Walton",
-    title: "Front-end Developer",
-    department: "Optimization",
-    email: "lindsay.walton@example.com",
-    role: "Member",
-    image:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    name: "Lindsay Walton",
-    title: "Front-end Developer",
-    department: "Optimization",
-    email: "lindsay.walton@example.com",
-    role: "Member",
-    image:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-];
-
-export default function AdminPendingOrderTable
-() {
+export default function AdminPendingOrderTable({ pendingOrdersList }) {
   const [currentPage, setCurrentPage] = useState(1);
   const entriesPerPage = 5;
-  const totalPages = Math.ceil(people.length / entriesPerPage);
+  const totalPages = Math.ceil(pendingOrdersList.length / entriesPerPage);
 
   // Slice the data for the current page
-  const displayedPeople = people.slice(
+  const displayedPeople = pendingOrdersList.slice(
     (currentPage - 1) * entriesPerPage,
     currentPage * entriesPerPage
   );
@@ -133,12 +74,12 @@ export default function AdminPendingOrderTable
                   >
                     Status
                   </th>
-                  <th
+                  {/* <th
                     scope="col"
                     className="px-3 py-3.5 text-right text-sm font-semibold text-gray-900"
                   >
                     Action
-                  </th>
+                  </th> */}
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
@@ -199,22 +140,26 @@ export default function AdminPendingOrderTable
                         Active
                       </span>
                     </td>
-                    <td className="relative whitespace-nowrap py-5 pl-3 text-center text-sm font-medium sm:pr-0">
+                    {/* <td className="relative whitespace-nowrap py-5 pl-3 text-center text-sm font-medium sm:pr-0">
                       <p className="text-indigo-600 hover:text-indigo-900">
                         Edit<span className="sr-only">, {person.name}</span>
                       </p>
-                    </td>
+                    </td> */}
                   </tr>
                 ))}
               </tbody>
             </table>
-            <Paginations
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPrevPage={handlePrevPage}
-              onNextPage={handleNextPage}
-              onPageChange={handlePageChange}
-            />
+            {pendingOrdersList && pendingOrdersList.length >= 5 ? (
+              <Paginations
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPrevPage={handlePrevPage}
+                onNextPage={handleNextPage}
+                onPageChange={handlePageChange}
+              />
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>

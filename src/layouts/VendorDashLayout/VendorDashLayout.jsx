@@ -18,9 +18,12 @@ import {
   HomeIcon,
   XMarkIcon,
   ArchiveBoxIcon,
-  // ShoppingBagIcon,
+  ShoppingBagIcon,
   ChartPieIcon,
-  PlusCircleIcon
+  PlusCircleIcon,
+  CheckBadgeIcon,
+  TruckIcon,
+  XCircleIcon,
 } from "@heroicons/react/24/outline";
 import {
   ChevronDownIcon,
@@ -37,37 +40,56 @@ const navigation = [
     accordion: false,
     navigation: "/vendordash",
   },
-  //  {
-  //   name: "My Shops",
-  //   href: "#",
-  //   icon: ShoppingBagIcon,
-  //   current: false,
-  //   accordion: false,
-  //   navigation: "/allshops",
-  // },
   {
     name: "My Products",
     href: "#",
     icon: ArchiveBoxIcon,
     current: false,
     accordion: false,
-    navigation: "/allproducts",
+    navigation: "/vendorproducts",
   },
   {
-    name: "Add A Product",
+    name: "Create A Product",
     href: "#",
     icon: PlusCircleIcon,
     current: false,
     accordion: false,
-    navigation: "/addproduct",
+    navigation: "/vendoraddproduct",
   },
+];
+
+const navigationTwo = [
   {
-    name: "Statistics",
+    name: "Pending Orders",
     href: "#",
-    icon: ChartPieIcon,
+    icon: ShoppingBagIcon,
     current: false,
     accordion: false,
-    navigation: "/statistics",
+    navigation: "/vendorpendingorders",
+  },
+  {
+    name: "Confirm Orders",
+    href: "#",
+    icon: CheckBadgeIcon,
+    current: false,
+    accordion: false,
+    navigation: "/vendorconfirmorders",
+  },
+  {
+    name: "Delivered Orders",
+    href: "#",
+    icon: TruckIcon,
+    current: false,
+    accordion: false,
+    navigation: "/vendordeliveredorders",
+  },
+  {
+    name: "Cancelled Orders",
+    href: "#",
+    icon: CheckBadgeIcon,
+    current: false,
+    accordion: false,
+    navigation: "/vendorcancelledorders",
   },
 ];
 
@@ -204,10 +226,43 @@ export default function VendorDashLayout() {
               </div>
             </Link>
             <nav className="flex flex-1 flex-col">
-              <ul role="list" className="flex flex-1 flex-col gap-y-7">
+              <ul role="list" className="flex flex-1 flex-col">
                 <li>
                   <ul role="list" className="-mx-2 space-y-1">
                     {navigation.map((item) => (
+                      <li>
+                        <NavLink
+                          to={item.navigation}
+                          className={({ isActive }) =>
+                            classNames(
+                              isActive
+                                ? "bg-orange-700 text-white"
+                                : "text-orange-200 hover:text-white hover:bg-orange-700",
+                              "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                            )
+                          }
+                        >
+                          <item.icon
+                            className={classNames(
+                              item.current
+                                ? "text-white"
+                                : "text-orange-200 group-hover:text-white",
+                              "h-6 w-6 shrink-0"
+                            )}
+                            aria-hidden="true"
+                          />
+                          {item.name}
+                        </NavLink>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+                <p className="mt-5 mb-2 text-orange-600 font-semibold text-lg">
+                  Order Management
+                </p>
+                <li>
+                  <ul role="list" className="-mx-2 space-y-1">
+                    {navigationTwo.map((item) => (
                       <li>
                         <NavLink
                           to={item.navigation}
