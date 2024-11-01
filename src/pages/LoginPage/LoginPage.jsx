@@ -7,7 +7,7 @@ import { AuthContext } from "../../providers/AuthProviders";
 
 function LoginPage() {
   const { handleLoginData, setLoading, user } = useContext(AuthContext);
-  const [selectedRole, setSelectedRole] = useState("buyer");
+  const [selectedRole, setSelectedRole] = useState(101);
   const navigate = useNavigate();
 
   const handleLogin = async (event) => {
@@ -17,7 +17,9 @@ function LoginPage() {
       const form = event.target;
       const email = form.email.value;
       const password = form.password.value;
-      const userCreds = { email, password };
+      const usertype = selectedRole;
+      const userCreds = { email, password, usertype };
+      console.log(userCreds, "User Login Details");
       await handleLoginData(userCreds);
       if (handleLoginData) {
         console.log(user, "Userrrr");
@@ -77,22 +79,22 @@ function LoginPage() {
                   <button
                     type="button"
                     className={`w-full py-1 mr-2 rounded-lg ${
-                      selectedRole === "buyer"
+                      selectedRole === 101
                         ? "bg-orange-600 text-white"
                         : "bg-white text-black"
                     } font-bold duration-200 hover:cursor-pointer`}
-                    onClick={() => setSelectedRole("buyer")}
+                    onClick={() => setSelectedRole(101)}
                   >
                     As Buyer
                   </button>
                   <button
                     type="button"
                     className={`w-full py-1 ml-2 rounded-lg ${
-                      selectedRole === "vendor"
+                      selectedRole === 103
                         ? "bg-orange-600 text-white"
                         : "bg-white text-black"
                     } font-bold duration-200 hover:cursor-pointer`}
-                    onClick={() => setSelectedRole("vendor")}
+                    onClick={() => setSelectedRole(103)}
                   >
                     As Vendor
                   </button>
