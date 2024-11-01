@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
-import { Fragment, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import logo from "../../assets/logo.png";
 import { CiShop } from "react-icons/ci";
+import Swal from "sweetalert2";
 import {
   Dialog,
   DialogPanel,
@@ -22,13 +23,14 @@ import {
   XCircleIcon,
   TruckIcon,
   ChartPieIcon,
-  UserCircleIcon
+  UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import {
   ChevronDownIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/20/solid";
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProviders";
 
 const navigation = [
   {
@@ -103,6 +105,15 @@ function classNames(...classes) {
 
 export default function UserDashLayouts() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { setUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("userCreds");
+    Swal.fire("Logged Out");
+    setUser(null);
+    navigate("/");
+  };
 
   return (
     <>
@@ -416,21 +427,19 @@ export default function UserDashLayouts() {
                     leaveTo="transform opacity-0 scale-95"
                   >
                     <MenuItems className="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
-                      {userNavigation.map((item) => (
-                        <MenuItem key={item.name}>
-                          {({ focus }) => (
-                            <a
-                              href={item.href}
-                              className={classNames(
-                                focus ? "bg-gray-50" : "",
-                                "block px-3 py-1 text-sm leading-6 text-gray-900"
-                              )}
-                            >
-                              {item.name}
-                            </a>
-                          )}
-                        </MenuItem>
-                      ))}
+                      <MenuItem>
+                        {({ focus }) => (
+                          <button
+                            onClick={handleLogout}
+                            className={classNames(
+                              focus ? "bg-gray-50" : "",
+                              "block px-3 py-1 text-sm leading-6 text-gray-900"
+                            )}
+                          >
+                            Logout
+                          </button>
+                        )}
+                      </MenuItem>
                     </MenuItems>
                   </Transition>
                 </Menu>

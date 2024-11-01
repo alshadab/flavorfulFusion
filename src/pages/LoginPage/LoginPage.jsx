@@ -4,6 +4,7 @@ import img from "../../assets/logo.png";
 import loginImage from "../../assets/loginImage.png";
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../../providers/AuthProviders";
+import Swal from "sweetalert2";
 
 function LoginPage() {
   const { handleLoginData, setLoading, user } = useContext(AuthContext);
@@ -11,24 +12,34 @@ function LoginPage() {
   const navigate = useNavigate();
 
   const handleLogin = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+
     try {
-      event.preventDefault();
-      setLoading(true);
       const form = event.target;
       const email = form.email.value;
       const password = form.password.value;
       const usertype = selectedRole;
-      const userCreds = { email, password, usertype };
-      console.log(userCreds, "User Login Details");
-      await handleLoginData(userCreds);
-      if (handleLoginData) {
-        console.log(user, "Userrrr");
-        navigate("/");
-      } else {
-        navigate("/login");
-      }
+
+      await handleLoginData({ email, password, usertype });
+
+      Swal.fire({
+        icon: "success",
+        title: "Logged in successfully!",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+
+      // Redirect after successful login
+      setTimeout(() => navigate("/"), 2000);
     } catch (error) {
-      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Login Failed",
+        text: error.message || "Invalid credentials",
+      });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -39,9 +50,10 @@ function LoginPage() {
           <div className="bg-orange-100 w-full h-full flex justify-center items-center">
             <img src={loginImage} className="w-92" alt="Sign Up Logo" />
           </div>
-          <form 
-          onSubmit={handleLogin}
-          className="w-full h-full px-28 py-20 flex flex-col justify-center">
+          <form
+            onSubmit={handleLogin}
+            className="w-full h-full px-28 py-20 flex flex-col justify-center"
+          >
             <div className="">
               <div className="flex items-center justify-center ">
                 <Link to="/">

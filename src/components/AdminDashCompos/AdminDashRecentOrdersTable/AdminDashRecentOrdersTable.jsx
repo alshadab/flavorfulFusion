@@ -26,7 +26,8 @@ export default function AdminDashRecentOrdersTable() {
 
   // Pagination handler functions
   const handlePrevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
-  const handleNextPage = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+  const handleNextPage = () =>
+    setCurrentPage((prev) => Math.min(prev + 1, totalPages));
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
@@ -37,50 +38,109 @@ export default function AdminDashRecentOrdersTable() {
             <table className="min-w-full divide-y divide-gray-300">
               <thead>
                 <tr>
-                  <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Tracking Id</th>
-                  <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Name</th>
-                  <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Products Quantity</th>
-                  <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Order Date</th>
-                  <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Total $</th>
-                  <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
-                  <th scope="col" className="px-3 py-3.5 text-right text-sm font-semibold text-gray-900">Action</th>
+                  <th
+                    scope="col"
+                    className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
+                  >
+                    Tracking Id
+                  </th>
+                  <th
+                    scope="col"
+                    className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
+                  >
+                    Name
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                  >
+                    Products Quantity
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                  >
+                    Order Date
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                  >
+                    Total $
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                  >
+                    Status
+                  </th>
+                  {/* <th
+                    scope="col"
+                    className="px-3 py-3.5 text-right text-sm font-semibold text-gray-900"
+                  >
+                    Action
+                  </th> */}
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
                 {displayedPeople.map((person, index) => (
                   <tr key={`${person.email}-${index}`}>
-                    <td className="whitespace-nowrap pr-3 py-5 text-sm text-gray-500">61230878992821</td>
+                    <td className="whitespace-nowrap pr-3 py-5 text-sm text-gray-500">
+                      61230878992821
+                    </td>
                     <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                       <div className="flex items-center">
                         <div className="h-11 w-11 flex-shrink-0">
-                          <img className="h-11 w-11 rounded-full" src={person.image} alt="" />
+                          <img
+                            className="h-11 w-11 rounded-full"
+                            src={person.image}
+                            alt=""
+                          />
                         </div>
                         <div className="ml-4">
-                          <div className="font-medium text-gray-900">{person.name}</div>
-                          <div className="mt-1 text-gray-500">{person.email}</div>
+                          <div className="font-medium text-gray-900">
+                            {person.name}
+                          </div>
+                          <div className="mt-1 text-gray-500">
+                            {person.email}
+                          </div>
                         </div>
                       </div>
                     </td>
-                    <td className="whitespace-nowrap py-5 text-sm text-center text-gray-500">6</td>
-                    <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">October 25th, 2024</td>
-                    <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">2,354 $</td>
+                    <td className="whitespace-nowrap py-5 text-sm text-center text-gray-500">
+                      6
+                    </td>
                     <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                      <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Active</span>
+                      October 25th, 2024
                     </td>
-                    <td className="relative whitespace-nowrap py-5 pl-3 text-center text-sm font-medium sm:pr-0">
-                      <p className="text-indigo-600 hover:text-indigo-900">Edit<span className="sr-only">, {person.name}</span></p>
+                    <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+                      2,354 $
                     </td>
+                    <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+                      <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                        Active
+                      </span>
+                    </td>
+                    {/* <td className="relative whitespace-nowrap py-5 pl-3 text-center text-sm font-medium sm:pr-0">
+                      <p className="text-indigo-600 hover:text-indigo-900">
+                        Edit<span className="sr-only">, {person.name}</span>
+                      </p>
+                    </td> */}
                   </tr>
                 ))}
               </tbody>
             </table>
-            <Paginations
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPrevPage={handlePrevPage}
-              onNextPage={handleNextPage}
-              onPageChange={handlePageChange}
-            />
+            {displayedPeople && displayedPeople.length > 5 ? (
+              <Paginations
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPrevPage={handlePrevPage}
+                onNextPage={handleNextPage}
+                onPageChange={handlePageChange}
+              />
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>

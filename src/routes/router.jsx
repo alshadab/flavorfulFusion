@@ -14,7 +14,6 @@ import AdminAllProductsPage from "../pages/AdminPanelPages/AdminAllProductsPage/
 import AdminAllCategoriesPage from "../pages/AdminPanelPages/AdminAllCategoriesPage/AdminAllCategoriesPage";
 import AdminAllPendingOrdersPage from "../pages/AdminPanelPages/AdminAllPendingOrdersPage/AdminAllPendingOrdersPage";
 import AdminAllCancelledOrdersPage from "../pages/AdminPanelPages/AdminAllCancelledOrdersPage/AdminAllCancelledOrdersPage";
-import AdminAllRefundOrdersPage from "../pages/AdminPanelPages/AdminAllRefundOrdersPage/AdminAllRefundOrdersPage";
 import AdminAllDeliveredOrdersPage from "../pages/AdminPanelPages/ADminAllDeliveredOrdersPage/AdminAllDeliveredOrdersPage";
 import AdminFAQ from "../pages/AdminPanelPages/AdminFAQ/AdminFAQ";
 import AdminAllReviews from "../pages/AdminPanelPages/AdminAllReviews/AdminAllReviews";
@@ -35,6 +34,7 @@ import UserDashAllReviews from "../pages/UserPanelPages/UserDashAllReviews/UserD
 import UserCancelledOrders from "../pages/UserPanelPages/UserCancelledOrders/UserCancelledOrders";
 import UserDeliveredOrders from "../pages/UserPanelPages/UserDeliveredOrders/UserDeliveredOrders";
 import UserPendingOrders from "../pages/UserPanelPages/UserPendingOrders/UserPendingOrders";
+import AdminAllConfirmedOrdersPage from "../pages/AdminPanelPages/AdminAllConfirmedOrdersPage/AdminAllConfirmedOrdersPage";
 
 const router = createBrowserRouter([
   {
@@ -152,8 +152,8 @@ const router = createBrowserRouter([
         element: <AdminAllCancelledOrdersPage />,
       },
       {
-        path: "allrefundorders",
-        element: <AdminAllRefundOrdersPage />,
+        path: "allconfirmedorders",
+        element: <AdminAllConfirmedOrdersPage />,
       },
       {
         path: "alldeliveredorders",

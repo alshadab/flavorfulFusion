@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import Paginations from "../../GlobalComponents/Paginations/Paginations";
 
-export default function AdminAllDeliveredOrdersTable({ deliveredOrders }) {
+export default function AdminAllConfirmedOrdersTable({ confirmedOrders }) {
   const [currentPage, setCurrentPage] = useState(1);
   const entriesPerPage = 5;
-  const totalPages = Math.ceil(deliveredOrders.length / entriesPerPage);
+  const totalPages = Math.ceil(confirmedOrders.length / entriesPerPage);
 
   // Slice the data for the current page
-  const displayedPeople = deliveredOrders.slice(
+  const displayedPeople = confirmedOrders.slice(
     (currentPage - 1) * entriesPerPage,
     currentPage * entriesPerPage
   );
@@ -131,7 +131,7 @@ export default function AdminAllDeliveredOrdersTable({ deliveredOrders }) {
               </table>
             ) : (
               <div className="text-2xl font-bold flex items-center justify-center text-gray-400">
-                <h1>No Delivered Orders Yet</h1>
+                <h1>No Confirmed Orders Yet</h1>
               </div>
             )}
             {displayedPeople && displayedPeople.length > 5 ? (

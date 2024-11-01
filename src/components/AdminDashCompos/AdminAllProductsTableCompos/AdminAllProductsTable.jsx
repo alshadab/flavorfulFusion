@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import Paginations from "../../GlobalComponents/Paginations/Paginations";
 import AdminSingleProductTableData from "./AdminSingleProductTableData";
 
-export default function AdminAllProductsTable({deleteProduct, activateProduct, activateState, deleteState, allProdList }) {
+export default function AdminAllProductsTable({
+  deleteProduct,
+  activateProduct,
+  activateState,
+  deleteState,
+  allProdList,
+}) {
   const [currentPage, setCurrentPage] = useState(1);
   const entriesPerPage = 5;
   const totalPages = Math.ceil(allProdList.length / entriesPerPage);
@@ -79,17 +85,29 @@ export default function AdminAllProductsTable({deleteProduct, activateProduct, a
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
                 {displayedPeople.map((product, index) => (
-                  <AdminSingleProductTableData key={product?._id} activateState={activateState} deleteProduct={deleteProduct} activateProduct={activateProduct} deleteState={deleteState} product={product} index={index}/>
+                  <AdminSingleProductTableData
+                    key={product?._id}
+                    activateState={activateState}
+                    deleteProduct={deleteProduct}
+                    activateProduct={activateProduct}
+                    deleteState={deleteState}
+                    product={product}
+                    index={index}
+                  />
                 ))}
               </tbody>
             </table>
-            <Paginations
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPrevPage={handlePrevPage}
-              onNextPage={handleNextPage}
-              onPageChange={handlePageChange}
-            />
+            {displayedPeople && displayedPeople.length > 5 ? (
+              <Paginations
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPrevPage={handlePrevPage}
+                onNextPage={handleNextPage}
+                onPageChange={handlePageChange}
+              />
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>

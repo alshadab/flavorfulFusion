@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from "react";
-import useRequest from "../../../APIServices/useRequest";
+// import React, { useEffect, useState } from "react";
+// import useRequest from "../../../APIServices/useRequest";
 
 function AdminCancelledOrdersTableItem({ order }) {
-  const [postRequest, getRequest] = useRequest();
-  const [cartDetails, setCartDetails] = useState([]);
+  // const [postRequest, getRequest] = useRequest();
+  // const [cartDetails, setCartDetails] = useState([]);
 
-  const fetchCartDetails = async () => {
-    try {
-      const cartId = order?.cartId;
-      const fetchDetails = await getRequest(`/carts/src/byId/${cartId}`);
-      console.log(fetchDetails, "Fetch Details");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const fetchCartDetails = async () => {
+  //   try {
+  //     const cartId = order?.cartId;
+  //     const fetchDetails = await getRequest(`/carts/src/byId/${cartId}`);
+  //     console.log(fetchDetails, "Fetch Details");
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchCartDetails();
-  }, []);
+  // useEffect(() => {
+  //   fetchCartDetails();
+  // }, []);
 
   return (
     <tr>
@@ -52,13 +52,11 @@ function AdminCancelledOrdersTableItem({ order }) {
       <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
         {order.deliveryFee} $
       </td>
+      ]
       <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-        2,354 $
+        {order.allTotalPrice} $
       </td>
-      <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-        2,404 $
-      </td>
-      <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+      {/* <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
         <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
           Active
         </span>
@@ -67,7 +65,7 @@ function AdminCancelledOrdersTableItem({ order }) {
         <p className="text-indigo-600 hover:text-indigo-900">
           Edit<span className="sr-only">, {order.name}</span>
         </p>
-      </td>
+      </td> */}
     </tr>
   );
 }

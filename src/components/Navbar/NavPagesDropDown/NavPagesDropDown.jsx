@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Menu,
   MenuButton,
@@ -7,10 +7,6 @@ import {
   Transition,
 } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
-
-import { LuVegan } from "react-icons/lu";
-import { GiFruitTree } from "react-icons/gi";
-import { GiFruiting } from "react-icons/gi";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");

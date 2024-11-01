@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import FilterProductsByVendors from "../../../components/GlobalComponents/FilterProductsByVendors/FilterProductsByVendors";
 import FilterProductsByCategories from "../../../components/GlobalComponents/FilterProductsByCategories/FilterProductsByCategories";
-import FilterProductsByProductTypes from "../../../components/GlobalComponents/FilterProductsByProductTypes/FilterProductsByProductTypes";
 import AdminAllProductsTable from "../../../components/AdminDashCompos/AdminAllProductsTableCompos/AdminAllProductsTable";
 import GlobalHeaders from "../../../components/GlobalComponents/GlobalHeaders/GlobalHeaders";
 import useRequest from "../../../APIServices/useRequest";
