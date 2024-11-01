@@ -1,11 +1,34 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import img from "../../assets/logo.png";
-import loginImage from "../../assets/loginImage.png"
+import loginImage from "../../assets/loginImage.png";
 import { FcGoogle } from "react-icons/fc";
+import { AuthContext } from "../../providers/AuthProviders";
 
 function LoginPage() {
-  const [selectedRole, setSelectedRole] = useState("buyer"); // Default selected role
+  const { handleLoginData, setLoading, user } = useContext(AuthContext);
+  const [selectedRole, setSelectedRole] = useState("buyer");
+  const navigate = useNavigate();
+
+  const handleLogin = async (event) => {
+    try {
+      event.preventDefault();
+      setLoading(true);
+      const form = event.target;
+      const email = form.email.value;
+      const password = form.password.value;
+      const userCreds = { email, password };
+      await handleLoginData(userCreds);
+      if (handleLoginData) {
+        console.log(user, "Userrrr");
+        navigate("/");
+      } else {
+        navigate("/login");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="w-[100vw] h-[100vh] bg-white flex justify-center items-center px-20 py-10">
@@ -14,7 +37,9 @@ function LoginPage() {
           <div className="bg-orange-100 w-full h-full flex justify-center items-center">
             <img src={loginImage} className="w-92" alt="Sign Up Logo" />
           </div>
-          <form className="w-full h-full px-28 py-20 flex flex-col justify-center">
+          <form 
+          onSubmit={handleLogin}
+          className="w-full h-full px-28 py-20 flex flex-col justify-center">
             <div className="">
               <div className="flex items-center justify-center ">
                 <Link to="/">
@@ -93,7 +118,7 @@ function LoginPage() {
 
                 <div className="flex items-center justify-center mt-10">
                   <button className="flex items-center gap-x-2 px-4 py-2 rounded bg-blue-500 text-white font-bold duration-200 hover:duration-200 hover:bg-blue-600">
-                    <FcGoogle className="bg-white text-2xl"/>
+                    <FcGoogle className="bg-white text-2xl" />
                     Sign In With Google Account
                   </button>
                 </div>

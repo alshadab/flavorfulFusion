@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import img from "../../assets/logo.png";
 import signupLogo from "../../assets/signupPage.png";
 import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import useRequest from "../../APIServices/useRequest";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../providers/AuthProviders";
 
 function SignUpPage() {
+  const {setLoading} = useContext(AuthContext);
+
   const [postRequest] = useRequest();
   const [image, setImage] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -20,7 +23,6 @@ function SignUpPage() {
   const [postalCode, setPostalCode] = useState("");
   const [gender, setGender] = useState("");
   const [userType, setUserType] = useState(0);
-  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 

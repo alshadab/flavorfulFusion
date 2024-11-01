@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import SummaryDataCards from "../../../components/GlobalComponents/SummaryDataCards/SummaryDataCards";
 
 import { FcMoneyTransfer } from "react-icons/fc";
@@ -10,18 +10,22 @@ import { FcBarChart } from "react-icons/fc";
 import { FcApproval } from "react-icons/fc";
 import { FcCancel } from "react-icons/fc";
 import useRequest from "../../../APIServices/useRequest";
+import { AuthContext } from "../../../providers/AuthProviders";
 
 function VendorDashPage() {
+  const {user} = useContext(AuthContext);
+
   const [postRequest, getRequest] = useRequest();
   const [totalRevenues, setTotalRevenues] = useState(0);
 
-  const fetchVendorRevenues = async ()=>{
-    const fetchData = await getRequest('/products/src/rev/byusr', )
-  }
+  // const fetchVendorRevenues = async ()=>{
+  //   const fetchData = await getRequest('/products/src/rev/byusr', user?._id);
+  //   setTotalRevenues(fetchData?.data?.data);
+  // }
 
-  useEffect(()=>{
-    fetchVendorRevenues();
-  },[])
+  // useEffect(()=>{
+  //   fetchVendorRevenues();
+  // },[])
 
   return (
     <div className="w-full h-full rounded-lg shadow-md px-5 py-10 bg-white">
