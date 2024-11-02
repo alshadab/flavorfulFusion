@@ -13,19 +13,19 @@ import useRequest from "../../../APIServices/useRequest";
 import { AuthContext } from "../../../providers/AuthProviders";
 
 function VendorDashPage() {
-  const {user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   const [postRequest, getRequest] = useRequest();
   const [totalRevenues, setTotalRevenues] = useState(0);
 
-  // const fetchVendorRevenues = async ()=>{
-  //   const fetchData = await getRequest('/products/src/rev/byusr', user?._id);
-  //   setTotalRevenues(fetchData?.data?.data);
-  // }
+  const fetchVendorRevenues = async () => {
+    const fetchData = await getRequest("/products/src/rev/byusr", user?._id);
+    setTotalRevenues(fetchData?.data?.data);
+  };
 
-  // useEffect(()=>{
-  //   fetchVendorRevenues();
-  // },[])
+  useEffect(() => {
+    fetchVendorRevenues();
+  }, []);
 
   return (
     <div className="w-full h-full rounded-lg shadow-md px-5 py-10 bg-white">
