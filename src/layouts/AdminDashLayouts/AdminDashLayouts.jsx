@@ -142,22 +142,22 @@ const navigationFour = [
     accordion: false,
     navigation: "/allusers",
   },
-  // {
-  //   name: "All Admin",
-  //   href: "#",
-  //   icon: UserCircleIcon,
-  //   current: false,
-  //   accordion: false,
-  //   navigation: "/alladmins",
-  // },
-  // {
-  //   name: "All Vendors",
-  //   href: "#",
-  //   icon: UserGroupIcon,
-  //   current: false,
-  //   accordion: false,
-  //   navigation: "/allvendors",
-  // },
+  {
+    name: "All Admin",
+    href: "#",
+    icon: UserCircleIcon,
+    current: false,
+    accordion: false,
+    navigation: "/alladmins",
+  },
+  {
+    name: "All Vendors",
+    href: "#",
+    icon: UserGroupIcon,
+    current: false,
+    accordion: false,
+    navigation: "/allvendors",
+  },
 ];
 
 const userNavigation = [

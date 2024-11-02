@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Paginations from "../../GlobalComponents/Paginations/Paginations";
 import { AiFillDelete } from "react-icons/ai";
+import { IoTrashBinOutline } from "react-icons/io5";
+import { FaUndo } from "react-icons/fa";
 
 const people = [
   {
@@ -60,13 +62,13 @@ const people = [
   },
 ];
 
-export default function AdminAllVendorsTable() {
+export default function AdminAllVendorsTable({ allVendors }) {
   const [currentPage, setCurrentPage] = useState(1);
   const entriesPerPage = 5;
-  const totalPages = Math.ceil(people.length / entriesPerPage);
+  const totalPages = Math.ceil(allVendors.length / entriesPerPage);
 
   // Slice the data for the current page
-  const displayedPeople = people.slice(
+  const displayedPeople = allVendors.slice(
     (currentPage - 1) * entriesPerPage,
     currentPage * entriesPerPage
   );
@@ -89,7 +91,7 @@ export default function AdminAllVendorsTable() {
                     scope="col"
                     className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
                   >
-                    Customer Name
+                    Vendor Info
                   </th>
                   <th
                     scope="col"
@@ -110,33 +112,44 @@ export default function AdminAllVendorsTable() {
                   <tr key={`${person.email}-${index}`}>
                     <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                       <div className="flex items-center">
-                        <div className="h-11 w-11 flex-shrink-0">
-                          <img
-                            className="h-11 w-11 rounded-full"
-                            src={person.image}
-                            alt=""
-                          />
-                        </div>
                         <div className="ml-4">
                           <div className="font-medium text-gray-900">
-                            {person.name}
+                            {person?.userName}
                           </div>
                           <div className="mt-1 text-gray-500">
-                            {person.email}
+                            {person?.userEmail}
                           </div>
                         </div>
                       </div>
                     </td>
                     <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 text-left">
-                      <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                        Active
-                      </span>
+                      {person?.isActive === false &&
+                      person?.isDeleted === false ? (
+                        <span className="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/20">
+                          In-Active
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                          Active
+                        </span>
+                      )}
                     </td>
-                    <td className="whitespace-nowrap px-3 py-5 text-center text-2xl font-medium">
-                      <button className="text-red-600 hover:text-orange-900">
-                        <AiFillDelete />
-                        <span className="sr-only">, {person.name}</span>
-                      </button>
+                    <td className="relative whitespace-nowrap py-5 text-center text-xs font-medium sm:pr-0">
+                      {person &&
+                      person?.isActive === false &&
+                      person?.isDeleted === false ? (
+                        <button
+                          // onClick={handleActivateProd}
+                          className="border-2 border-green-400 px-2 py-1 rounded-lg text-green-600 duration-400 hover:duration-400 hover:scale-110 hover:cursor-pointer"
+                        >
+                          Activate
+                        </button>
+                      ) : (
+                        <button
+                          // onClick={handleDeleteProd}
+                          className="text-red-600 duration-400 hover:duration-400 hover:scale-110 hover:cursor-pointer"
+                        ></button>
+                      )}
                     </td>
                   </tr>
                 ))}
