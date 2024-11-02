@@ -1,6 +1,6 @@
-import React, { createContext, useEffect, useState } from "react";
-import Swal from "sweetalert2";
-import useRequest from "../APIServices/useRequest";
+import React, { createContext, useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
+import useRequest from '../APIServices/useRequest';
 
 export const AuthContext = createContext(null);
 
@@ -11,7 +11,7 @@ function AuthProviders({ children }) {
 
   const getUserData = () => {
     try {
-      let getUserDetails = JSON.parse(localStorage.getItem("userCreds"));
+      let getUserDetails = JSON.parse(localStorage.getItem('userCreds'));
       if (getUserDetails) {
         setUser(getUserDetails);
       }
@@ -28,21 +28,22 @@ function AuthProviders({ children }) {
 
   const handleLoginData = async (userCreds) => {
     try {
-      const loginUser = await postRequest("/users/login", userCreds);
+      const loginUser = await postRequest('/users/login', userCreds);
 
       const user = loginUser?.data?.data?.modifiedUser;
       if (user) {
-        localStorage.setItem("userCreds", JSON.stringify(user));
+        localStorage.setItem('userCreds', JSON.stringify(user));
         setUser(user);
       } else {
-        Swal.fire("No user data found.")
-        throw new Error("No user data found.");
+        Swal.fire('No user data found.');
+        throw new Error('No user data found.');
       }
     } catch (error) {
       Swal.fire("Credentials Don't Match");
       throw new Error("Credentials Don't Match");
     }
   };
+  console.log('user', user);
 
   const authInfo = {
     user,

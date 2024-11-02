@@ -1,13 +1,14 @@
-import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import img from "../../assets/logo.png";
-import loginImage from "../../assets/loginImage.png";
-import { FcGoogle } from "react-icons/fc";
-import { AuthContext } from "../../providers/AuthProviders";
-import Swal from "sweetalert2";
+import React, { useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import img from '../../assets/logo.png';
+import loginImage from '../../assets/loginImage.png';
+import { FcGoogle } from 'react-icons/fc';
+import { AuthContext } from '../../providers/AuthProviders';
+import Swal from 'sweetalert2';
 
 function LoginPage() {
   const { handleLoginData, setLoading, user } = useContext(AuthContext);
+  console.log('user', user);
   const [selectedRole, setSelectedRole] = useState(103);
   const navigate = useNavigate();
 
@@ -23,19 +24,19 @@ function LoginPage() {
       await handleLoginData({ email, password });
 
       Swal.fire({
-        icon: "success",
-        title: "Logged in successfully!",
+        icon: 'success',
+        title: 'Logged in successfully!',
         showConfirmButton: false,
         timer: 2000,
       });
 
       // Redirect after successful login
-      setTimeout(() => navigate("/"), 2000);
+      setTimeout(() => navigate('/'), 2000);
     } catch (error) {
       Swal.fire({
-        icon: "error",
-        title: "Login Failed",
-        text: error.message || "Invalid credentials",
+        icon: 'error',
+        title: 'Login Failed',
+        text: error.message || 'Invalid credentials',
       });
     } finally {
       setLoading(false);

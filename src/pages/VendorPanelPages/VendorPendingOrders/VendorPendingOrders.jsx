@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react';
+import { AuthContext } from '../../../providers/AuthProviders';
 
 function VendorPendingOrders() {
-  return (
-    <div>VendorPendingOrders</div>
-  )
+  const { user } = useContext(AuthContext);
+
+  return <>{user && user.userType === 101 && <div>VendorPendingOrders</div>}</>;
 }
 
-export default VendorPendingOrders
+export default VendorPendingOrders;
