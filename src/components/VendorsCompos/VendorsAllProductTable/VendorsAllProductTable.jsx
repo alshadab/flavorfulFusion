@@ -84,13 +84,15 @@ export default function VendorsAllProductTable({deleteProduct, activateProduct, 
                 ))}
               </tbody>
             </table>
-            <Paginations
+            {
+              allProdList && allProdList.length > 5 ? <Paginations
               currentPage={currentPage}
               totalPages={totalPages}
               onPrevPage={handlePrevPage}
               onNextPage={handleNextPage}
               onPageChange={handlePageChange}
-            />
+            /> : <> </>
+            }
           </div>
         </div>
       </div>

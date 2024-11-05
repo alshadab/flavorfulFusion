@@ -7,18 +7,18 @@ export const AuthContext = createContext(null);
 function AuthProviders({ children }) {
   const [user, setUser] = useState(null);
   const [postRequest, getRequest] = useRequest();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true); // Make sure initial state is 'true' until data is fetched
 
-  const getUserData = () => {
+  const getUserData = async () => {
     try {
-      let getUserDetails = JSON.parse(localStorage.getItem("userCreds"));
+      let getUserDetails = await JSON.parse(localStorage.getItem("userCreds"));
       if (getUserDetails) {
         setUser(getUserDetails);
       }
-      setLoading(false);
     } catch (error) {
       console.log(error);
-      setLoading(false);
+    } finally {
+      setLoading(false); // Set loading to false after data is fetched (or after failure)
     }
   };
 
@@ -35,7 +35,7 @@ function AuthProviders({ children }) {
         localStorage.setItem("userCreds", JSON.stringify(user));
         setUser(user);
       } else {
-        Swal.fire("No user data found.")
+        Swal.fire("No user data found.");
         throw new Error("No user data found.");
       }
     } catch (error) {
@@ -51,6 +51,12 @@ function AuthProviders({ children }) {
     setLoading,
     handleLoginData,
   };
+
+  // Render loading spinner or a placeholder until user data is loaded
+  if (loading) {
+    return <div>Loading...</div>; // You can use a loading spinner here
+  }
+
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );
