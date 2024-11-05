@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import GlobalHeaders from "../../../components/GlobalComponents/GlobalHeaders/GlobalHeaders";
-import FilterProductsByCategories from "../../../components/GlobalComponents/FilterProductsByCategories/FilterProductsByCategories";
 import useRequest from "../../../APIServices/useRequest";
 import VendorsAllProductTable from "../../../components/VendorsCompos/VendorsAllProductTable/VendorsAllProductTable";
 import { AuthContext } from "../../../providers/AuthProviders";
@@ -44,8 +43,6 @@ function VendorAllProducts() {
       console.log(error);
     }
   };
-
-  console.log("All products, Bendor: ", allProdList);
 
   return (
     <div className="w-full h-full rounded-lg shadow-md px-10 bg-white">

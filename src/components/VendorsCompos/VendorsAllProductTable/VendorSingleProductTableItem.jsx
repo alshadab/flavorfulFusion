@@ -15,6 +15,8 @@ function VendorSingleProductTableItem({
   const [, getRequest] = useRequest();
   const [stockCount, setStockCount] = useState(0);
   const [category, setCategory] = useState("");
+  
+  console.log(product, "producccccc")
 
   const fetchIndividualProductStock = async () => {
     let stockCount = await getRequest(`/stocks/src/${product?._id}`);
@@ -87,7 +89,7 @@ function VendorSingleProductTableItem({
             <div className="h-11 w-11 flex-shrink-0">
               <img
                 className="h-11 w-11 rounded-full"
-                src={product?.productImg}
+                src={product?.productThumb}
                 alt=""
               />
             </div>
