@@ -230,7 +230,7 @@ function SignUpPage() {
 
             {/* Photo Upload and User Type fields */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-5">
-              <div className="flex flex-col col-span-2">
+              {/* <div className="flex flex-col col-span-2">
                 <label htmlFor="photoUpload">Upload Photo</label>
                 <input
                   type="file"
@@ -240,10 +240,10 @@ function SignUpPage() {
                   id="photoUpload"
                   onChange={handleImageChange}
                 />
-              </div>
+              </div> */}
 
               <div className="flex items-end space-x-2">
-                {selectedImage && (
+                {/* {selectedImage && (
                   <div className="w-14 h-14">
                     <img
                       src={selectedImage}
@@ -251,7 +251,7 @@ function SignUpPage() {
                       className="object-cover rounded-xl w-full h-full"
                     />
                   </div>
-                )}
+                )} */}
                 <div className="flex flex-col w-full">
                   <label htmlFor="userType">User Type</label>
                   <select

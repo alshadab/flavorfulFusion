@@ -77,14 +77,11 @@ function VendorAddAProduct() {
   };
   return (
     <div className="w-full h-full rounded-lg shadow-md px-10 pb-10 bg-white">
-      <div className="w-full bg-white rounded pt-5">
+      <div className="w-full bg-white rounded">
         <GlobalHeaders title={"Create / Add Products"} />
       </div>
-      <div className="mt-10 w-full h-full">
-        <form
-          onSubmit={handleCreateProducts}
-          className="mx-10 mt-10"
-        >
+      <div className="mt-4 w-full h-full">
+        <form onSubmit={handleCreateProducts} className="mx-10">
           <div className="flex items-start w-full gap-5">
             <div className="flex flex-col items-start w-full">
               <label className="text-sm" htmlFor="productName">

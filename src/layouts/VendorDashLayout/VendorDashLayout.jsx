@@ -354,10 +354,12 @@ export default function VendorDashLayout() {
                   </button>
                 </Link>
 
-                <button className="flex items-center gap-x-2 px-4 py-2 rounded-3xl text-sm font-semibold border border-orange-600 text-orange-600 duration-200 hover:duration-200 hover:cursor-pointer hover:bg-orange-500 hover:text-white">
-                  <CiShop className="text-xl" />
-                  Create A Product
-                </button>
+                <Link to="/vendoraddproduct">
+                  <button className="flex items-center gap-x-2 px-4 py-2 rounded-3xl text-sm font-semibold border border-orange-600 text-orange-600 duration-200 hover:duration-200 hover:cursor-pointer hover:bg-orange-500 hover:text-white">
+                    <CiShop className="text-xl" />
+                    Create A Product
+                  </button>
+                </Link>
 
                 <div
                   className="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-900/10"

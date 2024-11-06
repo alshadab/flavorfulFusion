@@ -40,7 +40,7 @@ function HomePage() {
   return (
     <div>
       <Banner />
-      <CategorySelector fetchProductByCategory={fetchProductByCategory} />
+      <CategorySelector fetchProductByCategory={fetchProductByCategory} fetchAllProds={fetchAllProds}/>
       <HomePageAllProducts allProds={allProds} />
     </div>
   );

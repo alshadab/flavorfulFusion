@@ -1,27 +1,46 @@
-import React from "react";
-import appleImg from "../../../assets/appleImage.png";
+import React, { useEffect, useState } from "react";
+import useRequest from "../../../APIServices/useRequest";
 
-function HomePageIndividualProduct() {
+function HomePageIndividualProduct({product}) {
+  const [postRequest, getRequest] = useRequest();
+  const [stock, setStock] = useState(0);
+
+  const fetchStock = async()=>{
+    try{
+      const fetchData = await getRequest(`/stocks/src/${product?._id}`);
+      setStock(fetchData?.data?.data?.stockQTY);
+    }catch(error){
+      console.log(error);
+    }
+  };
+
+  useEffect(()=>{
+    fetchStock();
+  },[]);
+
+  console.log(stock, "Stocks")
+
+
   return (
     <div class="w-full p-4 bg-white border rounded-lg shadow-md">
       <div class="relative">
         <img
-          class="w-full h-60 object-cover rounded-t-lg"
-          src={appleImg}
+          class="w-full h-60 rounded-t-lg object-contain"
+          src={`http://localhost:8000/images/${product?.productThumb}`}
           alt="Apples"
         />
-        <span class="absolute top-2 right-2 bg-yellow-400 text-white text-sm font-semibold px-2 py-1 rounded-full">
+        {/* <span class="absolute top-2 right-2 bg-yellow-400 text-white text-sm font-semibold px-2 py-1 rounded-full">
           20%
-        </span>
+        </span> */}
       </div>
 
       <div class="mt-5 text-left">
-        <h3 class="text-lg font-semibold">Apples</h3>
-        <p class="text-sm text-gray-500">1lb</p>
+        <h3 class="text-lg font-semibold">{product?.productName}</h3>
+        <p class="text-sm text-gray-500">Quantity Remaining: <span className="italic">{stock}</span> pieces</p>
         <div class="mt-10 flex items-end justify-between">
           <div className="flex flex-col items-start">
-            <span class="text-sm line-through text-gray-400">$2.00</span>
-            <span class="text-lg font-semibold text-green-500">$1.60</span>
+            {/* <span class="text-sm line-through text-gray-400">$2.00</span> */}
+            <span class="text-lg font-semibold text-green-500">${product?.sellingPrice}</span>
           </div>
           <button class="flex items-center justify-center border px-4 py-2 text-sm bg-white text-green-600 font-bold rounded-3xl duration-200 hover:duration-200 hover:scale-105">
             <svg
