@@ -1,25 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import useRequest from "../../../APIServices/useRequest";
+import { AuthContext } from "../../../providers/AuthProviders";
+import { useNavigate } from "react-router-dom";
 
-function HomePageIndividualProduct({product}) {
+function HomePageIndividualProduct({ product }) {
+  const { addToCart, addedProduct } = useContext(AuthContext);
   const [postRequest, getRequest] = useRequest();
   const [stock, setStock] = useState(0);
+  const navigate = useNavigate();
 
-  const fetchStock = async()=>{
-    try{
+  const fetchStock = async () => {
+    try {
       const fetchData = await getRequest(`/stocks/src/${product?._id}`);
       setStock(fetchData?.data?.data?.stockQTY);
-    }catch(error){
+    } catch (error) {
       console.log(error);
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchStock();
-  },[]);
-
-  console.log(stock, "Stocks")
-
+  }, [addedProduct]);
 
   return (
     <div class="w-full p-4 bg-white border rounded-lg shadow-md">
@@ -36,13 +37,25 @@ function HomePageIndividualProduct({product}) {
 
       <div class="mt-5 text-left">
         <h3 class="text-lg font-semibold">{product?.productName}</h3>
-        <p class="text-sm text-gray-500">Quantity Remaining: <span className="italic">{stock}</span> pieces</p>
+        <p class="text-sm text-gray-500">
+          Quantity Remaining: <span className="italic">{stock}</span> pieces
+        </p>
         <div class="mt-10 flex items-end justify-between">
           <div className="flex flex-col items-start">
             {/* <span class="text-sm line-through text-gray-400">$2.00</span> */}
-            <span class="text-lg font-semibold text-green-500">${product?.sellingPrice}</span>
+            <span class="text-lg font-semibold text-green-500">
+              ${product?.sellingPrice}
+            </span>
           </div>
-          <button class="flex items-center justify-center border px-4 py-2 text-sm bg-white text-green-600 font-bold rounded-3xl duration-200 hover:duration-200 hover:scale-105">
+          <button
+            onClick={async () => {
+              const success = await addToCart(product, stock);
+              if (success) {
+                navigate("/usercarts");
+              }
+            }}
+            class="flex items-center justify-center border px-3 py-1 text-sm bg-white text-green-600 font-bold rounded-3xl duration-200 hover:duration-200 hover:scale-105"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

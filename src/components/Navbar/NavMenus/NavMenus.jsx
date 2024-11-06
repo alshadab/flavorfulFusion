@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import NavPagesDropDown from "../NavPagesDropDown/NavPagesDropDown";
 import { AuthContext } from "../../../providers/AuthProviders";
@@ -11,9 +11,14 @@ import {
 } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import Swal from "sweetalert2";
+import useRequest from "../../../APIServices/useRequest";
 
 function NavMenus() {
-  const { user, setUser } = useContext(AuthContext);
+  const [postRequest, getRequest] = useRequest();
+  const { user, setUser, cartItem } = useContext(AuthContext);
+
+  console.log(cartItem, "Cart Item");
+
   const navigate = useNavigate();
 
   function classNames(...classes) {
@@ -93,7 +98,33 @@ function NavMenus() {
     <div className="w-full h-full flex items-center justify-end gap-x-6">
       <div className="flex items-center gap-x-6 font-semibold">{links}</div>
       {user ? (
-        <div className="">
+        <div className="flex items-center gap-x-6">
+          {/* Cart Icon with Item Count for userType === 103 */}
+          {user.userType === 103 && (
+            <Link to="/usercarts">
+              <div className="relative flex items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  className="w-6 h-6 text-gray-900"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 6M7 13l1.4 6m10-6l-1.4 6M7 19h10M9 23a1 1 0 102 0m4 0a1 1 0 102 0"
+                  />
+                </svg>
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-semibold rounded-full h-5 w-5 flex items-center justify-center">
+                  {cartItem ? cartItem.length : 0}
+                </span>
+              </div>
+            </Link>
+          )}
+
+          {/* User Menu */}
           <Menu as="div" className="relative">
             <MenuButton className="-m-1.5 flex items-center p-1.5">
               <span className="sr-only">Open user menu</span>
@@ -120,6 +151,7 @@ function NavMenus() {
                 />
               </span>
             </MenuButton>
+
             <Transition
               enter="transition ease-out duration-100"
               enterFrom="transform opacity-0 scale-95"
@@ -134,6 +166,7 @@ function NavMenus() {
                     user.userType === 109 ||
                     user.userType === 101) && (
                     <>
+                      {/* Render user-specific navigation */}
                       {(user.userType === 103
                         ? userNavigation
                         : user.userType === 109
@@ -155,16 +188,18 @@ function NavMenus() {
                               </Link>
                             )}
                           </MenuItem>
-                          <MenuItem>
-                            <button
-                              onClick={handleLogout}
-                              className="pl-3 py-1 text-sm leading-6 text-gray-900"
-                            >
-                              Logout
-                            </button>
-                          </MenuItem>
                         </div>
                       ))}
+
+                      {/* Logout Button */}
+                      <MenuItem>
+                        <button
+                          onClick={handleLogout}
+                          className="pl-3 py-1 text-sm leading-6 text-gray-900"
+                        >
+                          Logout
+                        </button>
+                      </MenuItem>
                     </>
                   )}
               </MenuItems>
@@ -174,12 +209,12 @@ function NavMenus() {
       ) : (
         <div className="flex items-center gap-x-6">
           <Link to="/login">
-            <button className="px-4 py-1 font-semibold rounded bg-orange-600 text-white duraiton-200 hover:duration-200 hover:bg-orange-700 hover:scale-110">
+            <button className="px-4 py-1 font-semibold rounded bg-orange-600 text-white duration-200 hover:bg-orange-700 hover:scale-110">
               Join
             </button>
           </Link>
           <Link to="/signup">
-            <button className="px-4 py-1 font-semibold rounded bg-orange-600 text-white duraiton-200 hover:duration-200 hover:bg-orange-700 hover:scale-110">
+            <button className="px-4 py-1 font-semibold rounded bg-orange-600 text-white duration-200 hover:bg-orange-700 hover:scale-110">
               Become a Seller
             </button>
           </Link>

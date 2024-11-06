@@ -8,6 +8,7 @@ function HomePage() {
   const [postRequest, getRequest] = useRequest();
   const [allProds, setAllProds] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(0);
+  
 
   const fetchAllProds = async () => {
     try {
@@ -22,6 +23,7 @@ function HomePage() {
     fetchAllProds();
   }, []);
 
+
   const fetchProductByCategory = async (categoryCode) => {
     try {
       const productDetails = await getRequest(
@@ -34,8 +36,6 @@ function HomePage() {
     }
   };
 
-
-  console.log(allProds, "All Products");
 
   return (
     <div>
