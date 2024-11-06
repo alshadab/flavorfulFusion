@@ -233,7 +233,7 @@ export default function UserDashLayouts() {
                             ))}
                           </ul>
                         </li>
-                        <li className="mt-auto">
+                        {/* <li className="mt-auto">
                           <p
                             href="#"
                             className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-orange-200 hover:bg-orange-700 hover:text-white"
@@ -244,7 +244,7 @@ export default function UserDashLayouts() {
                             />
                             Settings
                           </p>
-                        </li>
+                        </li> */}
                       </ul>
                     </nav>
                   </div>
@@ -330,7 +330,7 @@ export default function UserDashLayouts() {
                     ))}
                   </ul>
                 </li>
-                <li className="mt-auto">
+                {/* <li className="mt-auto">
                   <p
                     href="#"
                     className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-orange-600 hover:bg-orange-700 hover:text-white"
@@ -341,7 +341,7 @@ export default function UserDashLayouts() {
                     />
                     Settings
                   </p>
-                </li>
+                </li> */}
               </ul>
             </nav>
           </div>
@@ -383,15 +383,15 @@ export default function UserDashLayouts() {
               </form>
               <div className="flex items-center gap-x-4 lg:gap-x-6">
                 <Link to="/">
-                  <button className="px-4 py-2 rounded-3xl text-sm font-semibold bg-orange-600 text-white duration-200 hover:duration-200 hover:cursor-pointer hover:bg-orange-700">
+                  <button className="px-4 py-2 rounded-lg text-sm font-semibold bg-orange-600 text-white duration-200 hover:duration-200 hover:cursor-pointer hover:bg-orange-700">
                     Visit Site
                   </button>
                 </Link>
 
-                <button className="flex items-center gap-x-2 px-4 py-2 rounded-3xl text-sm font-semibold border border-orange-600 text-orange-600 duration-200 hover:duration-200 hover:cursor-pointer hover:bg-orange-500 hover:text-white">
+                {/* <button className="flex items-center gap-x-2 px-4 py-2 rounded-3xl text-sm font-semibold border border-orange-600 text-orange-600 duration-200 hover:duration-200 hover:cursor-pointer hover:bg-orange-500 hover:text-white">
                   <CiShop className="text-xl" />
                   Create Shop
-                </button>
+                </button> */}
 
                 <div
                   className="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-900/10"
