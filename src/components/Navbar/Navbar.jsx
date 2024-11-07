@@ -9,7 +9,7 @@ function Navbar() {
     <div className="w-full h-[14vh] px-[2vw] bg-[#FFFFFF] grid grid-cols-12">
       <div className="col-span-4 w-full h-full border-white flex items-center gap-x-10">
         <Link to="/">
-          <div className="flex items-center">
+          <div className="flex items-center hover:cursor-pointer">
             <img
               src={logo}
               className="w-20 h-20"

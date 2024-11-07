@@ -38,6 +38,7 @@ import AdminAllConfirmedOrdersPage from "../pages/AdminPanelPages/AdminAllConfir
 import TermsAndConditions from "../pages/TermsAndConditions/TermsAndConditions";
 import FAQs from "../pages/FAQs/FAQs";
 import Manufacturers from "../pages/Manufacturers/Manufacturers";
+import SingleProductPage from "../pages/HomePage/SingleProductPage";
 
 const router = createBrowserRouter([
   {
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
       {
         path: "/manufacturers",
         element: <Manufacturers />,
+      },
+      {
+        path: "/singleproductpage/:id",
+        element: <SingleProductPage />,
       },
     ],
   },

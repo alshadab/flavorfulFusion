@@ -67,7 +67,7 @@ function AdminAllUsersPage() {
   return (
     <div className="w-full h-full rounded-lg shadow-md px-10 bg-white">
       <div className="w-full bg-white rounded px-10 pt-10">
-        <GlobalHeaders title={"All Users"} searchFilter={"UserName"} />
+        <GlobalHeaders title={"All Users/Customers/Buyers"} searchFilter={"UserName"} />
       </div>
       <div className="mt-10 px-10 grid grid-cols-2 items-end">
         <FilterByUserType

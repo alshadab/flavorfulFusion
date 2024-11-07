@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 
 function LoginPage() {
   const { handleLoginData, setLoading, user } = useContext(AuthContext);
-  console.log('user', user);
+  console.log("User Details", user);
   const [selectedRole, setSelectedRole] = useState(103);
   const navigate = useNavigate();
 

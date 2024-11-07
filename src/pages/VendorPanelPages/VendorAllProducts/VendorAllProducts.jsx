@@ -1,35 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import GlobalHeaders from "../../../components/GlobalComponents/GlobalHeaders/GlobalHeaders";
-import FilterProductsByCategories from "../../../components/GlobalComponents/FilterProductsByCategories/FilterProductsByCategories";
 import useRequest from "../../../APIServices/useRequest";
 import VendorsAllProductTable from "../../../components/VendorsCompos/VendorsAllProductTable/VendorsAllProductTable";
+import { AuthContext } from "../../../providers/AuthProviders";
 
 function VendorAllProducts() {
-  const [, getRequest] = useRequest();
-  const [categoryList, setCategoryList] = useState([]);
+  const { user } = useContext(AuthContext);
+  const [postRequest, getRequest] = useRequest();
   const [allProdList, setAllProdList] = useState([]);
   const [deleteState, setDeleteState] = useState([]);
   const [activateState, setActivateState] = useState([]);
 
-  const fetchAllCategoryList = async () => {
+  const fetchAllProducts = async () => {
     try {
-      let categoryList = await getRequest("/categories/src");
-      setCategoryList(categoryList?.data?.data);
+      let prodList = await postRequest("/products/src/all/byusrid", {
+        userId: user?._id,
+      });
+      setAllProdList(prodList?.data?.data);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    fetchAllCategoryList();
+    fetchAllProducts();
   }, [deleteState, activateState]);
-
-  const handleSelectCategories = async (categoryCode) => {
-    const fetchProdListAgain = await getRequest(
-      `/products/src/category/${categoryCode.target.value}`
-    );
-    setAllProdList(fetchProdListAgain?.data?.data);
-  };
 
   const deleteProduct = async (id) => {
     try {
@@ -53,16 +48,9 @@ function VendorAllProducts() {
     <div className="w-full h-full rounded-lg shadow-md px-10 bg-white">
       <div className="w-full bg-white rounded pt-5">
         <GlobalHeaders title={"Products"} searchFilter={"Product Name"} />
-        <div className="mt-5 w-full grid grid-cols-2 gap-x-80">
-          <FilterProductsByCategories
-            categoryList={categoryList}
-            handleSelectCategories={handleSelectCategories}
-          />
-          {/* <FilterProductsByProductTypes /> */}
-        </div>
       </div>
 
-      <div className="mt-5 bg-white w-full pt-5 pb-10 rounded">
+      <div className="bg-white w-full pb-10 rounded">
         {allProdList === null ? (
           <div className="w-full flex justify-center">
             <h1 className="text-2xl text-gray-300">No Products Available</h1>
