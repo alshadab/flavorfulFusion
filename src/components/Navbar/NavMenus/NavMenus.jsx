@@ -17,7 +17,6 @@ function NavMenus() {
   const [postRequest, getRequest] = useRequest();
   const { user, setUser, cartItem } = useContext(AuthContext);
 
-  console.log(cartItem, "Cart Item");
 
   const navigate = useNavigate();
 
