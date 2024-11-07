@@ -39,6 +39,7 @@ import TermsAndConditions from "../pages/TermsAndConditions/TermsAndConditions";
 import FAQs from "../pages/FAQs/FAQs";
 import Manufacturers from "../pages/Manufacturers/Manufacturers";
 import SingleProductPage from "../pages/HomePage/SingleProductPage";
+import CreateUserInfoPage from "../pages/LoginPage/CrtUserInfo";
 
 const router = createBrowserRouter([
   {
@@ -208,6 +209,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <LoginPage />,
+  },
+  {
+    path: "/user-info-crt",
+    element: <CreateUserInfoPage />,
   },
 ]);
 
