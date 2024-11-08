@@ -1,7 +1,7 @@
-import React, { createContext, useEffect, useState } from 'react';
-import Swal from 'sweetalert2';
-import useRequest from '../APIServices/useRequest';
-import GlobalLoading from '../components/GlobalComponents/GlobalLoading/GlobalLoading';
+import React, { createContext, useEffect, useState } from "react";
+import Swal from "sweetalert2";
+import useRequest from "../APIServices/useRequest";
+import GlobalLoading from "../components/GlobalComponents/GlobalLoading/GlobalLoading";
 
 export const AuthContext = createContext(null);
 
@@ -18,7 +18,7 @@ function AuthProviders({ children }) {
     setLoading(true); // Start loading
     try {
       const getUserDetails = await JSON.parse(
-        localStorage.getItem('userCreds')
+        localStorage.getItem("userCreds")
       );
       if (getUserDetails) {
         setUser(getUserDetails);
@@ -40,9 +40,9 @@ function AuthProviders({ children }) {
       const removeMechanism = await getRequest(`/carts/del/byId/${id}`);
       if (removeMechanism?.data?.error === false) {
         setRemoveCart(!removeCart);
-        Swal.fire('Successfully Removed From Cart');
+        Swal.fire("Successfully Removed From Cart");
       } else {
-        Swal.fire('Failed to remove the item from the cart');
+        Swal.fire("Failed to remove the item from the cart");
       }
     } catch (error) {
       console.log(error);
@@ -54,10 +54,10 @@ function AuthProviders({ children }) {
   const confirmCartItem = async (id) => {
     setLoading(true);
     try {
-      const confirmationData = await postRequest('/orders/crt', { cartId: id });
+      const confirmationData = await postRequest("/orders/crt", { cartId: id });
       if (confirmationData?.data?.error === false) {
         setRemoveCart(!removeCart);
-        Swal.fire('Successfully Placed an Order');
+        Swal.fire("Successfully Placed an Order");
         return true;
       }
     } catch (error) {
@@ -90,14 +90,14 @@ function AuthProviders({ children }) {
   const handleLoginData = async (userCreds) => {
     setLoading(true);
     try {
-      const loginUser = await postRequest('/users/login', userCreds);
+      const loginUser = await postRequest("/users/login", userCreds);
       const user = loginUser?.data?.data?.modifiedUser;
       if (user) {
-        localStorage.setItem('userCreds', JSON.stringify(user));
+        localStorage.setItem("userCreds", JSON.stringify(user));
         setUser(user);
       } else {
-        Swal.fire('No user data found.');
-        throw new Error('No user data found.');
+        Swal.fire("No user data found.");
+        throw new Error("No user data found.");
       }
     } catch (error) {
       Swal.fire("Credentials Don't Match");
@@ -107,60 +107,31 @@ function AuthProviders({ children }) {
     }
   };
 
-  const addToCart = async (product, stock) => {
+  const addToCart = async (product, stock, quantity) => {
     try {
-      const { value: quantity } = await Swal.fire({
-        title: 'Enter Quantity',
-        input: 'number',
-        inputAttributes: {
-          min: 1,
-          max: stock,
-          step: 1,
-          style: 'appearance: none; -moz-appearance: textfield;',
-        },
-        customClass: {
-          input: 'no-spinner',
-        },
-        showCancelButton: true,
-        confirmButtonText: 'Add to Cart',
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        inputValidator: (value) => {
-          if (!value || value <= 0) {
-            return 'Please enter a valid quantity!';
-          } else if (value > stock) {
-            return `Only ${stock} items are available in stock!`;
-          }
-        },
+      const addCartDetails = await postRequest("/carts/crt", {
+        userId: user?._id,
+        productId: product?._id,
+        quantity: parseInt(quantity),
       });
 
-      if (quantity) {
-        setLoading(true);
-        const addCartDetails = await postRequest('/carts/crt', {
-          userId: user?._id,
-          productId: product?._id,
-          quantity: parseInt(quantity),
+      if (addCartDetails?.data?.error === false) {
+        Swal.fire({
+          title: "Added to Cart",
+          text: `You have added ${quantity} items to your cart.`,
+          icon: "success",
         });
-
-        if (addCartDetails?.data?.error === false) {
-          Swal.fire({
-            title: 'Added to Cart',
-            text: `You have added ${quantity} items to your cart.`,
-            icon: 'success',
-          });
-          setAddedProduct(!addedProduct);
-          return true;
-        } else {
-          Swal.fire('Failed to Add');
-        }
+        setAddedProduct(!addedProduct);
+      } else {
+        Swal.fire("Failed to Add", "", "error");
       }
     } catch (error) {
       console.log(error);
     } finally {
-      setLoading(false);
+      // Ensure setLoading is declared in the parent component or adjust as needed
+      setLoading && setLoading(false);
     }
   };
-  console.log('user', user);
 
   const authInfo = {
     user,

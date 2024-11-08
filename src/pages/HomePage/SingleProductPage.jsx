@@ -110,7 +110,9 @@ function SingleProductPage() {
               className="w-full h-64 object-cover rounded-lg"
             />
           </div>
-          <div className="flex gap-2 mt-4"></div>
+          <div className="flex gap-2 mt-4">
+            
+          </div>
         </div>
 
         {/* Product Details */}
