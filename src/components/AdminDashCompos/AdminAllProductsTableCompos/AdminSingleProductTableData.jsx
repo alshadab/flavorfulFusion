@@ -15,14 +15,29 @@ function AdminSingleProductTableData({
   const [, getRequest] = useRequest();
   const [stockCount, setStockCount] = useState(0);
   const [category, setCategory] = useState("");
+  const [vendor, setVendor] = useState([]);
+
+
+  const fetchVendorData = async() =>{
+    try{
+      const fetchData = await getRequest(`/users/seller/src/byId/${product?.userId}`);
+      setVendor(fetchData?.data?.data);
+    }catch(error){
+      console.log(error);
+    }
+  }
+
+  useEffect(()=>{
+    fetchVendorData();
+  },[]);
+
+  console.log(vendor, "Vedors")
+
 
   const fetchIndividualProductStock = async () => {
     let stockCount = await getRequest(`/stocks/src/${product?._id}`);
     setStockCount(stockCount?.data?.data?.stockQTY);
   };
-
-
-  console.log(product, "Product");
 
   
   const fetchCategoryOfIndividualProduct = async () => {
@@ -91,7 +106,7 @@ function AdminSingleProductTableData({
             <div className="h-11 w-11 flex-shrink-0">
               <img
                 className="h-11 w-11 rounded-full"
-                src={product?.productImg}
+                src={`http://localhost:8000/images/${product?.productThumb}`}
                 alt=""
               />
             </div>

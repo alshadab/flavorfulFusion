@@ -97,7 +97,7 @@ export default function AdminAllProductsTable({
                 ))}
               </tbody>
             </table>
-            {displayedPeople && displayedPeople.length > 5 ? (
+            {displayedPeople && displayedPeople.length >= 5 ? (
               <Paginations
                 currentPage={currentPage}
                 totalPages={totalPages}
