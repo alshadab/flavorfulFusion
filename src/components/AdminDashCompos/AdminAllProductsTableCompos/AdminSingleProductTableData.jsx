@@ -21,6 +21,10 @@ function AdminSingleProductTableData({
     setStockCount(stockCount?.data?.data?.stockQTY);
   };
 
+
+  console.log(product, "Product");
+
+  
   const fetchCategoryOfIndividualProduct = async () => {
     let categoryFetch = await getRequest(
       `/categories/src/${product?.categoryId}`

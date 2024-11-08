@@ -26,7 +26,7 @@ function UserOrdersList({ order, index, onSelect, isSelected }) {
       } else if (order.isDelivered === true) {
         setCurrentState("Delivered");
       } else {
-        setCurrentState("Deleted");
+        setCurrentState("Cancelled");
       }
     } catch (error) {
       console.log(error);

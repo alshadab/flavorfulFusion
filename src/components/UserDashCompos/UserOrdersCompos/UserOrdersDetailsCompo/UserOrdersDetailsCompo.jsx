@@ -20,7 +20,7 @@ function UserOrdersDetailsCompo({ order, index }) {
       } else if (order.isDelivered === true) {
         setCurrentState("Delivered");
       } else {
-        setCurrentState("Deleted");
+        setCurrentState("Cancelled");
       }
     } catch (error) {
       console.log(error);
