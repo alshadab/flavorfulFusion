@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
-import { Fragment, useContext, useState } from "react";
-import logo from "../../assets/logo.png";
-import { CiShop } from "react-icons/ci";
+import { Fragment, useContext, useState } from 'react';
+import logo from '../../assets/logo.png';
+import { CiShop } from 'react-icons/ci';
 import {
   Dialog,
   DialogPanel,
@@ -11,7 +11,7 @@ import {
   MenuItems,
   Transition,
   TransitionChild,
-} from "@headlessui/react";
+} from '@headlessui/react';
 import {
   Bars3Icon,
   Cog6ToothIcon,
@@ -24,79 +24,79 @@ import {
   CheckBadgeIcon,
   TruckIcon,
   XCircleIcon,
-} from "@heroicons/react/24/outline";
+} from '@heroicons/react/24/outline';
 import {
   ChevronDownIcon,
   MagnifyingGlassIcon,
-} from "@heroicons/react/20/solid";
-import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../providers/AuthProviders";
-import Swal from "sweetalert2";
+} from '@heroicons/react/20/solid';
+import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../providers/AuthProviders';
+import Swal from 'sweetalert2';
 
 const navigation = [
   {
-    name: "Dashboard",
-    href: "#",
+    name: 'Dashboard',
+    href: '#',
     icon: HomeIcon,
     current: false,
     accordion: false,
-    navigation: "/vendordash",
+    navigation: '/vendordash',
   },
   {
-    name: "My Products",
-    href: "#",
+    name: 'My Products',
+    href: '#',
     icon: ArchiveBoxIcon,
     current: false,
     accordion: false,
-    navigation: "/vendorproducts",
+    navigation: '/vendorproducts',
   },
   {
-    name: "Create A Product",
-    href: "#",
+    name: 'Create A Product',
+    href: '#',
     icon: PlusCircleIcon,
     current: false,
     accordion: false,
-    navigation: "/vendoraddproduct",
+    navigation: '/vendoraddproduct',
   },
 ];
 
 const navigationTwo = [
   {
-    name: "Pending Orders",
-    href: "#",
+    name: 'Pending Orders',
+    href: '#',
     icon: ShoppingBagIcon,
     current: false,
     accordion: false,
-    navigation: "/vendorpendingorders",
+    navigation: '/vendorpendingorders',
   },
   {
-    name: "Confirm Orders",
-    href: "#",
+    name: 'Confirm Orders',
+    href: '#',
     icon: CheckBadgeIcon,
     current: false,
     accordion: false,
-    navigation: "/vendorconfirmorders",
+    navigation: '/vendorconfirmorders',
   },
   {
-    name: "Delivered Orders",
-    href: "#",
+    name: 'Delivered Orders',
+    href: '#',
     icon: TruckIcon,
     current: false,
     accordion: false,
-    navigation: "/vendordeliveredorders",
+    navigation: '/vendordeliveredorders',
   },
   {
-    name: "Cancelled Orders",
-    href: "#",
+    name: 'Cancelled Orders',
+    href: '#',
     icon: CheckBadgeIcon,
     current: false,
     accordion: false,
-    navigation: "/vendorcancelledorders",
+    navigation: '/vendorcancelledorders',
   },
 ];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ');
 }
 
 export default function VendorDashLayout() {
@@ -105,10 +105,10 @@ export default function VendorDashLayout() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("userCreds");
-    Swal.fire("Logged Out");
+    localStorage.removeItem('userCreds');
+    Swal.fire('Logged Out');
     setUser(null);
-    navigate("/");
+    navigate('/');
   };
 
   return (
@@ -178,17 +178,17 @@ export default function VendorDashLayout() {
                                   href={item.href}
                                   className={classNames(
                                     item.current
-                                      ? "bg-orange-700 text-white"
-                                      : "text-orange-200 hover:text-white hover:bg-orange-700",
-                                    "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                                      ? 'bg-orange-700 text-white'
+                                      : 'text-orange-200 hover:text-white hover:bg-orange-700',
+                                    'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
                                   )}
                                 >
                                   <item.icon
                                     className={classNames(
                                       item.current
-                                        ? "text-white"
-                                        : "text-orange-200 group-hover:text-white",
-                                      "h-6 w-6 shrink-0"
+                                        ? 'text-white'
+                                        : 'text-orange-200 group-hover:text-white',
+                                      'h-6 w-6 shrink-0'
                                     )}
                                     aria-hidden="true"
                                   />
@@ -242,18 +242,18 @@ export default function VendorDashLayout() {
                           className={({ isActive }) =>
                             classNames(
                               isActive
-                                ? "bg-orange-700 text-white"
-                                : "text-orange-200 hover:text-white hover:bg-orange-700",
-                              "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                                ? 'bg-orange-700 text-white'
+                                : 'text-orange-200 hover:text-white hover:bg-orange-700',
+                              'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
                             )
                           }
                         >
                           <item.icon
                             className={classNames(
                               item.current
-                                ? "text-white"
-                                : "text-orange-200 group-hover:text-white",
-                              "h-6 w-6 shrink-0"
+                                ? 'text-white'
+                                : 'text-orange-200 group-hover:text-white',
+                              'h-6 w-6 shrink-0'
                             )}
                             aria-hidden="true"
                           />
@@ -275,18 +275,18 @@ export default function VendorDashLayout() {
                           className={({ isActive }) =>
                             classNames(
                               isActive
-                                ? "bg-orange-700 text-white"
-                                : "text-orange-200 hover:text-white hover:bg-orange-700",
-                              "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                                ? 'bg-orange-700 text-white'
+                                : 'text-orange-200 hover:text-white hover:bg-orange-700',
+                              'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
                             )
                           }
                         >
                           <item.icon
                             className={classNames(
                               item.current
-                                ? "text-white"
-                                : "text-orange-200 group-hover:text-white",
-                              "h-6 w-6 shrink-0"
+                                ? 'text-white'
+                                : 'text-orange-200 group-hover:text-white',
+                              'h-6 w-6 shrink-0'
                             )}
                             aria-hidden="true"
                           />
@@ -406,8 +406,8 @@ export default function VendorDashLayout() {
                           <p
                             onClick={handleLogout}
                             className={classNames(
-                              focus ? "bg-gray-50" : "",
-                              "block px-3 py-1 text-sm leading-6 text-gray-900"
+                              focus ? 'bg-gray-50' : '',
+                              'block px-3 py-1 text-sm leading-6 text-gray-900'
                             )}
                           >
                             Logout

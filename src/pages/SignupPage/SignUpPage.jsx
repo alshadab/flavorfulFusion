@@ -1,11 +1,11 @@
-import React, { useContext, useState } from "react";
-import img from "../../assets/logo.png";
-import signupLogo from "../../assets/signupPage.png";
-import { Link, useNavigate } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
-import useRequest from "../../APIServices/useRequest";
-import Swal from "sweetalert2";
-import { AuthContext } from "../../providers/AuthProviders";
+import React, { useContext, useState } from 'react';
+import img from '../../assets/logo.png';
+import signupLogo from '../../assets/signupPage.png';
+import { Link, useNavigate } from 'react-router-dom';
+import { FcGoogle } from 'react-icons/fc';
+import useRequest from '../../APIServices/useRequest';
+import Swal from 'sweetalert2';
+import { AuthContext } from '../../providers/AuthProviders';
 
 function SignUpPage() {
   const { user, setLoading } = useContext(AuthContext);
@@ -85,11 +85,12 @@ function SignUpPage() {
       shippingAddress,
       shippingPostalCode,
     };
-    const createUser = await postRequest("/users/crt", userDetails);
+    console.log('userDetails', userDetails);
+    const createUser = await postRequest('/users/crt', userDetails);
     if (createUser?.data?.data) {
       setLoading(false);
-      Swal.fire("Created User");
-      navigate("/login");
+      Swal.fire('Created User');
+      navigate('/login');
     }
   };
 
@@ -107,7 +108,7 @@ function SignUpPage() {
                 <img src={img} className="w-16 lg:w-20" alt="Logo" />
               </Link>
               <h1 className="text-lg sm:text-xl lg:text-2xl font-poppins font-extrabold text-center lg:text-left">
-                Signup to <span className="text-orange-600">Flavourfull</span>{" "}
+                Signup to <span className="text-orange-600">Flavourfull</span>{' '}
                 Fusion
               </h1>
             </div>

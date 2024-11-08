@@ -1,14 +1,19 @@
-import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import img from "../../assets/logo.png";
-import loginImage from "../../assets/loginImage.png";
-import { FcGoogle } from "react-icons/fc";
-import { AuthContext } from "../../providers/AuthProviders";
-import Swal from "sweetalert2";
+import React, { useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import img from '../../assets/logo.png';
+import loginImage from '../../assets/loginImage.png';
+import { FcGoogle } from 'react-icons/fc';
+import { AuthContext } from '../../providers/AuthProviders';
+import Swal from 'sweetalert2';
+import { signInWithPopup } from 'firebase/auth';
+import { auth, provider } from '../../firebaseConfig';
+import useRequest from '../../APIServices/useRequest';
 
 function LoginPage() {
-  const { handleLoginData, setLoading, user } = useContext(AuthContext);
-  console.log("User Details", user);
+  const [postRequest] = useRequest();
+  const { handleLoginData, setLoading, user, setUser } =
+    useContext(AuthContext);
+  //console.log('User Details', user);
   const [selectedRole, setSelectedRole] = useState(103);
   const navigate = useNavigate();
 
@@ -24,22 +29,71 @@ function LoginPage() {
       await handleLoginData({ email, password });
 
       Swal.fire({
-        icon: "success",
-        title: "Logged in successfully!",
+        icon: 'success',
+        title: 'Logged in successfully!',
         showConfirmButton: false,
         timer: 2000,
       });
 
       // Redirect after successful login
-      setTimeout(() => navigate("/"), 2000);
+      setTimeout(() => navigate('/'), 2000);
     } catch (error) {
       Swal.fire({
-        icon: "error",
-        title: "Login Failed",
-        text: error.message || "Invalid credentials",
+        icon: 'error',
+        title: 'Login Failed',
+        text: error.message || 'Invalid credentials',
       });
     } finally {
       setLoading(false);
+    }
+  };
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      const token = await user.getIdToken();
+
+    
+      const res = await postRequest(`/users/crt/bygl`, {
+        email: user.email,
+        name: user.displayName,
+        picture: user.photoURL,
+        token,
+      });
+
+
+      if (res.data.error === true) {
+        return Swal.fire({
+          icon: 'error',
+          title: 'Login Failed',
+          text: res.data.message || 'Invalid credentials',
+        });
+      } else {
+        if (res.data.data.userType) {
+          if (res.data.data.isActive === false) {
+            return Swal.fire({
+              icon: 'success',
+              title:
+                'User Created Successfully, Please Wait for Admin Approval',
+              text: res.data.message || '',
+            });
+          } else {
+            setUser(res.data.data);
+            navigate('/');
+          }
+        } else {
+          navigate('/user-info-crt', {
+            state: { userID: res.data.data },
+          });
+        }
+      }
+    } catch (error) {
+      console.error('Google login error:', error);
+      Swal.fire({
+        icon: 'success',
+        title: 'User Created Successfully, Please Wait for Admin Approval',
+        text: 'Please Wait for Admin Approval',
+      });
     }
   };
 
@@ -142,7 +196,10 @@ function LoginPage() {
             </div>
 
             <div className="flex items-center justify-center mt-10">
-              <button className="flex items-center gap-x-2 px-4 py-2 rounded bg-blue-500 text-white font-bold duration-200 hover:duration-200 hover:bg-blue-600">
+              <button
+                onClick={handleGoogleLogin}
+                className="flex items-center gap-x-2 px-4 py-2 rounded bg-blue-500 text-white font-bold duration-200 hover:duration-200 hover:bg-blue-600"
+              >
                 <FcGoogle className="bg-white text-2xl" />
                 Sign In With Google Account
               </button>

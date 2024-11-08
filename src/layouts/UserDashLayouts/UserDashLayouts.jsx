@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
-import { Fragment, useContext, useState } from "react";
-import logo from "../../assets/logo.png";
-import { CiShop } from "react-icons/ci";
-import Swal from "sweetalert2";
+import { Fragment, useContext, useState } from 'react';
+import logo from '../../assets/logo.png';
+import { CiShop } from 'react-icons/ci';
+import Swal from 'sweetalert2';
 import {
   Dialog,
   DialogPanel,
@@ -12,7 +12,7 @@ import {
   MenuItems,
   Transition,
   TransitionChild,
-} from "@headlessui/react";
+} from '@headlessui/react';
 import {
   Bars3Icon,
   ShoppingBagIcon,
@@ -24,83 +24,83 @@ import {
   TruckIcon,
   ChartPieIcon,
   UserCircleIcon,
-} from "@heroicons/react/24/outline";
+} from '@heroicons/react/24/outline';
 import {
   ChevronDownIcon,
   MagnifyingGlassIcon,
-} from "@heroicons/react/20/solid";
-import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../providers/AuthProviders";
+} from '@heroicons/react/20/solid';
+import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../providers/AuthProviders';
 
 const navigation = [
   {
-    name: "Profile",
-    href: "#",
+    name: 'Profile',
+    href: '#',
     icon: UserCircleIcon,
     current: false,
     accordion: false,
-    navigation: "/userdash",
+    navigation: '/userdash',
   },
   {
-    name: "Carts",
-    href: "#",
+    name: 'Carts',
+    href: '#',
     icon: ShoppingBagIcon,
     current: false,
     accordion: false,
-    navigation: "/usercarts",
+    navigation: '/usercarts',
   },
   {
-    name: "Reviews",
-    href: "#",
+    name: 'Reviews',
+    href: '#',
     icon: StarIcon,
     current: false,
     accordion: false,
-    navigation: "/userallreviews",
+    navigation: '/userallreviews',
   },
 ];
 
 const navigationTwo = [
   {
-    name: "All Orders",
-    href: "#",
+    name: 'All Orders',
+    href: '#',
     icon: ArchiveBoxIcon,
     current: false,
     accordion: false,
-    navigation: "/userallorders",
+    navigation: '/userallorders',
   },
   {
-    name: "Pending Orders",
-    href: "#",
+    name: 'Pending Orders',
+    href: '#',
     icon: ChartPieIcon,
     current: false,
     accordion: false,
-    navigation: "/userpendingorders",
+    navigation: '/userpendingorders',
   },
   {
-    name: "Cancelled Orders",
-    href: "#",
+    name: 'Cancelled Orders',
+    href: '#',
     icon: XCircleIcon,
     current: false,
     accordion: false,
-    navigation: "/usercancelledorders",
+    navigation: '/usercancelledorders',
   },
   {
-    name: "Delivered Orders",
-    href: "#",
+    name: 'Delivered Orders',
+    href: '#',
     icon: TruckIcon,
     current: false,
     accordion: false,
-    navigation: "/userdeliveredorders",
+    navigation: '/userdeliveredorders',
   },
 ];
 
 const userNavigation = [
-  { name: "Your profile", href: "#" },
-  { name: "Sign out", href: "#" },
+  { name: 'Your profile', href: '#' },
+  { name: 'Sign out', href: '#' },
 ];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ');
 }
 
 export default function UserDashLayouts() {
@@ -109,10 +109,10 @@ export default function UserDashLayouts() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("userCreds");
-    Swal.fire("Logged Out");
+    localStorage.removeItem('userCreds');
+    Swal.fire('Logged Out');
     setUser(null);
-    navigate("/");
+    navigate('/');
   };
 
   return (
@@ -182,17 +182,17 @@ export default function UserDashLayouts() {
                                   href={item.href}
                                   className={classNames(
                                     item.current
-                                      ? "bg-orange-700 text-white"
-                                      : "text-orange-200 hover:text-white hover:bg-orange-700",
-                                    "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                                      ? 'bg-orange-700 text-white'
+                                      : 'text-orange-200 hover:text-white hover:bg-orange-700',
+                                    'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
                                   )}
                                 >
                                   <item.icon
                                     className={classNames(
                                       item.current
-                                        ? "text-white"
-                                        : "text-orange-200 group-hover:text-white",
-                                      "h-6 w-6 shrink-0"
+                                        ? 'text-white'
+                                        : 'text-orange-200 group-hover:text-white',
+                                      'h-6 w-6 shrink-0'
                                     )}
                                     aria-hidden="true"
                                   />
@@ -213,17 +213,17 @@ export default function UserDashLayouts() {
                                   href={item.href}
                                   className={classNames(
                                     item.current
-                                      ? "bg-orange-700 text-white"
-                                      : "text-orange-200 hover:text-white hover:bg-orange-700",
-                                    "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                                      ? 'bg-orange-700 text-white'
+                                      : 'text-orange-200 hover:text-white hover:bg-orange-700',
+                                    'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
                                   )}
                                 >
                                   <item.icon
                                     className={classNames(
                                       item.current
-                                        ? "text-white"
-                                        : "text-orange-200 group-hover:text-white",
-                                      "h-6 w-6 shrink-0"
+                                        ? 'text-white'
+                                        : 'text-orange-200 group-hover:text-white',
+                                      'h-6 w-6 shrink-0'
                                     )}
                                     aria-hidden="true"
                                   />
@@ -276,18 +276,18 @@ export default function UserDashLayouts() {
                           className={({ isActive }) =>
                             classNames(
                               isActive
-                                ? "bg-orange-700 text-white"
-                                : "text-orange-200 hover:text-white hover:bg-orange-700",
-                              "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                                ? 'bg-orange-700 text-white'
+                                : 'text-orange-200 hover:text-white hover:bg-orange-700',
+                              'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
                             )
                           }
                         >
                           <item.icon
                             className={classNames(
                               item.current
-                                ? "text-white"
-                                : "text-orange-200 group-hover:text-white",
-                              "h-6 w-6 shrink-0"
+                                ? 'text-white'
+                                : 'text-orange-200 group-hover:text-white',
+                              'h-6 w-6 shrink-0'
                             )}
                             aria-hidden="true"
                           />
@@ -309,18 +309,18 @@ export default function UserDashLayouts() {
                           className={({ isActive }) =>
                             classNames(
                               isActive
-                                ? "bg-orange-700 text-white"
-                                : "text-orange-200 hover:text-white hover:bg-orange-700",
-                              "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                                ? 'bg-orange-700 text-white'
+                                : 'text-orange-200 hover:text-white hover:bg-orange-700',
+                              'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
                             )
                           }
                         >
                           <item.icon
                             className={classNames(
                               item.current
-                                ? "text-white"
-                                : "text-orange-200 group-hover:text-white",
-                              "h-6 w-6 shrink-0"
+                                ? 'text-white'
+                                : 'text-orange-200 group-hover:text-white',
+                              'h-6 w-6 shrink-0'
                             )}
                             aria-hidden="true"
                           />
@@ -438,8 +438,8 @@ export default function UserDashLayouts() {
                           <button
                             onClick={handleLogout}
                             className={classNames(
-                              focus ? "bg-gray-50" : "",
-                              "block px-3 py-1 text-sm leading-6 text-gray-900"
+                              focus ? 'bg-gray-50' : '',
+                              'block px-3 py-1 text-sm leading-6 text-gray-900'
                             )}
                           >
                             Logout
