@@ -1,65 +1,23 @@
 import React, { useState } from "react";
 import Paginations from "../../GlobalComponents/Paginations/Paginations";
 
-const faqs = [
-  {
-    title: "Can I pay once I get the product on my hand?",
-    description:
-      "Yes, you can entirely pay the bill along with the shipping charges right outside your doors once you get the product. Even if the product comes damaged, you can return it straight away.",
-    type: "Vegetables",
-    issuedBy: "Lindsay Walton",
-    email: "lindsay.walton@example.com",
-    status: "Active",
-    image:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    title: "Do you provide international shipping for orders?",
-    description:
-      "Currently, we ship within our country, but international shipping options are under consideration for the future.",
-    type: "Shipping",
-    issuedBy: "Jordan Peterson",
-    email: "jordan.peterson@example.com",
-    status: "Inactive",
-    image:
-      "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    title: "How can I track my order?",
-    description:
-      "Once your order is shipped, you’ll receive an email with tracking details. You can use this information to monitor your order’s status.",
-    type: "Orders",
-    issuedBy: "Emma Stone",
-    email: "emma.stone@example.com",
-    status: "Active",
-    image:
-      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    title: "What payment methods do you accept?",
-    description:
-      "We accept various payment methods, including credit cards, PayPal, and bank transfers.",
-    type: "Payments",
-    issuedBy: "John Doe",
-    email: "john.doe@example.com",
-    status: "Active",
-    image:
-      "https://images.unsplash.com/photo-1502767089025-6572583495b2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-];
-
-export default function AdminAllFaqTable() {
+export default function AdminAllFaqTable({
+  allFAQ,
+  selectedFaq,
+  isModalOpen,
+  handleDeleteFaq,
+  handleEditClick,
+  handleModalClose,
+}) {
   const [currentPage, setCurrentPage] = useState(1);
   const entriesPerPage = 5;
-  const totalPages = Math.ceil(faqs.length / entriesPerPage);
+  const totalPages = Math.ceil(allFAQ.length / entriesPerPage);
 
-  // Slice the data for the current page
-  const displayedFaqs = faqs.slice(
+  const displayedFaqs = allFAQ.slice(
     (currentPage - 1) * entriesPerPage,
     currentPage * entriesPerPage
   );
 
-  // Pagination handler functions
   const handlePrevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
   const handleNextPage = () =>
     setCurrentPage((prev) => Math.min(prev + 1, totalPages));
@@ -75,37 +33,19 @@ export default function AdminAllFaqTable() {
                 <tr>
                   <th
                     scope="col"
-                    className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
+                    className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0 align-middle"
                   >
                     Title
                   </th>
                   <th
                     scope="col"
-                    className="w-20 px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    className="w-20 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 align-middle"
                   >
                     Description
                   </th>
                   <th
                     scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                  >
-                    Type
-                  </th>
-                  <th
-                    scope="col"
-                    className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
-                  >
-                    Issued By
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                  >
-                    Status
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-3 py-3.5 text-right text-sm font-semibold text-gray-900"
+                    className="py-3.5 text-left pl-5 text-sm font-semibold text-gray-900 align-middle"
                   >
                     Action
                   </th>
@@ -113,60 +53,87 @@ export default function AdminAllFaqTable() {
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
                 {displayedFaqs.map((faq, index) => (
-                  <tr key={`${faq.email}-${index}`}>
-                    <td className="whitespace-normal max-w-lg py-5 pl-4 pr-3 text-sm sm:pl-0 break-words">
-                      <h1 className="break-words">{faq.title}</h1>
+                  <tr key={faq?._id} className="align-middle">
+                    <td className="whitespace-normal max-w-lg py-5 pl-4 pr-3 text-sm sm:pl-0 break-words align-middle">
+                      <h1 className="break-words">{faq.question}</h1>
                     </td>
-                    <td className="text-left w-80 whitespace-normal max-w-xs py-5 text-sm text-gray-500 break-words">
-                      <h1 className="break-words">{faq.description}</h1>
+                    <td className="text-left w-80 whitespace-normal max-w-xs py-5 text-sm text-gray-500 break-words align-middle">
+                      <h1 className="break-words">{faq.answer}</h1>
                     </td>
-                    <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                      {faq.type}
-                    </td>
-                    <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
-                      <div className="flex items-center">
-                        <div className="h-11 w-11 flex-shrink-0">
-                          <img
-                            className="h-11 w-11 rounded"
-                            src={faq.image}
-                            alt=""
-                          />
-                        </div>
-                        <div className="ml-4">
-                          <div className="font-medium text-gray-900">
-                            {faq.issuedBy}
-                          </div>
-                        </div>
+                    <td className="whitespace-nowrap py-5 pl-3 text-center text-sm font-medium sm:pr-0 align-middle">
+                      <div className="flex items-center gap-x-2">
+                        <p
+                          onClick={() => handleEditClick(faq)}
+                          className="text-indigo-600 hover:text-indigo-900 hover:cursor-pointer"
+                        >
+                          Edit
+                        </p>
+                        <p 
+                        onClick={()=>handleDeleteFaq(faq?._id)}
+                        className="text-red-600 hover:text-indigo-900 hover:cursor-pointer">
+                          Delete
+                        </p>
                       </div>
-                    </td>
-                    <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                      <span className={`inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset ${
-                        faq.status === "Active"
-                          ? "bg-green-50 text-green-700 ring-green-600/20"
-                          : "bg-red-50 text-red-700 ring-red-600/20"
-                      }`}>
-                        {faq.status}
-                      </span>
-                    </td>
-                    <td className="relative whitespace-nowrap py-5 pl-3 text-center text-sm font-medium sm:pr-0">
-                      <p className="text-indigo-600 hover:text-indigo-900">
-                        Edit<span className="sr-only">, {faq.issuedBy}</span>
-                      </p>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
-            <Paginations
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPrevPage={handlePrevPage}
-              onNextPage={handleNextPage}
-              onPageChange={handlePageChange}
-            />
+            {allFAQ && allFAQ.lenght >= 5 ? (
+              <Paginations
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPrevPage={handlePrevPage}
+                onNextPage={handleNextPage}
+                onPageChange={handlePageChange}
+              />
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>
+
+      {/* Edit Modal */}
+      {isModalOpen && selectedFaq && (
+        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center">
+          <div className="bg-white rounded-lg p-6 w-1/3">
+            <h2 className="text-lg font-semibold mb-4">Edit FAQ</h2>
+            <form>
+              <label className="block text-sm font-medium text-gray-700">
+                Question
+              </label>
+              <input
+                type="text"
+                defaultValue={selectedFaq.question}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              />
+              <label className="block text-sm font-medium text-gray-700 mt-4">
+                Answer
+              </label>
+              <textarea
+                defaultValue={selectedFaq.answer}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              />
+              <div className="mt-6 flex justify-end gap-3">
+                <button
+                  type="button"
+                  onClick={handleModalClose}
+                  className="inline-flex justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="inline-flex justify-center rounded-md border border-transparent bg-orange-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-orange-700"
+                >
+                  Save Changes
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

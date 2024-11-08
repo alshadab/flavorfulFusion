@@ -20,7 +20,6 @@ function AdminAllCancelledOrdersPage() {
     fetchCancelledOrders();
   },[])
 
-  console.log(allCancelledOrders, "All Cancelled Orders");
 
   return (
     <div className="w-full h-full rounded-lg shadow-md px-10 py-10 bg-white">
