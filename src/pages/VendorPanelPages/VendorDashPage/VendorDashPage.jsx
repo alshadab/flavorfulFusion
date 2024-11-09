@@ -1,17 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react';
-import SummaryDataCards from '../../../components/GlobalComponents/SummaryDataCards/SummaryDataCards';
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from "react";
+import SummaryDataCards from "../../../components/GlobalComponents/SummaryDataCards/SummaryDataCards";
+import { Link } from "react-router-dom";
 
 // import { FcMoneyTransfer } from "react-icons/fc";
-import { FcCurrencyExchange } from 'react-icons/fc';
-import { FcFactoryBreakdown } from 'react-icons/fc';
-import { FcBusinessman } from 'react-icons/fc';
-import { FcAlarmClock } from 'react-icons/fc';
-import { FcBarChart } from 'react-icons/fc';
-import { FcApproval } from 'react-icons/fc';
-import { FcCancel } from 'react-icons/fc';
-import useRequest from '../../../APIServices/useRequest';
-import { AuthContext } from '../../../providers/AuthProviders';
+import { FcCurrencyExchange } from "react-icons/fc";
+import { FcFactoryBreakdown } from "react-icons/fc";
+import { FcBusinessman } from "react-icons/fc";
+import { FcAlarmClock } from "react-icons/fc";
+import { FcBarChart } from "react-icons/fc";
+import { FcApproval } from "react-icons/fc";
+import { FcCancel } from "react-icons/fc";
+import useRequest from "../../../APIServices/useRequest";
+import { AuthContext } from "../../../providers/AuthProviders";
 
 function VendorDashPage() {
   const { user } = useContext(AuthContext);
@@ -26,7 +26,7 @@ function VendorDashPage() {
   const [totalCancelledOrders, setTotalCancelledOrders] = useState([]);
 
   const fetchVendorRevenues = async () => {
-    const fetchData = await postRequest('/products/src/rev/byusr', {
+    const fetchData = await postRequest("/products/src/rev/byusr", {
       userId: user?._id,
     });
     setTotalRevenues(fetchData?.data?.data?.totalRevenue);
@@ -34,7 +34,7 @@ function VendorDashPage() {
 
   const fetchTotalProducts = async () => {
     try {
-      const data = await postRequest('/products/src/all/byusrid', {
+      const data = await postRequest("/products/src/all/byusrid", {
         userId: user?._id,
       });
 
@@ -46,7 +46,7 @@ function VendorDashPage() {
 
   const fetchPendingOrders = async () => {
     try {
-      const fetechedData = await postRequest('/orders/src/pending/all/byusr', {
+      const fetechedData = await postRequest("/orders/src/pending/all/byusr", {
         userId: user?._id,
       });
       setTotalPendingOrders(fetechedData?.data?.data);
@@ -57,7 +57,7 @@ function VendorDashPage() {
 
   const fetchCancelOrders = async () => {
     try {
-      const fetechedData = await postRequest('/orders/src/cancel/all/byusr', {
+      const fetechedData = await postRequest("/orders/src/cancel/all/byusr", {
         userId: user?._id,
       });
       setTotalCancelledOrders(fetechedData?.data?.data);
@@ -69,7 +69,7 @@ function VendorDashPage() {
   const fetchConfirmOrders = async () => {
     try {
       const fetechedData = await postRequest(
-        '/orders/src/confirmed/all/byusr',
+        "/orders/src/confirmed/all/byusr",
         {
           userId: user?._id,
         }
@@ -83,7 +83,7 @@ function VendorDashPage() {
   const fetchDeliveredOrders = async () => {
     try {
       const fetechedData = await postRequest(
-        '/orders/src/confirmed/all/byusr',
+        "/orders/src/confirmed/all/byusr",
         {
           userId: user?._id,
         }
@@ -94,7 +94,7 @@ function VendorDashPage() {
     }
   };
 
-  console.log(totalDeliveredOrders, 'Total CA Orders');
+  console.log(totalDeliveredOrders, "Total CA Orders");
 
   useEffect(() => {
     fetchVendorRevenues();
@@ -113,7 +113,9 @@ function VendorDashPage() {
       <div className="mt-5 w-full grid grid-cols-3 gap-x-4">
         <SummaryDataCards
           title="Total Revenue"
-          amount={totalRevenues}
+          amount={
+            totalRevenues && totalRevenues.length > 0 ? totalRevenues.length : 0
+          }
           borderLColor="border-green-400"
           borderBColor="border-b-green-400"
           isAmount={true}
@@ -123,7 +125,11 @@ function VendorDashPage() {
           <div className="hover:scale-105 hover:cursor-pointer hover:shadow-lg">
             <SummaryDataCards
               title="Total Products"
-              amount={totalProducts && totalProducts.length}
+              amount={
+                totalProducts && totalProducts.length > 0
+                  ? totalProducts.length
+                  : 0
+              }
               borderLColor="border-blue-400"
               borderBColor="border-b-blue-400"
               isAmount={false}
@@ -133,7 +139,9 @@ function VendorDashPage() {
         </Link>
         <SummaryDataCards
           title="Total Orders"
-          amount={totalOrders ? totalOrders.length : 0}
+          amount={
+            totalOrders && totalOrders?.length > 0 ? totalOrders.length : 0
+          }
           borderLColor="border-orange-400"
           borderBColor="border-b-orange-400"
           isAmount={false}

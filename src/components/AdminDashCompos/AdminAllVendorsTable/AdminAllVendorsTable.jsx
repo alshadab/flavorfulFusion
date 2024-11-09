@@ -58,7 +58,7 @@ export default function AdminAllVendorsTable({
                   <tr key={`${person.email}-${index}`}>
                     <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                       <div className="flex items-center">
-                        <div className="ml-4">
+                        <div className="">
                           <div className="font-medium text-gray-900">
                             {person?.userName}
                           </div>

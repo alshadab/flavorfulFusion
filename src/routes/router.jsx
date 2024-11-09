@@ -40,6 +40,7 @@ import FAQs from "../pages/FAQs/FAQs";
 import Manufacturers from "../pages/Manufacturers/Manufacturers";
 import SingleProductPage from "../pages/HomePage/SingleProductPage";
 import CreateUserInfoPage from "../pages/LoginPage/CrtUserInfo";
+import VendorsShopPage from "../pages/VendorPanelPages/VendorsShopPage/VendorsShopPage";
 
 const router = createBrowserRouter([
   {
@@ -145,6 +146,10 @@ const router = createBrowserRouter([
       {
         path: "/vendorproducts",
         element: <VendorAllProducts />,
+      },
+      {
+        path: "/vendorshops",
+        element: <VendorsShopPage />,
       },
     ],
   },

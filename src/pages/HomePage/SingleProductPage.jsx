@@ -7,7 +7,7 @@ import GlobalLoading from "../../components/GlobalComponents/GlobalLoading/Globa
 
 function SingleProductPage() {
   const { id } = useParams();
-  const { user } = useContext(AuthContext);
+  const { addToCart, user } = useContext(AuthContext);
 
   const [postRequest, getRequest] = useRequest();
   const [productInfo, setProductInfo] = useState(null);
@@ -110,9 +110,7 @@ function SingleProductPage() {
               className="w-full h-64 object-cover rounded-lg"
             />
           </div>
-          <div className="flex gap-2 mt-4">
-            
-          </div>
+          <div className="flex gap-2 mt-4"></div>
         </div>
 
         {/* Product Details */}
@@ -182,26 +180,58 @@ function SingleProductPage() {
 
           <div className="mt-3 mb-5 text-lg flex items-center gap-x-2 font-semibold">
             <span>Total Cost: </span>
-            <span className="text-green-700">{quantity*productInfo?.sellingPrice} TK</span>
+            <span className="text-green-700">
+              {quantity * productInfo?.sellingPrice} TK
+            </span>
           </div>
 
-
-          {quantity === 0 ? (
-            <button
-              className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg mb-6 transition duration-300 disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
-              disabled
-            >
-              Add To Shopping Cart
-            </button>
-          ) : (
-            <button
-              onClick={handleAddToCart}
-              className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg mb-6 transition duration-300"
-              disabled={productInfo.stock <= 0}
-            >
-              Add To Shopping Cart
-            </button>
-          )}
+          <div>
+            {user !== null ? (
+              <>
+                {user.userType === 103 ? (
+                  <>
+                    {" "}
+                    {quantity === 0 ? (
+                      <button
+                        className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg mb-6 transition duration-300 disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
+                        disabled
+                      >
+                        Add To Shopping Cart
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => addToCart(productInfo, stocks, quantity)}
+                        className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg mb-6 transition duration-300"
+                        disabled={productInfo.stock <= 0}
+                      >
+                        Add To Shopping Cart
+                      </button>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    {" "}
+                    <button
+                      className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg mb-6 transition duration-300 disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
+                      disabled
+                    >
+                      Add To Shopping Cart
+                    </button>
+                  </>
+                )}
+              </>
+            ) : (
+              <>
+                {" "}
+                <button
+                  className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg mb-6 transition duration-300 disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
+                  disabled
+                >
+                  Add To Shopping Cart
+                </button>
+              </>
+            )}
+          </div>
 
           {/* Categories and Seller */}
           <div className="flex flex-wrap gap-4 text-sm text-gray-600">

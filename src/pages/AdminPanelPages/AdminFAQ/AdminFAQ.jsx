@@ -15,6 +15,8 @@ function AdminFAQ() {
   const [dltState, setDltState] = useState(false);
   const [selectedFaq, setSelectedFaq] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editQuestion, setEditQuestion] = useState(selectedFaq?.question || "");
+  const [editAnswer, setEditAnswer] = useState(selectedFaq?.answer || "");
 
   const handleOpenCreateModal = () => setIsCreateModalOpen(true);
   const handleCloseCreateModal = () => {
@@ -33,7 +35,7 @@ function AdminFAQ() {
 
   useEffect(() => {
     fetchAllFAQs();
-  }, [crtState]);
+  }, [crtState, editState]);
 
   const handleCreateFaq = async () => {
     const createFq = await postRequest("/faq/crt", {
@@ -57,6 +59,8 @@ function AdminFAQ() {
 
   const handleEditClick = (faq) => {
     setSelectedFaq(faq);
+    setEditQuestion(faq.question);
+    setEditAnswer(faq.answer);
     setIsModalOpen(true);
   };
 
@@ -65,13 +69,27 @@ function AdminFAQ() {
     setIsModalOpen(false);
   };
 
-  const handleDeleteFaq = () =>{
-    try{
-
-    }catch(error){
-      console.log(error)
+  const handleDeleteFaq = () => {
+    try {
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
+
+  const handleSaveChanges = async (e) => {
+    e.preventDefault();
+
+    const saveEditData = await postRequest(
+      `/faq/src/updt/${selectedFaq?._id}`,
+      { question: editQuestion, answer: editAnswer }
+    );
+
+    if (saveEditData?.data?.error === false) {
+      Swal.fire("Updated the FAQ successfully");
+      handleModalClose();
+      setEditState(!editState);
+    }
+  };
 
   return (
     <div className="w-full h-full rounded-lg shadow-md px-10 py-10 bg-white">
@@ -107,6 +125,11 @@ function AdminFAQ() {
           allFAQ={allFAQ}
           selectedFaq={selectedFaq}
           isModalOpen={isModalOpen}
+          editQuestion={editQuestion}
+          editAnswer={editAnswer}
+          setEditQuestion={setEditQuestion}
+          setEditAnswer={setEditAnswer}
+          handleSaveChanges={handleSaveChanges}
           handleDeleteFaq={handleDeleteFaq}
           handleEditClick={handleEditClick}
           handleModalClose={handleModalClose}

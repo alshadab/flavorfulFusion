@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
-import { Fragment, useContext, useState } from 'react';
-import logo from '../../assets/logo.png';
-import { CiShop } from 'react-icons/ci';
+import { Fragment, useContext, useState } from "react";
+import logo from "../../assets/logo.png";
+import { CiShop } from "react-icons/ci";
 import {
   Dialog,
   DialogPanel,
@@ -11,7 +11,7 @@ import {
   MenuItems,
   Transition,
   TransitionChild,
-} from '@headlessui/react';
+} from "@headlessui/react";
 import {
   Bars3Icon,
   ShoppingBagIcon,
@@ -29,31 +29,31 @@ import {
   UserGroupIcon,
   HomeModernIcon,
   XCircleIcon,
-} from '@heroicons/react/24/outline';
+} from "@heroicons/react/24/outline";
 import {
   ChevronDownIcon,
   MagnifyingGlassIcon,
-} from '@heroicons/react/20/solid';
-import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
-import { AuthContext } from '../../providers/AuthProviders';
+} from "@heroicons/react/20/solid";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { AuthContext } from "../../providers/AuthProviders";
 
 const navigation = [
   {
-    name: 'Dashboard',
-    href: '#',
+    name: "Dashboard",
+    href: "#",
     icon: HomeIcon,
     current: false,
     accordion: false,
-    navigation: '/admindash',
+    navigation: "/admindash",
   },
   {
-    name: 'Products',
-    href: '#',
+    name: "Products",
+    href: "#",
     icon: ArchiveBoxIcon,
     current: false,
     accordion: false,
-    navigation: '/allproducts',
+    navigation: "/allproducts",
   },
   // {
   //   name: "Vendors",
@@ -64,85 +64,85 @@ const navigation = [
   //   navigation: "/allvendors",
   // },
   {
-    name: 'Catgories',
-    href: '#',
+    name: "Catgories",
+    href: "#",
     icon: DocumentDuplicateIcon,
     current: false,
     accordion: false,
-    navigation: '/allcategories',
+    navigation: "/allcategories",
   },
 ];
 
 const navigationTwo = [
   {
-    name: 'Pending',
-    href: '#',
+    name: "Pending",
+    href: "#",
     icon: ChartPieIcon,
     current: false,
     accordion: false,
-    navigation: '/allpendingorders',
+    navigation: "/allpendingorders",
   },
   {
-    name: 'Cancelled',
-    href: '#',
+    name: "Cancelled",
+    href: "#",
     icon: XCircleIcon,
     current: false,
     accordion: false,
-    navigation: '/allcancelledorders',
+    navigation: "/allcancelledorders",
   },
   {
-    name: 'Confirmed',
-    href: '#',
+    name: "Confirmed",
+    href: "#",
     icon: ArrowUturnUpIcon,
     current: false,
     accordion: false,
-    navigation: '/allconfirmedorders',
+    navigation: "/allconfirmedorders",
   },
   {
-    name: 'Delivered',
-    href: '#',
+    name: "Delivered",
+    href: "#",
     icon: ShoppingBagIcon,
     current: false,
     accordion: false,
-    navigation: '/alldeliveredorders',
+    navigation: "/alldeliveredorders",
   },
 ];
 
 const navigationThree = [
   {
-    name: 'Home Page',
-    href: '#',
+    name: "Home Page",
+    href: "#",
     icon: HomeModernIcon,
     current: false,
     accordion: false,
-    navigation: '/',
+    navigation: "/",
   },
   {
-    name: 'FAQs',
-    href: '#',
+    name: "FAQs",
+    href: "#",
     icon: QuestionMarkCircleIcon,
     current: false,
     accordion: false,
-    navigation: '/allfaq',
+    navigation: "/allfaq",
   },
   {
-    name: 'Reviews',
-    href: '#',
+    name: "Reviews",
+    href: "#",
     icon: SparklesIcon,
     current: false,
     accordion: false,
-    navigation: '/allreviews',
+    navigation: "/allreviews",
   },
 ];
 
 const navigationFour = [
   {
-    name: 'All Users',
-    href: '#',
+    name: "All Users",
+    href: "#",
     icon: UserGroupIcon,
     current: false,
     accordion: false,
-    navigation: '/allusers',
+    navigation: "/allusers",
   },
   // {
   //   name: "All Admin",
@@ -153,22 +153,22 @@ const navigationFour = [
   //   navigation: "/alladmins",
   // },
   {
-    name: 'All Vendors',
-    href: '#',
+    name: "All Vendors",
+    href: "#",
     icon: UserGroupIcon,
     current: false,
     accordion: false,
-    navigation: '/allvendors',
+    navigation: "/allvendors",
   },
 ];
 
 const userNavigation = [
-  { name: 'Your profile', href: '#' },
-  { name: 'Sign out', href: '#' },
+  { name: "Your profile", href: "#" },
+  { name: "Sign out", href: "#" },
 ];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
+  return classes.filter(Boolean).join(" ");
 }
 
 export default function AdminDashLayouts() {
@@ -177,10 +177,10 @@ export default function AdminDashLayouts() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem('userCreds');
-    Swal.fire('Logged Out');
+    localStorage.removeItem("userCreds");
+    Swal.fire("Logged Out");
     setUser(null);
-    navigate('/');
+    navigate("/");
   };
 
   return (
@@ -250,17 +250,17 @@ export default function AdminDashLayouts() {
                                   href={item.href}
                                   className={classNames(
                                     item.current
-                                      ? 'bg-orange-700 text-white'
-                                      : 'text-orange-200 hover:text-white hover:bg-orange-700',
-                                    'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                                      ? "bg-orange-700 text-white"
+                                      : "text-orange-200 hover:text-white hover:bg-orange-700",
+                                    "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                                   )}
                                 >
                                   <item.icon
                                     className={classNames(
                                       item.current
-                                        ? 'text-white'
-                                        : 'text-orange-200 group-hover:text-white',
-                                      'h-6 w-6 shrink-0'
+                                        ? "text-white"
+                                        : "text-orange-200 group-hover:text-white",
+                                      "h-6 w-6 shrink-0"
                                     )}
                                     aria-hidden="true"
                                   />
@@ -281,17 +281,17 @@ export default function AdminDashLayouts() {
                                   href={item.href}
                                   className={classNames(
                                     item.current
-                                      ? 'bg-orange-700 text-white'
-                                      : 'text-orange-200 hover:text-white hover:bg-orange-700',
-                                    'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                                      ? "bg-orange-700 text-white"
+                                      : "text-orange-200 hover:text-white hover:bg-orange-700",
+                                    "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                                   )}
                                 >
                                   <item.icon
                                     className={classNames(
                                       item.current
-                                        ? 'text-white'
-                                        : 'text-orange-200 group-hover:text-white',
-                                      'h-6 w-6 shrink-0'
+                                        ? "text-white"
+                                        : "text-orange-200 group-hover:text-white",
+                                      "h-6 w-6 shrink-0"
                                     )}
                                     aria-hidden="true"
                                   />
@@ -312,17 +312,17 @@ export default function AdminDashLayouts() {
                                   href={item.href}
                                   className={classNames(
                                     item.current
-                                      ? 'bg-orange-700 text-white'
-                                      : 'text-orange-200 hover:text-white hover:bg-orange-700',
-                                    'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                                      ? "bg-orange-700 text-white"
+                                      : "text-orange-200 hover:text-white hover:bg-orange-700",
+                                    "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                                   )}
                                 >
                                   <item.icon
                                     className={classNames(
                                       item.current
-                                        ? 'text-white'
-                                        : 'text-orange-200 group-hover:text-white',
-                                      'h-6 w-6 shrink-0'
+                                        ? "text-white"
+                                        : "text-orange-200 group-hover:text-white",
+                                      "h-6 w-6 shrink-0"
                                     )}
                                     aria-hidden="true"
                                   />
@@ -343,17 +343,17 @@ export default function AdminDashLayouts() {
                                   href={item.href}
                                   className={classNames(
                                     item.current
-                                      ? 'bg-orange-700 text-white'
-                                      : 'text-orange-200 hover:text-white hover:bg-orange-700',
-                                    'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                                      ? "bg-orange-700 text-white"
+                                      : "text-orange-200 hover:text-white hover:bg-orange-700",
+                                    "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                                   )}
                                 >
                                   <item.icon
                                     className={classNames(
                                       item.current
-                                        ? 'text-white'
-                                        : 'text-orange-200 group-hover:text-white',
-                                      'h-6 w-6 shrink-0'
+                                        ? "text-white"
+                                        : "text-orange-200 group-hover:text-white",
+                                      "h-6 w-6 shrink-0"
                                     )}
                                     aria-hidden="true"
                                   />
@@ -406,18 +406,18 @@ export default function AdminDashLayouts() {
                           className={({ isActive }) =>
                             classNames(
                               isActive
-                                ? 'bg-orange-700 text-white'
-                                : 'text-orange-200 hover:text-white hover:bg-orange-700',
-                              'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                                ? "bg-orange-700 text-white"
+                                : "text-orange-200 hover:text-white hover:bg-orange-700",
+                              "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                             )
                           }
                         >
                           <item.icon
                             className={classNames(
                               item.current
-                                ? 'text-white'
-                                : 'text-orange-200 group-hover:text-white',
-                              'h-6 w-6 shrink-0'
+                                ? "text-white"
+                                : "text-orange-200 group-hover:text-white",
+                              "h-6 w-6 shrink-0"
                             )}
                             aria-hidden="true"
                           />
@@ -439,18 +439,18 @@ export default function AdminDashLayouts() {
                           className={({ isActive }) =>
                             classNames(
                               isActive
-                                ? 'bg-orange-700 text-white'
-                                : 'text-orange-200 hover:text-white hover:bg-orange-700',
-                              'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                                ? "bg-orange-700 text-white"
+                                : "text-orange-200 hover:text-white hover:bg-orange-700",
+                              "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                             )
                           }
                         >
                           <item.icon
                             className={classNames(
                               item.current
-                                ? 'text-white'
-                                : 'text-orange-200 group-hover:text-white',
-                              'h-6 w-6 shrink-0'
+                                ? "text-white"
+                                : "text-orange-200 group-hover:text-white",
+                              "h-6 w-6 shrink-0"
                             )}
                             aria-hidden="true"
                           />
@@ -472,18 +472,18 @@ export default function AdminDashLayouts() {
                           className={({ isActive }) =>
                             classNames(
                               isActive
-                                ? 'bg-orange-700 text-white'
-                                : 'text-orange-200 hover:text-white hover:bg-orange-700',
-                              'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                                ? "bg-orange-700 text-white"
+                                : "text-orange-200 hover:text-white hover:bg-orange-700",
+                              "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                             )
                           }
                         >
                           <item.icon
                             className={classNames(
                               item.current
-                                ? 'text-white'
-                                : 'text-orange-200 group-hover:text-white',
-                              'h-6 w-6 shrink-0'
+                                ? "text-white"
+                                : "text-orange-200 group-hover:text-white",
+                              "h-6 w-6 shrink-0"
                             )}
                             aria-hidden="true"
                           />
@@ -505,18 +505,18 @@ export default function AdminDashLayouts() {
                           className={({ isActive }) =>
                             classNames(
                               isActive
-                                ? 'bg-orange-700 text-white'
-                                : 'text-orange-200 hover:text-white hover:bg-orange-700',
-                              'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                                ? "bg-orange-700 text-white"
+                                : "text-orange-200 hover:text-white hover:bg-orange-700",
+                              "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
                             )
                           }
                         >
                           <item.icon
                             className={classNames(
                               item.current
-                                ? 'text-white'
-                                : 'text-orange-200 group-hover:text-white',
-                              'h-6 w-6 shrink-0'
+                                ? "text-white"
+                                : "text-orange-200 group-hover:text-white",
+                              "h-6 w-6 shrink-0"
                             )}
                             aria-hidden="true"
                           />
@@ -584,10 +584,12 @@ export default function AdminDashLayouts() {
                   </button>
                 </Link>
 
-                <button className="flex items-center gap-x-2 px-4 py-2 rounded-3xl text-sm font-semibold border border-orange-600 text-orange-600 duration-200 hover:duration-200 hover:cursor-pointer hover:bg-orange-500 hover:text-white">
-                  <CiShop className="text-xl" />
-                  Create Shop
-                </button>
+                {/* <Link to="">
+                  <button className="flex items-center gap-x-2 px-4 py-2 rounded-3xl text-sm font-semibold border border-orange-600 text-orange-600 duration-200 hover:duration-200 hover:cursor-pointer hover:bg-orange-500 hover:text-white">
+                    <CiShop className="text-xl" />
+                    Create Shop
+                  </button>
+                </Link> */}
 
                 <div
                   className="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-900/10"
@@ -631,8 +633,8 @@ export default function AdminDashLayouts() {
                             onClick={handleLogout}
                             // href={item.href}
                             className={classNames(
-                              focus ? 'bg-gray-50' : '',
-                              'block px-3 py-1 text-sm leading-6 text-gray-900'
+                              focus ? "bg-gray-50" : "",
+                              "block px-3 py-1 text-sm leading-6 text-gray-900"
                             )}
                           >
                             Logout

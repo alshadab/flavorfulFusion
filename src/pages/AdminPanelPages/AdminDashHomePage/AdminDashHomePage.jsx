@@ -20,20 +20,24 @@ function AdminDashHomePage() {
   const [totalUserNumber, setTotalUserNumber] = useState(0);
   const [totalVendorNumber, setTotalVendorNumber] = useState(0);
   const [totalPendingOrdersNumber, setTotalPendingOrdersNumber] = useState(0);
-  const [totalConfirmedOrdersNumber, setTotalConfirmedOrdersNumber] = useState(0);
-  const [totalDeliveredOrdersNumber, setTotalDeliveredOrdersNumber] = useState(0);
-  const [totalCancelledOrdersNumber, setTotalCancelledOrdersNumber] = useState(0);
+  const [totalConfirmedOrdersNumber, setTotalConfirmedOrdersNumber] =
+    useState(0);
+  const [totalDeliveredOrdersNumber, setTotalDeliveredOrdersNumber] =
+    useState(0);
+  const [totalCancelledOrdersNumber, setTotalCancelledOrdersNumber] =
+    useState(0);
   const [popularProductsList, setPopularProductList] = useState([]);
+  const [recentOrders, setRecentOrders] = useState([]);
 
   const fetchTotalOrderNumbers = async () => {
     let totalNumber = await getRequest("/orders/src/all");
     setTotalOrderNumber(totalNumber?.data?.data?.length);
   };
 
-  const fetchTotalRevenueNumbers = async () =>{
+  const fetchTotalRevenueNumbers = async () => {
     let totalNumber = await getRequest("/products/src/rev");
     setTotalRevenue(totalNumber?.data?.data?.totalRevenue);
-  }
+  };
 
   const fetchTotalUserNumbers = async () => {
     let totalNumber = await getRequest("/users/src/all");
@@ -46,29 +50,29 @@ function AdminDashHomePage() {
   };
 
   const fetchTotalPendingOrderNumbers = async () => {
-    let totalNumber = await getRequest('/orders/src/pending/all');
+    let totalNumber = await getRequest("/orders/src/pending/all");
     setTotalPendingOrdersNumber(totalNumber?.data?.data.length);
   };
 
   const fetchTotalConfirmedOrderNumbers = async () => {
-    let totalNumber = await getRequest('/orders/src/confirmed/all');
+    let totalNumber = await getRequest("/orders/src/confirmed/all");
     setTotalConfirmedOrdersNumber(totalNumber?.data?.data.length);
   };
 
   const fetchTotalDeliveredOrderNumbers = async () => {
-    let totalNumber = await getRequest('/orders/src/delivered/all');
+    let totalNumber = await getRequest("/orders/src/delivered/all");
     setTotalDeliveredOrdersNumber(totalNumber?.data?.data.length);
   };
 
   const fetchTotalCancelledOrderNumbers = async () => {
-    let totalNumber = await getRequest('/orders/src/cancel/all');
+    let totalNumber = await getRequest("/orders/src/cancel/all");
     setTotalCancelledOrdersNumber(totalNumber?.data?.data.length);
   };
 
-  const fetchPopularProducts = async ()=>{
-    let allProducts = await getRequest('/products/src/popular');
+  const fetchPopularProducts = async () => {
+    let allProducts = await getRequest("/products/src/popular");
     setPopularProductList(allProducts?.data?.data);
-  }
+  };
 
   useEffect(() => {
     fetchTotalRevenueNumbers();
@@ -81,7 +85,6 @@ function AdminDashHomePage() {
     fetchTotalCancelledOrderNumbers();
     fetchPopularProducts();
   }, []);
-
 
   return (
     <div className="w-full h-full rounded-lg shadow-md px-5 py-10 bg-white">
@@ -161,25 +164,40 @@ function AdminDashHomePage() {
         />
       </div>
 
-      <div className="mt-20 pl-5 border-l-4 border-orange-600 grid grid-cols-5 items-center justify-between">
-        <h1 className="font-extrabold col-span-3">Recent Orders</h1>
-        <div className="relative col-span-2 w-full">
-          <input
-            type="search"
-            name="productName"
-            id="productName"
-            className="w-full px-4 py-2 pl-10 border rounded-lg focus:ring-0 focus:outline-none focus:border-orange-500"
-            placeholder="Search by product name"
-          />
-          <FaSearch className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-500" />
-        </div>
-      </div>
-      <AdminDashRecentOrdersTable />
+      {recentOrders && recentOrders?.length > 0 ? (
+        <>
+          <div className="mt-20 pl-5 border-l-4 border-orange-600 grid grid-cols-5 items-center justify-between">
+            <h1 className="font-extrabold col-span-3">Recent Orders</h1>
+            <div className="relative col-span-2 w-full">
+              <input
+                type="search"
+                name="productName"
+                id="productName"
+                className="w-full px-4 py-2 pl-10 border rounded-lg focus:ring-0 focus:outline-none focus:border-orange-500"
+                placeholder="Search by product name"
+              />
+              <FaSearch className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-500" />
+            </div>
+          </div>
 
-      <h1 className="mt-20 pl-5 border-l-4 border-orange-600 font-extrabold">
-        Popular Products
-      </h1>
-      <AdminDashPopularProuctsTable popularProductsList={popularProductsList} />
+          <AdminDashRecentOrdersTable />
+        </>
+      ) : (
+        <></>
+      )}
+
+      {popularProductsList && popularProductsList.length > 0 ? (
+        <>
+          <h1 className="mt-20 pl-5 border-l-4 border-orange-600 font-extrabold">
+            Popular Products
+          </h1>
+          <AdminDashPopularProuctsTable
+            popularProductsList={popularProductsList}
+          />{" "}
+        </>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

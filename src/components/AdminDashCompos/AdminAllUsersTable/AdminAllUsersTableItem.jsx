@@ -57,16 +57,16 @@ function AdminAllUsersTableItem({
   };
   return (
     <tr key={person?._id}>
-      <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
+      <td className="whitespace-nowrap py-5 pr-3 text-sm sm:pl-0">
         <div className="flex items-center">
-          <div className="h-11 w-11 flex-shrink-0">
+          {/* <div className="h-11 w-11 flex-shrink-0">
             <img
               className="h-11 w-11 rounded-full"
               src={person?.userImg}
               alt=""
             />
-          </div>
-          <div className="ml-4">
+          </div> */}
+          <div className="">
             <div className="font-medium text-gray-900">{person?.userName}</div>
           </div>
         </div>

@@ -18,26 +18,24 @@ function HomePageIndividualProduct({ product }) {
       console.log(error);
     }
   };
-
+  
   useEffect(() => {
     fetchStock();
-  }, [addedProduct]);
+  }, []);
 
   const handleIncrease = () => {
     if (quantity < stock) {
-      setQuantity(prevQuantity => prevQuantity + 1);
-      setStock(stock-1);
+      setQuantity((prevQuantity) => prevQuantity + 1);
+      setStock(stock - 1);
     }
   };
 
   const handleDecrease = () => {
     if (quantity > 1) {
-      setQuantity(prevQuantity => prevQuantity - 1);
-      setStock(stock+1);
+      setQuantity((prevQuantity) => prevQuantity - 1);
+      setStock(stock + 1);
     }
   };
-
- 
 
   return (
     <div className="w-full p-4 bg-white border rounded-lg shadow-md hover:cursor-pointer">
@@ -61,7 +59,9 @@ function HomePageIndividualProduct({ product }) {
             onClick={handleDecrease}
             disabled={quantity === 1}
             className={`px-2 border rounded-lg ${
-              quantity === 1 ? "text-gray-400 cursor-not-allowed" : "text-black bg-red-100 border-red-100"
+              quantity === 1
+                ? "text-gray-400 cursor-not-allowed"
+                : "text-black bg-red-100 border-red-100"
             }`}
           >
             -
@@ -76,7 +76,9 @@ function HomePageIndividualProduct({ product }) {
             onClick={handleIncrease}
             disabled={quantity === stock}
             className={`px-2 border rounded-lg ${
-              quantity === stock ? "text-gray-400 cursor-not-allowed" : "text-black bg-green-100 border-green-100"
+              quantity === stock
+                ? "text-gray-400 cursor-not-allowed"
+                : "text-black bg-green-100 border-green-100"
             }`}
           >
             +
@@ -91,7 +93,7 @@ function HomePageIndividualProduct({ product }) {
           </div>
           {user && user.userType === 103 ? (
             <button
-              onClick={()=>addToCart(product, stock, quantity)}
+              onClick={() => addToCart(product, stock, quantity)}
               className="flex items-center justify-center border px-3 py-1 text-sm bg-white text-green-600 font-bold rounded-3xl duration-200 hover:scale-105"
             >
               <svg
@@ -110,7 +112,30 @@ function HomePageIndividualProduct({ product }) {
               </svg>
               Cart
             </button>
-          ) : null}
+          ) : (
+            <Link to="/login">
+              <button
+                onClick={() => addToCart(product, stock, quantity)}
+                className="flex items-center justify-center border px-3 py-1 text-sm bg-white text-green-600 font-bold rounded-3xl duration-200 hover:scale-105"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  className="w-5 h-5 mr-2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 6M7 13l1.4 6m10-6l-1.4 6M7 19h10M9 23a1 1 0 102 0m4 0a1 1 0 102 0"
+                  />
+                </svg>
+                Cart
+              </button>
+            </Link>
+          )}
         </div>
       </div>
     </div>

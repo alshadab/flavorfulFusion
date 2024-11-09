@@ -19,11 +19,10 @@ import {
   XMarkIcon,
   ArchiveBoxIcon,
   ShoppingBagIcon,
-  ChartPieIcon,
   PlusCircleIcon,
   CheckBadgeIcon,
   TruckIcon,
-  XCircleIcon,
+  BuildingLibraryIcon
 } from '@heroicons/react/24/outline';
 import {
   ChevronDownIcon,
@@ -57,6 +56,14 @@ const navigation = [
     current: false,
     accordion: false,
     navigation: '/vendoraddproduct',
+  },
+  {
+    name: 'Shop Management',
+    href: '#',
+    icon: BuildingLibraryIcon,
+    current: false,
+    accordion: false,
+    navigation: '/vendorshops',
   },
 ];
 
