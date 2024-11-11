@@ -53,14 +53,12 @@ function LoginPage() {
       const user = result.user;
       const token = await user.getIdToken();
 
-    
       const res = await postRequest(`/users/crt/bygl`, {
         email: user.email,
         name: user.displayName,
         picture: user.photoURL,
         token,
       });
-
 
       if (res.data.error === true) {
         return Swal.fire({
@@ -78,6 +76,8 @@ function LoginPage() {
               text: res.data.message || '',
             });
           } else {
+            localStorage.setItem('userCreds', JSON.stringify(res.data.data));
+
             setUser(res.data.data);
             navigate('/');
           }

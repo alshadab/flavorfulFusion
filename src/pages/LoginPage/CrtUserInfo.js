@@ -14,7 +14,6 @@ function CreateUserInfoPage() {
   const [postRequest] = useRequest();
   const { handleLoginData, setLoading, user, setUser } =
     useContext(AuthContext);
-  console.log('User Details', user);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -30,6 +29,7 @@ function CreateUserInfoPage() {
   const handleSubmitUsrInfo = async (event) => {
     event.preventDefault();
     setLoading(true);
+
     try {
       const res = await axios.post(
         `http://localhost:8000/api/v1/users/crt/usr/info`,
@@ -40,13 +40,44 @@ function CreateUserInfoPage() {
           userId: userInfo.userId,
         }
       );
-      //console.log('res from crt user info', res.data.data);
-      if (res.data.error === false) {
-        setUser(res.data.data);
-        navigate('/');
+
+      const { data } = res;
+
+      if (data && data.data) {
+        if (data.data.isActive === false) {
+          Swal.fire({
+            icon: 'info',
+            title: 'Account Approval in Pending',
+            text: 'Your account has been created but is awaiting admin approval. Please check back later.',
+          });
+          setUser(null);
+          navigate('/');
+        } else {
+          Swal.fire({
+            icon: 'success',
+            title: 'User Created Successfully',
+            text: 'Your account is active and ready for use.',
+          });
+          setUser(data.data);
+          localStorage.setItem('userCreds', JSON.stringify(data.data));
+          navigate('/');
+        }
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'User Creation Failed',
+          text: 'Please check the provided information and try again.',
+        });
       }
     } catch (error) {
-      console.error('error:', error);
+      console.error('Error:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'An Error Occurred',
+        text: 'Unable to create user information. Please try again later.',
+      });
+    } finally {
+      setLoading(false);
     }
   };
 
