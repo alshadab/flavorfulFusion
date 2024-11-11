@@ -205,7 +205,7 @@ export default function VendorDashLayout() {
                             ))}
                           </ul>
                         </li>
-                        <li className="mt-auto">
+                        {/* <li className="mt-auto">
                           <p
                             href="#"
                             className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-orange-200 hover:bg-orange-700 hover:text-white"
@@ -216,7 +216,7 @@ export default function VendorDashLayout() {
                             />
                             Settings
                           </p>
-                        </li>
+                        </li> */}
                       </ul>
                     </nav>
                   </div>
@@ -303,7 +303,7 @@ export default function VendorDashLayout() {
                     ))}
                   </ul>
                 </li>
-                <li className="mt-auto">
+                {/* <li className="mt-auto">
                   <p
                     href="#"
                     className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-orange-600 hover:bg-orange-700 hover:text-white"
@@ -314,7 +314,7 @@ export default function VendorDashLayout() {
                     />
                     Settings
                   </p>
-                </li>
+                </li> */}
               </ul>
             </nav>
           </div>

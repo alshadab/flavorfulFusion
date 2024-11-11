@@ -12,6 +12,7 @@ import { FcApproval } from "react-icons/fc";
 import { FcCancel } from "react-icons/fc";
 import useRequest from "../../../APIServices/useRequest";
 import { AuthContext } from "../../../providers/AuthProviders";
+import { FcShop } from "react-icons/fc";
 
 function VendorDashPage() {
   const { user } = useContext(AuthContext);
@@ -24,6 +25,7 @@ function VendorDashPage() {
   const [totalConfirmedOrders, setTotalConfirmedOrders] = useState([]);
   const [totalDeliveredOrders, setTotalDeliveredOrders] = useState([]);
   const [totalCancelledOrders, setTotalCancelledOrders] = useState([]);
+  const [totalShops, setTotalShops] = useState([]);
 
   const fetchVendorRevenues = async () => {
     const fetchData = await postRequest("/products/src/rev/byusr", {
@@ -39,6 +41,17 @@ function VendorDashPage() {
       });
 
       setTotalProducts(data?.data?.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchTotalShops = async () => {
+    try {
+      const fetchData = await postRequest("/shop/src/alshop/byuserid", {
+        userId: user?._id,
+      });
+      setTotalShops(fetchData?.data?.data);
     } catch (error) {
       console.log(error);
     }
@@ -101,16 +114,17 @@ function VendorDashPage() {
     fetchCancelOrders();
     fetchConfirmOrders();
     fetchDeliveredOrders();
+    fetchTotalShops();
   }, []);
 
-  console.log("totalRevenues", totalRevenues);
+  console.log("totalShops", totalShops);
 
   return (
     <div className="w-full h-full rounded-lg shadow-md px-5 py-10 bg-white">
       <h1 className="pl-5 border-l-4 border-orange-600 font-extrabold">
         Summary
       </h1>
-      <div className="mt-5 w-full grid grid-cols-3 gap-x-4">
+      <div className="mt-5 w-full grid grid-cols-4 gap-x-4">
         <SummaryDataCards
           title="Total Revenue"
           amount={totalRevenues}
@@ -119,22 +133,16 @@ function VendorDashPage() {
           isAmount={true}
           icons={FcCurrencyExchange}
         />
-        <Link to="/vendorproducts">
-          <div className="hover:scale-105 hover:cursor-pointer hover:shadow-lg">
-            <SummaryDataCards
-              title="Total Products"
-              amount={
-                totalProducts && totalProducts.length > 0
-                  ? totalProducts.length
-                  : 0
-              }
-              borderLColor="border-blue-400"
-              borderBColor="border-b-blue-400"
-              isAmount={false}
-              icons={FcFactoryBreakdown}
-            />
-          </div>
-        </Link>
+        <SummaryDataCards
+          title="Total Products"
+          amount={
+            totalProducts && totalProducts.length > 0 ? totalProducts.length : 0
+          }
+          borderLColor="border-blue-400"
+          borderBColor="border-b-blue-400"
+          isAmount={false}
+          icons={FcFactoryBreakdown}
+        />
         <SummaryDataCards
           title="Total Orders"
           amount={
@@ -144,6 +152,15 @@ function VendorDashPage() {
           borderBColor="border-b-orange-400"
           isAmount={false}
           icons={FcBusinessman}
+        />
+
+        <SummaryDataCards
+          title="Total Shops"
+          amount={totalShops?.length}
+          borderLColor="border-yellow-400"
+          borderBColor="border-b-yellow-400"
+          isAmount={false}
+          icons={FcShop}
         />
       </div>
 

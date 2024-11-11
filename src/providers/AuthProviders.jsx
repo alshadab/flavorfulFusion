@@ -148,9 +148,9 @@ function AuthProviders({ children }) {
     confirmCartItem,
   };
 
-  if (loading) {
-    return <GlobalLoading />; // Show global loading
-  }
+  // if (loading) {
+  //   return <GlobalLoading />; // Show global loading
+  // }
 
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

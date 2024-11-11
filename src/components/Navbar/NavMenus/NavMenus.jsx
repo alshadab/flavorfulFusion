@@ -65,7 +65,7 @@ function NavMenus() {
       >
         Shops
       </NavLink>
-      <NavLink
+      {/* <NavLink
         to="/offers"
         className={({ isActive, isPending }) =>
           isPending
@@ -76,7 +76,7 @@ function NavMenus() {
         }
       >
         Offers
-      </NavLink>
+      </NavLink> */}
       <NavLink
         to="/contact"
         className={({ isActive, isPending }) =>
