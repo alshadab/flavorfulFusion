@@ -243,7 +243,7 @@ export default function VendorDashLayout() {
                 <li>
                   <ul role="list" className="-mx-2 space-y-1">
                     {navigation.map((item) => (
-                      <li>
+                      <li key={item?.name}>
                         <NavLink
                           to={item.navigation}
                           className={({ isActive }) =>
@@ -276,7 +276,7 @@ export default function VendorDashLayout() {
                 <li>
                   <ul role="list" className="-mx-2 space-y-1">
                     {navigationTwo.map((item) => (
-                      <li>
+                      <li key={item?.name}>
                         <NavLink
                           to={item.navigation}
                           className={({ isActive }) =>

@@ -11,9 +11,11 @@ function UserOrdersList({ order, index, onSelect, isSelected }) {
     });
   };
 
+  console.log("Orderrrrrrrrrrrrrrrrr", order);
+
   const orderStateHandle = async () => {
     try {
-      if (order.isCancelled === true) {
+      if (order.isCanceled === true) {
         setCurrentState("Cancelled");
       } else if (
         order.isConfirmed === true &&
@@ -35,7 +37,23 @@ function UserOrdersList({ order, index, onSelect, isSelected }) {
 
   useEffect(() => {
     orderStateHandle();
-  }, []);
+  }, [order]);
+
+  // Define color based on the current state
+  const getStatusColor = () => {
+    switch (currentState) {
+      case "Cancelled":
+        return "text-red-500";
+      case "Released":
+        return "text-blue-500";
+      case "Processing":
+        return "text-green-500";
+      case "Delivered":
+        return "text-orange-500";
+      default:
+        return "text-gray-500";
+    }
+  };
 
   return (
     <div
@@ -50,7 +68,7 @@ function UserOrdersList({ order, index, onSelect, isSelected }) {
         </h1>
         <div className="text-xs flex items-center gap-x-2">
           <p className="font-semibold">Order Status:</p>
-          <p className="text-orange-600 font-extrabold">{currentState}</p>
+          <p className={`${getStatusColor()} font-extrabold`}>{currentState}</p>
         </div>
       </div>
       <div className="mt-5 text-xs font-semibold">

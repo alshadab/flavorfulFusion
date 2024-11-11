@@ -10,7 +10,9 @@ function VendorsShopPage() {
   const [crtState, setCrtState] = useState(false);
   const [crtedShop, setcrtedShop] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [shops, setShops] = useState([]);
 
+  // Fetch Categories
   const fetchCategory = async () => {
     try {
       const fetchedData = await getRequest("/categories/src");
@@ -24,6 +26,7 @@ function VendorsShopPage() {
     fetchCategory();
   }, []);
 
+  // Handle Shop Creation
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
@@ -43,37 +46,50 @@ function VendorsShopPage() {
         shopDescription,
         shopCategory,
         products: [],
-        address,
-        state,
-        city,
-        country,
-        postalCode,
+        location: {
+          address,
+          state,
+          city,
+          country,
+          postalCode,
+        },
       };
 
-      const crtShp = await postRequest('/shop/crt', categoryData);
+      const crtShp = await postRequest("/shop/crt", categoryData);
       console.log(crtShp, "Create Shop");
-      setCrtState(!crtState); // Close modal after submission
-      setcrtedShop(!crtedShop);
+
+      // Update shops state after successful shop creation
+      setShops([...shops, crtShp?.data]);
+
+      // Close modal and show success
+      setCrtState(false);
+      setcrtedShop(true);
       Swal.fire("Successfully Created");
     } catch (error) {
       console.log(error);
     }
   };
 
-  const fetchAllShops = async () =>{
-    try{
-        
-    }catch(error){
-        console.log(error);
+  // Fetch All Shops (Optional: If shops need to be fetched from backend)
+  const fetchAllShops = async () => {
+    try {
+      const response = await postRequest("/shop/src/alshop/byuserid", {
+        userId: user?._id,
+      });
+      setShops(response?.data?.data || []);
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchAllShops();
-  },[crtState])
+  }, [crtState]);
+
+  console.log("Shops", shops);
 
   return (
-    <div className="w-full h-full rounded-lg shadow-md px-10 bg-white">
+    <div className="w-full h-full rounded-lg shadow-md px-10 pb-10 bg-white">
       <div className="w-full bg-white rounded pt-5">
         <GlobalHeaders
           title={"Shop Management"}
@@ -87,6 +103,46 @@ function VendorsShopPage() {
         >
           Create Shop
         </button>
+      </div>
+
+      {/* Table to Display Shops */}
+      <div className="mt-8">
+        <h2 className="text-xl font-semibold mb-4 pl-5 border-l-4 border-orange-600">
+          All Shops
+        </h2>
+        <table className="min-w-full table-auto border-collapse">
+          <thead>
+            <tr>
+              <th className="px-6 py-3 text-left">Shop Name</th>
+              <th className="px-6 py-3 text-left">Description</th>
+              <th className="px-6 py-3 text-left">Category</th>
+              <th className="px-6 py-3 text-left">Address</th>
+              <th className="px-6 py-3 text-left">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {shops.length > 0 ? (
+              shops.map((shop) => (
+                <tr key={shop._id} className="border-b">
+                  <td className="px-6 py-4">{shop.shopName}</td>
+                  <td className="px-6 py-4">{shop.shopDescription}</td>
+                  <td className="px-6 py-4">{shop.shopCategory}</td>
+                  <td className="px-6 py-4">{shop?.location?.address}</td>
+                  <td className="px-6 py-4">
+                    {/* <button className="text-blue-600">Edit</button> | */}
+                    <button className="text-red-600 ml-2">Delete</button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="5" className="text-center px-6 py-4">
+                  No shops available
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
       </div>
 
       {/* Modal for Creating Shop */}
@@ -114,8 +170,8 @@ function VendorsShopPage() {
                 <option value="">Select Category</option>
                 {categories &&
                   categories.map((category) => (
-                    <option value={category?.categoryName}>
-                      {category?.categoryName}
+                    <option key={category._id} value={category.categoryName}>
+                      {category.categoryName}
                     </option>
                   ))}
               </select>

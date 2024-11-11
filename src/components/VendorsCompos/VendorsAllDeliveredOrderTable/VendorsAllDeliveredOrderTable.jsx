@@ -1,17 +1,13 @@
 import React, { useState } from "react";
 import Paginations from "../../GlobalComponents/Paginations/Paginations";
 
-export default function VendorsAllPendingOrdersTable({
-  pendingOrdersList,
-  deletePendingOrders,
-  confirmOrders,
-}) {
+export default function VendorsAllDeliveredOrderTable({ allDeliveredOrders }) {
   const [currentPage, setCurrentPage] = useState(1);
   const entriesPerPage = 5;
-  const totalPages = Math.ceil(pendingOrdersList.length / entriesPerPage);
+  const totalPages = Math.ceil(allDeliveredOrders.length / entriesPerPage);
 
   // Slice the data for the current page
-  const displayedProduct = pendingOrdersList.slice(
+  const displayedProduct = allDeliveredOrders.slice(
     (currentPage - 1) * entriesPerPage,
     currentPage * entriesPerPage
   );
@@ -66,12 +62,12 @@ export default function VendorsAllPendingOrdersTable({
                   >
                     Total
                   </th>
-                  <th
+                  {/* <th
                     scope="col"
                     className=" py-3.5 text-center text-sm font-semibold text-gray-900"
                   >
                     Action
-                  </th>
+                  </th> */}
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
@@ -114,7 +110,7 @@ export default function VendorsAllPendingOrdersTable({
                     <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                       {order?.allTotalPrice} $
                     </td>
-                    <td className="relative whitespace-nowrap py-5 px-3.5 text-right text-sm font-medium sm:pr-0">
+                    {/* <td className="relative whitespace-nowrap py-5 px-3.5 text-right text-sm font-medium sm:pr-0">
                       <div className="flex items-center justify-center gap-x-2">
                         <button
                           onClick={() => confirmOrders(order?._id)}
@@ -129,12 +125,12 @@ export default function VendorsAllPendingOrdersTable({
                           Cancel
                         </button>
                       </div>
-                    </td>
+                    </td> */}
                   </tr>
                 ))}
               </tbody>
             </table>
-            {pendingOrdersList && pendingOrdersList.length >= 5 ? (
+            {allDeliveredOrders && allDeliveredOrders.length >= 5 ? (
               <Paginations
                 currentPage={currentPage}
                 totalPages={totalPages}

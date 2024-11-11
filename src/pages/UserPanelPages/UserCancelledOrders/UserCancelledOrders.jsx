@@ -3,6 +3,7 @@ import GlobalHeaders from "../../../components/GlobalComponents/GlobalHeaders/Gl
 import { AuthContext } from "../../../providers/AuthProviders";
 import useRequest from "../../../APIServices/useRequest";
 import UserPendingOrdersTable from "../../../components/UserDashCompos/UserPendingOrdersTable/UserPendingOrdersTable";
+import UserCancelledOrdersTable from "../../../components/UserDashCompos/UserCancelledOrdersTable/UserCancelledOrdersTable";
 
 function UserCancelledOrders() {
   const { user } = useContext(AuthContext);
@@ -32,8 +33,8 @@ function UserCancelledOrders() {
       </div>
 
       <div className="bg-white w-full pb-10 rounded">
-        {cancelledOrders?.length > 0 ? (
-          <UserPendingOrdersTable cancelOrderList={cancelledOrders} />
+        {cancelledOrders && cancelledOrders?.length >= 0 ? (
+          <UserCancelledOrdersTable cancelOrderList={cancelledOrders} />
         ) : (
           <div className="mt-5 text-xl flex justify-center text-gray-400">
             <h1>No Cancelled Orders Available</h1>

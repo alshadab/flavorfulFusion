@@ -107,7 +107,7 @@ export default function UserPendingOrdersTable({ pendingOrdersList, deletePendin
                 ))}
               </tbody>
             </table>
-            {pendingOrdersList && pendingOrdersList.length >= 5 ? (
+            {pendingOrdersList && pendingOrdersList?.length >= 5 ? (
               <Paginations
                 currentPage={currentPage}
                 totalPages={totalPages}

@@ -94,8 +94,6 @@ function VendorDashPage() {
     }
   };
 
-  console.log(totalDeliveredOrders, "Total CA Orders");
-
   useEffect(() => {
     fetchVendorRevenues();
     fetchTotalProducts();
@@ -105,6 +103,8 @@ function VendorDashPage() {
     fetchDeliveredOrders();
   }, []);
 
+  console.log("totalRevenues", totalRevenues);
+
   return (
     <div className="w-full h-full rounded-lg shadow-md px-5 py-10 bg-white">
       <h1 className="pl-5 border-l-4 border-orange-600 font-extrabold">
@@ -113,9 +113,7 @@ function VendorDashPage() {
       <div className="mt-5 w-full grid grid-cols-3 gap-x-4">
         <SummaryDataCards
           title="Total Revenue"
-          amount={
-            totalRevenues && totalRevenues.length > 0 ? totalRevenues.length : 0
-          }
+          amount={totalRevenues}
           borderLColor="border-green-400"
           borderBColor="border-b-green-400"
           isAmount={true}

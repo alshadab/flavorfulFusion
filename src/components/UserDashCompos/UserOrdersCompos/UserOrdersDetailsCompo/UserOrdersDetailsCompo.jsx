@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-function UserOrdersDetailsCompo({ order, index }) {
+function UserOrdersDetailsCompo({ order, index, handleOrderDelivered }) {
   const [currentState, setCurrentState] = useState(null);
-
-  console.log(order);
 
   const orderStateHandle = async () => {
     try {
@@ -29,7 +27,23 @@ function UserOrdersDetailsCompo({ order, index }) {
 
   useEffect(() => {
     orderStateHandle();
-  }, []);
+  }, [order]);
+
+  // Function to determine color class based on currentState
+  const getStateColor = () => {
+    switch (currentState) {
+      case "Cancelled":
+        return "text-red-600";
+      case "Released":
+        return "text-blue-600";
+      case "Processing":
+        return "text-green-600";
+      case "Delivered":
+        return "text-orange-600";
+      default:
+        return "text-gray-600";
+    }
+  };
 
   return (
     <div className="mx-5">
@@ -44,7 +58,7 @@ function UserOrdersDetailsCompo({ order, index }) {
           </div>
           <div className="flex items-center gap-x-2">
             <h1 className="font-bold">Order Status: </h1>
-            <div className="text-orange-600 font-extrabold">
+            <div className={`font-extrabold ${getStateColor()}`}>
               <p>{currentState}</p>
             </div>
           </div>
@@ -52,18 +66,13 @@ function UserOrdersDetailsCompo({ order, index }) {
 
         <div className="mt-5">
           <div className="flex items-center justify-between">
+            <div className="flex items-center gap-x-2 justify-start font-semibold"></div>
             <div className="flex items-center gap-x-2 justify-start font-semibold">
-              {/* <h1>Delivery Method:</h1>
-              <p className="text-orange-600">Cash On Delivery</p> */}
-            </div>
-            <div className="flex items-center gap-x-2 justify-start font-semibold">
-              {order.isConfirmed &&
-              order.isLaunched === true &&
-              order.isDelivered === false ? (
+              {order.isConfirmed && order.isLaunched === true && order.isDelivered === false ? (
                 <div className="flex items-center gap-1 text-seventh font-semibold text-sm">
                   <h1 className="text-xs">Is Product Delivered ?</h1>
                   <button
-                    // onClick={() => handleOrderDelivered(order._id)}
+                    onClick={() => handleOrderDelivered(order._id)}
                     className="px-4 py-1 font-bold rounded-lg shadow-md bg-green-700 text-white duration-700 hover:cursor-pointer hover:duration-700 hover:bg-green-400"
                   >
                     Yes
@@ -143,7 +152,7 @@ function UserOrdersDetailsCompo({ order, index }) {
               <tr className="border-b hover:bg-gray-50">
                 <td className="p-4 flex items-center">
                   <img
-                     src={`http://localhost:8000/images/${order?.productThumb}`}
+                    src={`http://localhost:8000/images/${order?.productThumb}`}
                     alt="Product"
                     className="w-12 h-12 mr-4 rounded-full object-cover border-2 border-orange-600"
                   />
