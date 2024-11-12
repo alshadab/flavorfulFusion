@@ -4,9 +4,8 @@ import './GlobalLoading.css';
 
 function GlobalLoading() {
   return (
-    <div className="global-loading">
-      <div className="spinner"></div>
-      <p>Loading, please wait...</p>
+    <div className="">
+     <span class="loader">Loading</span>
     </div>
   );
 }

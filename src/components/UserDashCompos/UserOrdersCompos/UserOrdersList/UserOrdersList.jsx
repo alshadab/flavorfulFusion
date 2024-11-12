@@ -11,7 +11,6 @@ function UserOrdersList({ order, index, onSelect, isSelected }) {
     });
   };
 
-  console.log("Orderrrrrrrrrrrrrrrrr", order);
 
   const orderStateHandle = async () => {
     try {
@@ -57,7 +56,7 @@ function UserOrdersList({ order, index, onSelect, isSelected }) {
 
   return (
     <div
-      className={`py-3 px-3 border rounded-lg mb-5 cursor-pointer hover:scale-105 ${
+      className={`py-3 px-3 border rounded-lg mb-5 cursor-pointer hover:bg-orange-50 ${
         isSelected ? "border-green-600" : "border-orange-600"
       }`}
       onClick={onSelect}

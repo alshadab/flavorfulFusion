@@ -125,13 +125,6 @@ function SingleProductPage() {
     }
   };
 
-  const handleAddToCart = async () => {
-    try {
-      console.log(quantity, "Cart Quantity");
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const handleStarClick = (star) => {
     setRating(star);

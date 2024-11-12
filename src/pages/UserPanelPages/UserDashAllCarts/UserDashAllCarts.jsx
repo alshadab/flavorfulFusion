@@ -10,6 +10,8 @@ function UserDashAllCarts() {
 
   const [postRequest, getRequest] = useRequest();
   const [items, setItems] = useState(cartItem);
+  const [loadingTwo, setLoadingTwo] = useState(false);
+  const [stocks, setStocks] = useState([]);
 
   // Calculate total price
   const calculateTotalPrice = () =>
@@ -54,7 +56,7 @@ function UserDashAllCarts() {
   // Place order
   const placeOrder = async () => {
     try {
-      setLoading(true);
+      setLoadingTwo(true);
       const orderPromises = items.map((item) =>
         postRequest("/orders/crt", { cartId: item?._id })
       );
@@ -64,13 +66,13 @@ function UserDashAllCarts() {
         Swal.fire("Successfull Placed the Order");
         setItems([]);
 
-        setLoading(false);
+        setLoadingTwo(false);
       }
 
-      setLoading(false);
+      setLoadingTwo(false);
     } catch (error) {
       console.log("Error placing order:", error);
-      setLoading(false);
+      setLoadingTwo(false);
     }
   };
 
@@ -217,7 +219,7 @@ function UserDashAllCarts() {
                 </div>
 
                 <div className="mt-8">
-                  {loading === true ? (
+                  {loadingTwo === true ? (
                     <button
                       onClick={placeOrder}
                       className="w-full py-2 rounded-lg bg-gray-400 text-white font-extrabold hover:cursor-wait"
