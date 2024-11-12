@@ -18,7 +18,7 @@ function HomePageIndividualProduct({ product }) {
       console.log(error);
     }
   };
-  
+
   useEffect(() => {
     fetchStock();
   }, []);
@@ -54,36 +54,40 @@ function HomePageIndividualProduct({ product }) {
         <p className="text-sm text-gray-500">
           Quantity Remaining: <span className="italic">{stock}</span> pieces
         </p>
-        <div className="mt-3 flex items-center space-x-2">
-          <button
-            onClick={handleDecrease}
-            disabled={quantity === 1}
-            className={`px-2 border rounded-lg ${
-              quantity === 1
-                ? "text-gray-400 cursor-not-allowed"
-                : "text-black bg-red-100 border-red-100"
-            }`}
-          >
-            -
-          </button>
-          <input
-            type="number"
-            value={quantity}
-            readOnly
-            className="w-8 text-xs !px-0 !py-1 text-center border rounded-lg border-gray-200"
-          />
-          <button
-            onClick={handleIncrease}
-            disabled={quantity === stock}
-            className={`px-2 border rounded-lg ${
-              quantity === stock
-                ? "text-gray-400 cursor-not-allowed"
-                : "text-black bg-green-100 border-green-100"
-            }`}
-          >
-            +
-          </button>
-        </div>
+        {user && user.userType === 103 ? (
+          <div className="mt-3 flex items-center space-x-2">
+            <button
+              onClick={handleDecrease}
+              disabled={quantity === 1}
+              className={`px-2 border rounded-lg ${
+                quantity === 1
+                  ? "text-gray-400 cursor-not-allowed"
+                  : "text-black bg-red-100 border-red-100"
+              }`}
+            >
+              -
+            </button>
+            <input
+              type="number"
+              value={quantity}
+              readOnly
+              className="w-8 text-xs !px-0 !py-1 text-center border rounded-lg border-gray-200"
+            />
+            <button
+              onClick={handleIncrease}
+              disabled={quantity === stock}
+              className={`px-2 border rounded-lg ${
+                quantity === stock
+                  ? "text-gray-400 cursor-not-allowed"
+                  : "text-black bg-green-100 border-green-100"
+              }`}
+            >
+              +
+            </button>
+          </div>
+        ) : (
+          <></>
+        )}
 
         <div className="mt-10 flex items-end justify-between">
           <div className="flex flex-col items-start">
@@ -113,28 +117,7 @@ function HomePageIndividualProduct({ product }) {
               Cart
             </button>
           ) : (
-            <Link to="/login">
-              <button
-                onClick={() => addToCart(product, stock, quantity)}
-                className="flex items-center justify-center border px-3 py-1 text-sm bg-white text-green-600 font-bold rounded-3xl duration-200 hover:scale-105"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  className="w-5 h-5 mr-2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 6M7 13l1.4 6m10-6l-1.4 6M7 19h10M9 23a1 1 0 102 0m4 0a1 1 0 102 0"
-                  />
-                </svg>
-                Cart
-              </button>
-            </Link>
+            <></>
           )}
         </div>
       </div>

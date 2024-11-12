@@ -100,8 +100,8 @@ function AuthProviders({ children }) {
         throw new Error("No user data found.");
       }
     } catch (error) {
-      Swal.fire("Credentials Don't Match");
-      throw new Error("Credentials Don't Match");
+      Swal.fire(error?.response?.data.message);
+      throw new Error(error?.response?.data.message);
     } finally {
       setLoading(false);
     }

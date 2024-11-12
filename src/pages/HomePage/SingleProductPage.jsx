@@ -150,34 +150,37 @@ function SingleProductPage() {
               </span>
             )}
           </div>
-          <div className="mb-10 flex items-center space-x-2">
-            {/* Decrease Button */}
-            <button
-              onClick={handleDecrease}
-              className="px-3 py-1 bg-gray-200 rounded-l-lg text-gray-600 hover:bg-gray-300 disabled:opacity-50"
-              disabled={quantity <= 0}
-            >
-              -
-            </button>
+          {user && user.userType === 103 ? (
+            <div className="mb-10 flex items-center space-x-2">
+              {/* Decrease Button */}
+              <button
+                onClick={handleDecrease}
+                className="px-3 py-1 bg-gray-200 rounded-l-lg text-gray-600 hover:bg-gray-300 disabled:opacity-50"
+                disabled={quantity <= 0}
+              >
+                -
+              </button>
 
-            {/* Input Field */}
-            <input
-              type="number"
-              value={quantity}
-              readOnly
-              className="w-14 py-1 flex items-center justify-normaltext-center border-t border-b border-gray-300 focus:outline-none"
-            />
+              {/* Input Field */}
+              <input
+                type="number"
+                value={quantity}
+                readOnly
+                className="w-14 py-1 flex items-center justify-normaltext-center border-t border-b border-gray-300 focus:outline-none"
+              />
 
-            {/* Increase Button */}
-            <button
-              onClick={handleIncrease}
-              className="px-3 py-1 bg-gray-200 rounded-r-lg text-gray-600 hover:bg-gray-300 disabled:opacity-50"
-              disabled={quantity >= stocks}
-            >
-              +
-            </button>
-          </div>
-
+              {/* Increase Button */}
+              <button
+                onClick={handleIncrease}
+                className="px-3 py-1 bg-gray-200 rounded-r-lg text-gray-600 hover:bg-gray-300 disabled:opacity-50"
+                disabled={quantity >= stocks}
+              >
+                +
+              </button>
+            </div>
+          ) : (
+            <></>
+          )}
           <div className="mt-3 mb-5 text-lg flex items-center gap-x-2 font-semibold">
             <span>Total Cost: </span>
             <span className="text-green-700">
@@ -257,11 +260,11 @@ function SingleProductPage() {
         </h1>
       </div>
 
-      <div className="mt-10 px-10 py-10">
+      {/* <div className="mt-10 px-10 py-10">
         <h1 className="text-2xl font-semibold underline underline-offset-8">
           Recently Viewed Products
         </h1>
-      </div>
+      </div> */}
     </div>
   );
 }

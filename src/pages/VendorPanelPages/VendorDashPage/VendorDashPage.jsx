@@ -59,9 +59,9 @@ function VendorDashPage() {
 
   const fetchPendingOrders = async () => {
     try {
-      const fetechedData = await postRequest("/orders/src/pending/all/byusr", {
-        userId: user?._id,
-      });
+      const fetechedData = await postRequest(
+        `/orders/src/pending/orders/bysellerid/${user?._id}`
+      );
       setTotalPendingOrders(fetechedData?.data?.data);
     } catch (error) {
       console.log(error);
@@ -70,9 +70,9 @@ function VendorDashPage() {
 
   const fetchCancelOrders = async () => {
     try {
-      const fetechedData = await postRequest("/orders/src/cancel/all/byusr", {
-        userId: user?._id,
-      });
+      const fetechedData = await getRequest(
+        `/orders/src/cancelled/orders/bysellerid/${user?._id}`
+      );
       setTotalCancelledOrders(fetechedData?.data?.data);
     } catch (error) {
       console.log(error);
@@ -81,11 +81,8 @@ function VendorDashPage() {
 
   const fetchConfirmOrders = async () => {
     try {
-      const fetechedData = await postRequest(
-        "/orders/src/confirmed/all/byusr",
-        {
-          userId: user?._id,
-        }
+      const fetechedData = await getRequest(
+        `/orders/src/confirmed/orders/bysellerid/${user?._id}`
       );
       setTotalConfirmedOrders(fetechedData?.data?.data);
     } catch (error) {
@@ -95,11 +92,8 @@ function VendorDashPage() {
 
   const fetchDeliveredOrders = async () => {
     try {
-      const fetechedData = await postRequest(
-        "/orders/src/confirmed/all/byusr",
-        {
-          userId: user?._id,
-        }
+      const fetechedData = await getRequest(
+        `/orders/src/delivered/orders/bysellerid/${user?._id}`
       );
       setTotalDeliveredOrders(fetechedData?.data?.data);
     } catch (error) {

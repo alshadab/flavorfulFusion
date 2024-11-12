@@ -1,13 +1,13 @@
-import React, { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import img from '../../assets/logo.png';
-import loginImage from '../../assets/loginImage.png';
-import { FcGoogle } from 'react-icons/fc';
-import { AuthContext } from '../../providers/AuthProviders';
-import Swal from 'sweetalert2';
-import { signInWithPopup } from 'firebase/auth';
-import { auth, provider } from '../../firebaseConfig';
-import useRequest from '../../APIServices/useRequest';
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import img from "../../assets/logo.png";
+import loginImage from "../../assets/loginImage.png";
+import { FcGoogle } from "react-icons/fc";
+import { AuthContext } from "../../providers/AuthProviders";
+import Swal from "sweetalert2";
+import { signInWithPopup } from "firebase/auth";
+import { auth, provider } from "../../firebaseConfig";
+import useRequest from "../../APIServices/useRequest";
 
 function LoginPage() {
   const [postRequest] = useRequest();
@@ -29,19 +29,19 @@ function LoginPage() {
       await handleLoginData({ email, password });
 
       Swal.fire({
-        icon: 'success',
-        title: 'Logged in successfully!',
+        icon: "success",
+        title: "Logged in successfully!",
         showConfirmButton: false,
         timer: 2000,
       });
 
       // Redirect after successful login
-      setTimeout(() => navigate('/'), 2000);
+      setTimeout(() => navigate("/"), 2000);
     } catch (error) {
       Swal.fire({
-        icon: 'error',
-        title: 'Login Failed',
-        text: error.message || 'Invalid credentials',
+        icon: "error",
+        title: "Login Failed",
+        text: error.message || "Invalid credentials",
       });
     } finally {
       setLoading(false);
@@ -62,37 +62,37 @@ function LoginPage() {
 
       if (res.data.error === true) {
         return Swal.fire({
-          icon: 'error',
-          title: 'Login Failed',
-          text: res.data.message || 'Invalid credentials',
+          icon: "error",
+          title: "Login Failed",
+          text: res.data.message || "Invalid credentials",
         });
       } else {
         if (res.data.data.userType) {
           if (res.data.data.isActive === false) {
             return Swal.fire({
-              icon: 'success',
+              icon: "success",
               title:
-                'User Created Successfully, Please Wait for Admin Approval',
-              text: res.data.message || '',
+                "User Created Successfully, Please Wait for Admin Approval",
+              text: res.data.message || "",
             });
           } else {
-            localStorage.setItem('userCreds', JSON.stringify(res.data.data));
+            localStorage.setItem("userCreds", JSON.stringify(res.data.data));
 
             setUser(res.data.data);
-            navigate('/');
+            navigate("/");
           }
         } else {
-          navigate('/user-info-crt', {
+          navigate("/user-info-crt", {
             state: { userID: res.data.data },
           });
         }
       }
     } catch (error) {
-      console.error('Google login error:', error);
+      console.error("Google login error:", error);
       Swal.fire({
-        icon: 'success',
-        title: 'User Created Successfully, Please Wait for Admin Approval',
-        text: 'Please Wait for Admin Approval',
+        icon: "success",
+        title: "User Created Successfully, Please Wait for Admin Approval",
+        text: "Please Wait for Admin Approval",
       });
     }
   };

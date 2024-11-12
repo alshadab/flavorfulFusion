@@ -63,7 +63,7 @@ function NavMenus() {
             : "duration-200 hover:duration-200 hover:scale-110"
         }
       >
-        Shops
+        Branches
       </NavLink>
       {/* <NavLink
         to="/offers"
