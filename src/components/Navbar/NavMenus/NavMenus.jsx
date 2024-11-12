@@ -17,7 +17,6 @@ function NavMenus() {
   const [postRequest, getRequest] = useRequest();
   const { user, setUser, cartItem } = useContext(AuthContext);
 
-
   const navigate = useNavigate();
 
   function classNames(...classes) {
@@ -209,12 +208,12 @@ function NavMenus() {
         <div className="flex items-center gap-x-6">
           <Link to="/login">
             <button className="px-4 py-1 font-semibold rounded bg-orange-600 text-white duration-200 hover:bg-orange-700 hover:scale-110">
-              Join
+              Login
             </button>
           </Link>
           <Link to="/signup">
             <button className="px-4 py-1 font-semibold rounded bg-orange-600 text-white duration-200 hover:bg-orange-700 hover:scale-110">
-              Become a Seller
+              Become a Seller/Buyer
             </button>
           </Link>
         </div>

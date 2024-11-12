@@ -42,10 +42,11 @@ function AuthProviders({ children }) {
         setRemoveCart(!removeCart);
         Swal.fire("Successfully Removed From Cart");
       } else {
-        Swal.fire("Failed to remove the item from the cart");
+        throw new Error("Failed to remove the item from the cart"); // Throw an error if there's a problem
       }
     } catch (error) {
       console.log(error);
+      throw error; // Propagate the error to the calling function
     } finally {
       setLoading(false);
     }
@@ -73,6 +74,7 @@ function AuthProviders({ children }) {
       try {
         const fetchData = await getRequest(`/carts/src/byuser/${user._id}`);
         setCartItem(fetchData?.data?.data);
+        setLoading(false);
       } catch (error) {
         console.log(error);
       } finally {
@@ -86,6 +88,9 @@ function AuthProviders({ children }) {
       fetchCartItemsNumber();
     }
   }, [user, addedProduct, removeCart]);
+
+
+  
 
   const handleLoginData = async (userCreds) => {
     setLoading(true);
