@@ -45,6 +45,7 @@ import PrivateRoute from "./PrivateRoute";
 import AdminPrivateRoute from "./AdminPrivateRoute";
 import VendorPrivateRoute from "./VendorPrivateRoute";
 import BuyerPrivateRoute from "./BuyerPrivateRoute";
+import AminRecommendations from "../pages/AdminPanelPages/AdminRecommendations/AminRecommendations";
 
 const router = createBrowserRouter([
   {
@@ -277,6 +278,16 @@ const router = createBrowserRouter([
           <AdminPrivateRoute>
             <PrivateRoute>
               <AdminAllCategoriesPage />
+            </PrivateRoute>
+          </AdminPrivateRoute>
+        ),
+      },
+      {
+        path: "recommendations",
+        element: (
+          <AdminPrivateRoute>
+            <PrivateRoute>
+              <AminRecommendations />
             </PrivateRoute>
           </AdminPrivateRoute>
         ),

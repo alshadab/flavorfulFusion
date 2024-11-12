@@ -1,9 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProviders";
 import useRequest from "../../APIServices/useRequest";
 import { FaHeart, FaStar } from "react-icons/fa";
 import GlobalLoading from "../../components/GlobalComponents/GlobalLoading/GlobalLoading";
+import Swal from "sweetalert2";
 
 function SingleProductPage() {
   const { id } = useParams();
@@ -14,6 +16,52 @@ function SingleProductPage() {
   const [stocks, setStocks] = useState(0);
   const [categories, setCategories] = useState([]);
   const [quantity, setQuantity] = useState(1);
+  const [rating, setRating] = useState(0); // Rating state
+  const [review, setReview] = useState("");
+  const [crtReviewState, setCrtReviewState] = useState(false);
+  const [allTotalRating, setAllTotalRating] = useState([]);
+  const [fetchRatingState, setFetchRatingState] = useState(false);
+  const [calculatedRating, setCalculatedRating] = useState(0);
+
+  const fetchTotalRatings = async () => {
+    try {
+      const fetchData = await getRequest(`/ratings/src/byId/${id}`);
+      setAllTotalRating(fetchData?.data?.data);
+      setFetchRatingState(!fetchRatingState);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchTotalRatings();
+  }, [crtReviewState]);
+
+  const calculateRating = async () => {
+    try {
+      const totalRating = allTotalRating.length;
+      let sumOfAllRatings = 0;
+      let avgRating = 0;
+
+      allTotalRating &&
+        allTotalRating.map((item) => {
+          sumOfAllRatings += item.rating;
+        });
+
+      avgRating = sumOfAllRatings / totalRating;
+
+      setCalculatedRating(avgRating);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const staticRating = calculatedRating ? calculatedRating : 0;
+  const staticRatingCount = allTotalRating.length;
+
+  useEffect(() => {
+    calculateRating();
+  }, [fetchRatingState]);
 
   const fetchProductInfo = async () => {
     const singleProdFetchInfo = {
@@ -77,14 +125,6 @@ function SingleProductPage() {
     }
   };
 
-  if (!productInfo) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <GlobalLoading />
-      </div>
-    );
-  }
-
   const handleAddToCart = async () => {
     try {
       console.log(quantity, "Cart Quantity");
@@ -93,27 +133,48 @@ function SingleProductPage() {
     }
   };
 
+  const handleStarClick = (star) => {
+    setRating(star);
+  };
+
+  const handleSubmitReview = async () => {
+    const crtReview = await postRequest("/ratings/crt", {
+      userId: user?._id,
+      productId: id,
+      rating: rating,
+      review: review,
+    });
+
+    if (crtReview?.data?.error === false) {
+      Swal.fire("Successfully Added the Review");
+      setRating(0);
+      setReview("");
+      setCrtReviewState(!crtReviewState);
+    }
+  };
+
+  if (!productInfo) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <GlobalLoading />
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="flex flex-col md:flex-row gap-8 bg-white p-8">
-        {/* Product Image and Thumbnails */}
+      <div className="flex flex-col md:flex-row gap-8 bg-white pb-8 px-8">
         <div className="md:w-1/2 flex flex-col items-center justify-center">
           <div className="relative">
-            {/* {productInfo.discount && (
-              <span className="absolute top-2 left-2 bg-yellow-400 text-white font-semibold py-1 px-2 rounded-lg text-sm">
-                {productInfo.discount}% OFF
-              </span>
-            )} */}
             <img
               src={`http://localhost:8000/images/${productInfo?.productThumb}`}
               alt={productInfo?.name}
-              className="w-full h-64 object-cover rounded-lg"
+              className="w-full h-full object-cover rounded-lg"
             />
           </div>
           <div className="flex gap-2 mt-4"></div>
         </div>
 
-        {/* Product Details */}
         <div className="md:w-1/2">
           <div className="flex justify-between items-start mb-4">
             <h1 className="text-2xl font-bold text-gray-800">
@@ -129,17 +190,27 @@ function SingleProductPage() {
           )}
           <p className="text-gray-600 mb-6">{productInfo.productDescription}</p>
 
-          {/* Rating */}
-          <div className="flex gap-x-2 items-center mb-4">
-            <span>Rating</span>
-            <span className="text-lg font-semibold text-green-600">
-              {productInfo.rating || "4.5"}
+          <div className="flex items-center mb-4">
+            {[...Array(5)].map((star, index) => (
+              <svg
+                key={index}
+                className={`w-6 h-6 ${
+                  index < Math.floor(staticRating)
+                    ? "text-yellow-400"
+                    : "text-gray-300"
+                }`}
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.977a1 1 0 00.95.69h4.184c.969 0 1.371 1.24.588 1.81l-3.388 2.464a1 1 0 00-.364 1.118l1.286 3.977c.3.921-.755 1.688-1.54 1.118L10 13.347l-3.388 2.464c-.785.57-1.84-.197-1.54-1.118l1.286-3.977a1 1 0 00-.364-1.118L2.605 9.404c-.784-.57-.38-1.81.588-1.81h4.184a1 1 0 00.95-.69l1.286-3.977z"></path>
+              </svg>
+            ))}
+            <span className="ml-2 text-gray-600 text-sm">
+              {staticRating} ({staticRatingCount} ratings)
             </span>
-            <FaStar className="text-yellow-500" />
-            <span>({0})</span>
           </div>
 
-          {/* Price Section */}
           <div className="flex items-center gap-4 mb-6">
             <span className="text-3xl font-bold text-green-600">
               Tk {productInfo.sellingPrice} /-
@@ -150,9 +221,9 @@ function SingleProductPage() {
               </span>
             )}
           </div>
+
           {user && user.userType === 103 ? (
             <div className="mb-10 flex items-center space-x-2">
-              {/* Decrease Button */}
               <button
                 onClick={handleDecrease}
                 className="px-3 py-1 bg-gray-200 rounded-l-lg text-gray-600 hover:bg-gray-300 disabled:opacity-50"
@@ -160,16 +231,12 @@ function SingleProductPage() {
               >
                 -
               </button>
-
-              {/* Input Field */}
               <input
                 type="number"
                 value={quantity}
                 readOnly
-                className="w-14 py-1 flex items-center justify-normaltext-center border-t border-b border-gray-300 focus:outline-none"
+                className="w-14 py-1 flex items-center justify-normal text-center border-t border-b border-gray-300 focus:outline-none"
               />
-
-              {/* Increase Button */}
               <button
                 onClick={handleIncrease}
                 className="px-3 py-1 bg-gray-200 rounded-r-lg text-gray-600 hover:bg-gray-300 disabled:opacity-50"
@@ -178,9 +245,8 @@ function SingleProductPage() {
                 +
               </button>
             </div>
-          ) : (
-            <></>
-          )}
+          ) : null}
+
           <div className="mt-3 mb-5 text-lg flex items-center gap-x-2 font-semibold">
             <span>Total Cost: </span>
             <span className="text-green-700">
@@ -192,79 +258,93 @@ function SingleProductPage() {
             {user !== null ? (
               <>
                 {user.userType === 103 ? (
-                  <>
-                    {" "}
-                    {quantity === 0 ? (
-                      <button
-                        className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg mb-6 transition duration-300 disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
-                        disabled
-                      >
-                        Add To Shopping Cart
-                      </button>
-                    ) : (
-                      <button
-                        onClick={() => addToCart(productInfo, stocks, quantity)}
-                        className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg mb-6 transition duration-300"
-                        disabled={productInfo.stock <= 0}
-                      >
-                        Add To Shopping Cart
-                      </button>
-                    )}
-                  </>
+                  <button
+                    onClick={() => addToCart(productInfo, stocks, quantity)}
+                    className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg mb-6 transition duration-300"
+                    disabled={quantity === 0 || stocks <= 0}
+                  >
+                    Add To Shopping Cart
+                  </button>
                 ) : (
-                  <>
-                    {" "}
-                    <button
-                      className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg mb-6 transition duration-300 disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
-                      disabled
-                    >
-                      Add To Shopping Cart
-                    </button>
-                  </>
+                  <button
+                    className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg mb-6 transition duration-300 disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
+                    disabled
+                  >
+                    Add To Shopping Cart
+                  </button>
                 )}
               </>
             ) : (
-              <>
-                {" "}
-                <button
-                  className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg mb-6 transition duration-300 disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
-                  disabled
-                >
-                  Add To Shopping Cart
-                </button>
-              </>
+              <button
+                className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg mb-6 transition duration-300 disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
+                disabled
+              >
+                Add To Shopping Cart
+              </button>
             )}
           </div>
 
-          {/* Categories and Seller */}
-          <div className="flex flex-wrap gap-4 text-sm text-gray-600">
-            <div>
-              <span className="font-semibold">Categories:</span>{" "}
-              {categories && categories?.categoryName
-                ? categories?.categoryName
-                : "not defined"}
+          {/* Categories, Seller, and Review Section */}
+          <div className="flex flex-col gap-4 text-sm text-gray-600">
+            <div className="flex items-center gap-x-5">
+              <div>
+                <span className="font-semibold">Categories:</span>{" "}
+                {categories?.categoryName || "not defined"}
+              </div>
+              <div className="flex items-center gap-x-2">
+                <span className="font-semibold">Sellers:</span>
+                <p className="text-orange-600 hover:underline cursor-pointer">
+                  {productInfo.seller || "Grocery Shop"}
+                </p>
+              </div>
             </div>
-            <div className="flex items-center gap-x-2">
-              <span className="font-semibold flex">Sellers:</span>
-              <p className="text-green-600 hover:underline hover:cursor-pointer">
-                {productInfo.seller || "Grocery Shop"}
-              </p>
-            </div>
+
+            {/* Rating and Review Section */}
+            {user && user?.userType === 103 ? (
+              <div className="mt-6">
+                <h3 className="font-semibold">Your Rating and Review:</h3>
+                <div className="flex gap-x-4 items-center mt-2">
+                  {/* Star Rating Input */}
+                  <div className="flex flex-col justify-center items-center">
+                    <div className="w-full flex justify-center space-x-1">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <FaStar
+                          key={star}
+                          onClick={() => handleStarClick(star)}
+                          className={`cursor-pointer w-5 h-5 ${
+                            star <= rating ? "text-yellow-500" : "text-gray-300"
+                          }`}
+                        />
+                      ))}
+                    </div>
+                    <button
+                      onClick={handleSubmitReview}
+                      disabled={!rating || !review} // Button is disabled until both rating and review are provided
+                      className={`w-full mt-3 px-4 py-1 text-sm font-semibold rounded transition ${
+                        rating && review
+                          ? "bg-orange-600 text-white hover:bg-orange-700"
+                          : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                      }`}
+                    >
+                      Submit
+                    </button>
+                  </div>
+
+                  {/* Review Textarea */}
+                  <textarea
+                    value={review}
+                    onChange={(e) => setReview(e.target.value)}
+                    placeholder="Write your review here..."
+                    className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-0 focus:border-orange-600"
+                  ></textarea>
+                </div>
+              </div>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>
-
-      <div className="mt-10 px-10 py-10">
-        <h1 className="text-2xl font-semibold underline underline-offset-8">
-          Reviews and Rating
-        </h1>
-      </div>
-
-      {/* <div className="mt-10 px-10 py-10">
-        <h1 className="text-2xl font-semibold underline underline-offset-8">
-          Recently Viewed Products
-        </h1>
-      </div> */}
     </div>
   );
 }

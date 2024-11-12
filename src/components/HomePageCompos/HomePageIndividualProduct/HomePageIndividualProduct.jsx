@@ -9,6 +9,8 @@ function HomePageIndividualProduct({ product }) {
   const [stock, setStock] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const navigate = useNavigate();
+  const [rating, setRating] = useState([]);
+  const [calculatedRating, setCalculatedRating] = useState(0);
 
   const fetchStock = async () => {
     try {
@@ -19,8 +21,18 @@ function HomePageIndividualProduct({ product }) {
     }
   };
 
+  const fetchRating = async () => {
+    try {
+      const fetchData = await getRequest(`/ratings/src/byId/${product?._id}`);
+      setRating(fetchData?.data?.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     fetchStock();
+    fetchRating();
   }, []);
 
   const handleIncrease = () => {
@@ -37,6 +49,32 @@ function HomePageIndividualProduct({ product }) {
     }
   };
 
+  const calculateRating = async ()=>{
+    try{
+      const totalRating = rating.length;
+      let sumOfAllRatings = 0;
+      let avgRating = 0;
+
+      rating && rating.map((item)=>{
+        sumOfAllRatings += item.rating;
+      })
+
+      avgRating = sumOfAllRatings/totalRating 
+
+      setCalculatedRating(avgRating);
+    }catch(error){
+      console.log(error);
+    }
+  }
+  
+  const staticRating = calculatedRating ? calculatedRating : 0;
+  const staticRatingCount = rating.length;
+
+
+  useEffect(()=>{
+    calculateRating();
+  },[rating])
+
   return (
     <div className="w-full p-4 bg-white border rounded-lg shadow-md hover:cursor-pointer">
       <Link to={`/singleproductpage/${product?._id}`}>
@@ -51,6 +89,28 @@ function HomePageIndividualProduct({ product }) {
 
       <div className="mt-5 text-left">
         <h3 className="text-lg font-semibold">{product?.productName}</h3>
+
+        <div className="flex items-center mb-4">
+          {[...Array(5)].map((star, index) => (
+            <svg
+              key={index}
+              className={`w-6 h-6 ${
+                index < Math.floor(staticRating)
+                  ? "text-yellow-400"
+                  : "text-gray-300"
+              }`}
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.977a1 1 0 00.95.69h4.184c.969 0 1.371 1.24.588 1.81l-3.388 2.464a1 1 0 00-.364 1.118l1.286 3.977c.3.921-.755 1.688-1.54 1.118L10 13.347l-3.388 2.464c-.785.57-1.84-.197-1.54-1.118l1.286-3.977a1 1 0 00-.364-1.118L2.605 9.404c-.784-.57-.38-1.81.588-1.81h4.184a1 1 0 00.95-.69l1.286-3.977z"></path>
+            </svg>
+          ))}
+          <span className="ml-2 text-gray-600 text-sm">
+            {staticRating} ({staticRatingCount} ratings)
+          </span>
+        </div>
+
         <p className="text-sm text-gray-500">
           Quantity Remaining: <span className="italic">{stock}</span> pieces
         </p>
