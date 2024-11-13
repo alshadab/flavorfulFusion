@@ -174,7 +174,7 @@ function UserDashAllCarts() {
 
                         <div className="col-span-2 text-center">
                           <button
-                            onClick={() => handleRemoveItem(index, item?._id)}
+                            onClick={() => handleRemoveItem(index, item?.productId)}
                             className="text-xl text-red-500 font-bold"
                           >
                             <FaRegTrashCan />

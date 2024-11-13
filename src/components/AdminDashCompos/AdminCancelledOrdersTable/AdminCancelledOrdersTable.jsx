@@ -52,12 +52,12 @@ export default function AdminCancelledOrdersPage({ allCancelledOrders }) {
                     >
                       Customer Info
                     </th>
-                    <th
+                    {/* <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
                       Delivery Fee
-                    </th>
+                    </th> */}
                     {/* <th
                     scope="col"
                     className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"

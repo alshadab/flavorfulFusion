@@ -123,7 +123,7 @@ function AdminSingleProductTableData({
         <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
           {category}
         </td>
-        <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
+        {/* <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
           <div className="flex items-center">
             <div className="">
               <div className="font-medium text-gray-900">
@@ -131,7 +131,7 @@ function AdminSingleProductTableData({
               </div>
             </div>
           </div>
-        </td>
+        </td> */}
         <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
           {product?.buyingPrice} $
         </td>

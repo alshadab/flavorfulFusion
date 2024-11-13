@@ -86,6 +86,8 @@ function AdminDashHomePage() {
     fetchPopularProducts();
   }, []);
 
+  console.log("Popular Products", popularProductsList);
+
   return (
     <div className="w-full h-full rounded-lg shadow-md px-5 py-10 bg-white">
       <h1 className="pl-5 border-l-4 border-orange-600 font-extrabold">
