@@ -1,7 +1,59 @@
-import React from "react";
-import "./banner.css";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import './banner.css';
+import { Link } from 'react-router-dom';
 
 function Banner() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [showResults, setShowResults] = useState(false);
+
+  // Debounced search function
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      if (searchTerm) {
+        fetchSearchResults(searchTerm);
+      } else {
+        setResults([]);
+        setShowResults(false);
+      }
+    }, 300); // 300ms debounce time
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchTerm]);
+
+  const fetchSearchResults = async (query) => {
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        'http://localhost:8000/api/v1/products/src/prd',
+        {
+          pQuery: query,
+        }
+      );
+      setResults(response.data.data || []);
+      setShowResults(true);
+    } catch (error) {
+      console.error('Error fetching search results:', error);
+      setResults([]);
+      setShowResults(true);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleInput = (e) => {
+    if (!e.target.value) {
+      setShowResults(false);
+      setResults([]);
+    }
+  };
+
   return (
     <div className="bannerClass w-full h-[86vh]">
       <div className="w-full h-full flex items-center justify-center">
@@ -14,9 +66,43 @@ function Banner() {
             everyday
           </p>
           <form className="mt-10 w-full grid grid-cols-12 items-center">
-            <input className="col-span-10 border py-4 rounded-s-lg px-4 focus:outline-none" type="searc" placeholder="Search for Products"/>
-            <input className="col-span-2 px-4 py-4 rounded-e-lg bg-orange-600 text-white font-semibold" type="submit" value="Search" />
+            <input
+              className="col-span-10 border py-4 rounded-s-lg px-4"
+              type="search"
+              placeholder="Search for Products"
+              value={searchTerm}
+              onChange={handleSearchChange}
+              onInput={handleInput} // Handle cancel icon click
+            />
+            <input
+              className="col-span-2 px-4 py-4 rounded-e-lg bg-orange-600 text-white font-semibold"
+              type="submit"
+              value="Search"
+              onClick={(e) => e.preventDefault()}
+            />
           </form>
+
+          {/* Results Panel */}
+          {showResults && (
+            <div className="mt-4 bg-gray-100 rounded-lg shadow-lg">
+              {loading ? (
+                <p className="p-4">Loading...</p>
+              ) : results.length > 0 ? (
+                results.map((product) => (
+                  <Link
+                    to={`/singleproductpage/${product._id}`}
+                    key={product._id}
+                  >
+                    <div className="p-4 border-b cursor-pointer text-black hover:bg-gray-200">
+                      {product.productName}
+                    </div>
+                  </Link>
+                ))
+              ) : (
+                <p className="text-center p-4">No results found.</p>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>
