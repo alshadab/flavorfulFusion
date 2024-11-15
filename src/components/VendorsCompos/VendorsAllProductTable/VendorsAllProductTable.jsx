@@ -3,7 +3,14 @@ import Paginations from "../../GlobalComponents/Paginations/Paginations";
 import AdminSingleProductTableData from "../../AdminDashCompos/AdminAllProductsTableCompos/AdminSingleProductTableData";
 import VendorSingleProductTableItem from "./VendorSingleProductTableItem";
 
-export default function VendorsAllProductTable({deleteProduct, activateProduct, activateState, deleteState, allProdList }) {
+export default function VendorsAllProductTable({
+  deleteProduct,
+  activateProduct,
+  activateState,
+  deleteState,
+  allProdList,
+  handleRowClick,
+}) {
   const [currentPage, setCurrentPage] = useState(1);
   const entriesPerPage = 5;
   const totalPages = Math.ceil(allProdList.length / entriesPerPage);
@@ -80,19 +87,30 @@ export default function VendorsAllProductTable({deleteProduct, activateProduct, 
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
                 {displayedPeople.map((product, index) => (
-                  <VendorSingleProductTableItem key={product?._id} activateState={activateState} deleteProduct={deleteProduct} activateProduct={activateProduct} deleteState={deleteState} product={product} index={index}/>
+                  <VendorSingleProductTableItem
+                    key={product?._id}
+                    activateState={activateState}
+                    deleteProduct={deleteProduct}
+                    activateProduct={activateProduct}
+                    deleteState={deleteState}
+                    product={product}
+                    handleRowClick={handleRowClick}
+                    index={index}
+                  />
                 ))}
               </tbody>
             </table>
-            {
-              allProdList && allProdList.length > 5 ? <Paginations
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPrevPage={handlePrevPage}
-              onNextPage={handleNextPage}
-              onPageChange={handlePageChange}
-            /> : <> </>
-            }
+            {allProdList && allProdList.length > 5 ? (
+              <Paginations
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPrevPage={handlePrevPage}
+                onNextPage={handleNextPage}
+                onPageChange={handlePageChange}
+              />
+            ) : (
+              <> </>
+            )}
           </div>
         </div>
       </div>

@@ -3,6 +3,8 @@ import GlobalHeaders from "../../../components/GlobalComponents/GlobalHeaders/Gl
 import useRequest from "../../../APIServices/useRequest";
 import VendorsAllProductTable from "../../../components/VendorsCompos/VendorsAllProductTable/VendorsAllProductTable";
 import { AuthContext } from "../../../providers/AuthProviders";
+import VendorEditProductModal from "../../../components/VendorsCompos/VendorEditProductModal/VendorEditProductModal";
+import Swal from "sweetalert2";
 
 function VendorAllProducts() {
   const { user } = useContext(AuthContext);
@@ -10,6 +12,22 @@ function VendorAllProducts() {
   const [allProdList, setAllProdList] = useState([]);
   const [deleteState, setDeleteState] = useState([]);
   const [activateState, setActivateState] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [uptState, setUptState] = useState(false);
+
+  const handleSave = async (updatedProduct, prodId) => {
+    console.log(updatedProduct, "Updated Product")
+    const updateProdInfo = await postRequest(
+      `/products/upt/${prodId}`,
+      updatedProduct
+    );
+
+    if (updateProdInfo?.data?.error === false) {
+      Swal.fire("Product Info Updated Successfully");
+      setUptState(!uptState);
+    }
+  };
 
   const fetchAllProducts = async () => {
     try {
@@ -24,7 +42,7 @@ function VendorAllProducts() {
 
   useEffect(() => {
     fetchAllProducts();
-  }, [deleteState, activateState]);
+  }, [deleteState, activateState, uptState]);
 
   const deleteProduct = async (id) => {
     try {
@@ -42,6 +60,12 @@ function VendorAllProducts() {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleRowClick = (product) => {
+    console.log("Product Selected", product);
+    setSelectedProduct(product);
+    setIsModalOpen(true);
   };
 
   return (
@@ -62,9 +86,17 @@ function VendorAllProducts() {
             activateState={activateState}
             deleteState={deleteState}
             allProdList={allProdList}
+            handleRowClick={handleRowClick}
           />
         )}
       </div>
+
+      <VendorEditProductModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        product={selectedProduct}
+        onSave={handleSave}
+      />
     </div>
   );
 }
