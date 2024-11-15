@@ -57,8 +57,8 @@ function Banner() {
   return (
     <div className="bannerClass w-full h-[86vh]">
       <div className="w-full h-full flex items-center justify-center">
-        <div className="px-10 py-10 bg-white rounded-lg text-center">
-          <h1 className="text-3xl font-extrabold font-poppins">
+        <div className="mx-5 md:mx-0 px-5 md:px-10 py-10 md:py-10 bg-white rounded-lg text-center">
+          <h1 className="text-2xl md:text-3xl font-extrabold font-poppins">
             Groceries will be delivered within 90 Minutes
           </h1>
           <p className="text-sm mt-4">
@@ -67,7 +67,7 @@ function Banner() {
           </p>
           <form className="mt-10 w-full grid grid-cols-12 items-center">
             <input
-              className="col-span-10 border py-4 rounded-s-lg px-4"
+              className="col-span-9 md:col-span-10 border-0 md:border py-2 md:py-4 rounded-s-lg px-4"
               type="search"
               placeholder="Search for Products"
               value={searchTerm}
@@ -75,7 +75,7 @@ function Banner() {
               onInput={handleInput} // Handle cancel icon click
             />
             <input
-              className="col-span-2 px-4 py-4 rounded-e-lg bg-orange-600 text-white font-semibold"
+              className="col-span-3 md:col-span-2 px-2 md:px-4 py-2 md:py-4 rounded-e-lg bg-orange-600 text-white font-semibold"
               type="submit"
               value="Search"
               onClick={(e) => e.preventDefault()}

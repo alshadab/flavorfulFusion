@@ -93,10 +93,10 @@ function NavMenus() {
   );
 
   return (
-    <div className="w-full h-full flex items-center justify-end gap-x-6">
-      <div className="flex items-center gap-x-6 font-semibold">{links}</div>
+    <div className="w-full h-full flex flex-col md:flex-row items-center justify-end md:gap-x-6">
+      <div className="ml-5 md:ml-0 flex items-center gap-x-4 md:gap-x-6 font-semibold">{links}</div>
       {user ? (
-        <div className="flex items-center gap-x-6">
+        <div className="flex items-center md:gap-x-6">
           {/* Cart Icon with Item Count for userType === 103 */}
           {user.userType === 103 && (
             <Link to="/usercarts">
@@ -205,14 +205,14 @@ function NavMenus() {
           </Menu>
         </div>
       ) : (
-        <div className="flex items-center gap-x-6">
+        <div className="flex items-center gap-x-2 md:gap-x-6">
           <Link to="/login">
-            <button className="px-4 py-1 font-semibold rounded bg-orange-600 text-white duration-200 hover:bg-orange-700 hover:scale-110">
+            <button className="text-md md:text-xl px-4 py-1 font-semibold rounded bg-orange-600 text-white duration-200 hover:bg-orange-700 hover:scale-110">
               Login
             </button>
           </Link>
           <Link to="/signup">
-            <button className="px-4 py-1 font-semibold rounded bg-orange-600 text-white duration-200 hover:bg-orange-700 hover:scale-110">
+            <button className="text-md md:text-xl px-4 py-1 font-semibold rounded bg-orange-600 text-white duration-200 hover:bg-orange-700 hover:scale-110">
               Become a Seller/Buyer
             </button>
           </Link>

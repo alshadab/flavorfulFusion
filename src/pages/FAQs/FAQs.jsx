@@ -25,12 +25,12 @@ const FAQs = () => {
   };
 
   return (
-    <div className="container mx-auto bg-white">
+    <div className="mt-14 md:mt-0 container mx-auto bg-white">
       <h1 className="text-4xl font-bold text-center text-orange-600 mb-8">
         Frequently Asked Questions
       </h1>
       {
-        allFaqs && allFaqs.length > 0 ? <div className="py-6 px-10 mx-80">
+        allFaqs && allFaqs.length > 0 ? <div className="py-6 px-6 md:px-10 mx-0 md:mx-80">
         {allFaqs.map((faq, index) => (
           <div
             key={index}

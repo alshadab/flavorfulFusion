@@ -34,7 +34,7 @@ const Manufacturers = () => {
   console.log(allVendors, "All Vendors");
 
   return (
-    <div className="container mx-auto p-5 md:p-10 bg-white">
+    <div className="container mt-10 md:mt-0 mx-auto p-5 md:p-10 bg-white">
       <h1 className="text-4xl font-bold text-center text-orange-600 mb-8">
         Our Manufacturers & Publishers
       </h1>

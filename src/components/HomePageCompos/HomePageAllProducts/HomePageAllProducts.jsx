@@ -35,7 +35,7 @@ function HomePageAllProducts({ allProds = [] }) {
   };
 
   return (
-    <div className="px-10 pt-5 pb-10">
+    <div className="px-6 md:px-10 pt-5 pb-10">
       <GlobalFilters
         searchTerm=""
         onSearch={() => {}}
@@ -43,9 +43,9 @@ function HomePageAllProducts({ allProds = [] }) {
         onSortChange={() => {}}
       />
 
-      <div className="col-span-9">
+      <div className="">
         {currentProducts && currentProducts.length > 0 ? (
-          <div className="grid grid-cols-5 gap-x-5 gap-y-10">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-x-5 gap-y-5 md:gap-y-10">
             {currentProducts.map((product) => (
               <HomePageIndividualProduct key={product.id} product={product} />
             ))}

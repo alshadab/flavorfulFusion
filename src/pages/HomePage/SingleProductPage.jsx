@@ -155,8 +155,8 @@ function SingleProductPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="flex flex-col md:flex-row gap-8 bg-white pb-8 px-8">
+    <div className="container mt-10 md:mt-0 mx-auto px-4 py-8">
+      <div className="flex flex-col md:flex-row gap-8 bg-white pb-8 px-4 md:px-8">
         <div className="md:w-1/2 flex flex-col items-center justify-center">
           <div className="relative">
             <img
@@ -175,7 +175,7 @@ function SingleProductPage() {
             </h1>
           </div>
           {stocks && stocks > 0 ? (
-            <p className="text-gray-500 mb-4">
+            <p className="text-gray-500 mb-4 font-semibold md:font-normal">
               Stock Remaining: {stocks} pieces
             </p>
           ) : (

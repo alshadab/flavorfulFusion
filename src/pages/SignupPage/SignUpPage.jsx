@@ -95,8 +95,8 @@ function SignUpPage() {
   };
 
   return (
-    <div className="w-screen h-screen bg-orange-300 flex justify-center items-center p-4 sm:px-10 sm:py-8 lg:px-20 lg:py-10">
-      <div className="w-full max-w-8xl h-full bg-white rounded-lg shadow-lg">
+    <div className="w-screen h-screen bg-transparent md:bg-orange-300 flex justify-center items-center p-4 sm:px-10 sm:py-8 lg:px-20 lg:py-10">
+      <div className="w-full max-w-8xl h-full bg-white md:rounded-lg md:shadow-lg">
         <div className="grid grid-cols-1 lg:grid-cols-2 w-full h-full">
           <form
             onSubmit={handleSignUpUser}
@@ -107,7 +107,7 @@ function SignUpPage() {
               <Link to="/">
                 <img src={img} className="w-16 lg:w-20" alt="Logo" />
               </Link>
-              <h1 className="text-lg sm:text-xl lg:text-2xl font-poppins font-extrabold text-center lg:text-left">
+              <h1 className="text-2xl sm:text-xl lg:text-2xl font-poppins font-extrabold text-center lg:text-left">
                 Signup to <span className="text-orange-600">Flavourfull</span>{' '}
                 Fusion
               </h1>

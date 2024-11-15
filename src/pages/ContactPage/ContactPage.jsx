@@ -43,9 +43,9 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="bg-fifth px-[10vw] py-[8vh]">
-      <div className="bg-transparent grid grid-cols-3 gap-5">
-        <div className="col-span-1 px-4 py-4 border shadow-lg rounded-lg">
+    <div className="bg-fifth px-6 md:px-[10vw] py-20 md:py-[8vh]">
+      <div className="bg-transparent grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="col-span-1 px-4 py-4 md:border md:shadow-lg md:rounded-lg">
           <img src={illust} className="-mt-2" alt="" />
           <div className="px-4 mt-5">
             <h1 className="font-extrabold text-xl">Address</h1>
@@ -73,16 +73,16 @@ const ContactPage = () => {
             </div>
           </div>
           <div className="px-4 mt-10">
-            <h1 className="font-extrabold text-xl">Follow Us</h1>
-            <div className="mt-4 pb-5 text-2xl flex items-center gap-10">
+            <h1 className="font-extrabold text-xl text-center md:text-left">Follow Us</h1>
+            <div className="mt-4 pb-5 text-3xl md:text-2xl flex items-center justify-center md:justify-normal gap-10">
               <FaFacebookSquare className="text-orange-600 duration-200 hover:text-seventh hover:cursor-pointer hover:duration-200 hover:scale-110"></FaFacebookSquare>
               <ImInstagram className="text-orange-600 duration-200 hover:text-seventh hover:cursor-pointer hover:duration-200 hover:scale-110"></ImInstagram>
               <FaLinkedin className="text-orange-600 duration-200 hover:text-seventh hover:cursor-pointer hover:duration-200 hover:scale-110"></FaLinkedin>
             </div>
           </div>
         </div>
-        <div className="col-span-2 px-10 py-4 border shadow-lg rounded-lg">
-          <h1 className="mt-5 text-2xl font-extrabold tracking-wider">
+        <div className="col-span-2 md:px-10 py-4 md:border md:shadow-lg md:rounded-lg">
+          <h1 className="mt-5 text-2xl font-extrabold tracking-wider text-center md:text-left">
             How can we improve our experience?{" "}
           </h1>
           <form onSubmit={createContact} className="mt-5 py-5">

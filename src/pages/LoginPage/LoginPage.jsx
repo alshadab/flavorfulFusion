@@ -99,13 +99,13 @@ function LoginPage() {
 
   return (
     <div className="w-full h-screen bg-white flex justify-center items-center p-5">
-      <div className="w-full max-w-4xl h-full rounded-lg shadow-lg flex flex-col md:flex-row">
-        <div className="bg-orange-100 w-full md:w-1/2 flex justify-center items-center">
+      <div className="w-full max-w-4xl h-full md:rounded-lg md:shadow-lg flex flex-col md:flex-row">
+        <div className="bg-orange-100 md:w-1/2 hidden md:flex justify-center items-center">
           <img src={loginImage} className="w-72 md:w-92" alt="Sign Up Logo" />
         </div>
         <form
           onSubmit={handleLogin}
-          className="w-full md:w-1/2 p-8 flex flex-col justify-center"
+          className="w-full md:w-1/2 p-4 md:px-8 py-10 md:py-8 flex flex-col justify-center"
         >
           <div className="flex items-center justify-center">
             <Link to="/">
@@ -184,12 +184,12 @@ function LoginPage() {
                 value="Login"
               />
             </div>
-            <div className="mt-2 flex items-center justify-between">
+            <div className="w-full mt-2 flex items-center justify-between">
               <h1>
                 New to <span>Flavourfull</span> Fushion?
               </h1>
               <Link to="/signup">
-                <p className="font-bold text-orange-600 duration-200 hover:duration-200 hover:cursor-pointer hover:text-orange-700">
+                <p className="text-sm md:text-md font-bold text-orange-600 duration-200 hover:duration-200 hover:cursor-pointer hover:text-orange-700">
                   Create Account
                 </p>
               </Link>

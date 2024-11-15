@@ -6,13 +6,13 @@ import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <div className="w-full h-[14vh] px-[2vw] bg-[#FFFFFF] grid grid-cols-12">
-      <div className="col-span-4 w-full h-full border-white flex items-center gap-x-10">
+    <div className="pt-5 md:pt-0 w-full h-[14vh] px-[2vw] bg-[#FFFFFF] grid md:grid-cols-12">
+      <div className="md:col-span-4 w-full h-full border-white flex items-center justify-center md:justify-between md:gap-x-10">
         <Link to="/">
           <div className="flex items-center hover:cursor-pointer">
             <img
               src={logo}
-              className="w-20 h-20"
+              className="w-10 md:w-20 h-10 md:h-20"
               alt="Flavour Full Fushion Logo"
             />
             <h1 className="text-xl">
@@ -27,7 +27,7 @@ function Navbar() {
           <NavDropDown />
         </div> */}
       </div>
-      <div className="col-span-8">
+      <div className="md:col-span-8">
         <NavMenus />
       </div>
     </div>
