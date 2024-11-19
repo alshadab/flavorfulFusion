@@ -22,6 +22,7 @@ function VendorAddAProduct() {
   const [allShops, setAllShops] = useState([]);
   const navigate = useNavigate();
   const [postRequest, getRequest] = useRequest();
+  const [files, setFiles] = useState([]);
 
   const multipleFilesUpload = async (data, options) => {
     try {
@@ -69,6 +70,10 @@ function VendorAddAProduct() {
     }
   };
 
+  const handleFileChange = (e)=>{
+    setFiles(e.target.files);
+  }
+
   //Blank COmmit//
   const handleCreateProducts = async (event) => {
     event.preventDefault();
@@ -86,6 +91,10 @@ function VendorAddAProduct() {
       formData.append("userId", user?._id);
       formData.append("sellerId", user?._id);
       formData.append("shopId", shopId);
+      console.log(files,"files")
+      for(const file of files){
+        formData.append("productsImg", file);
+      }
 
       for (let [key, value] of formData.entries()) {
         console.log(`${key}: ${value}`);
@@ -103,6 +112,10 @@ function VendorAddAProduct() {
       setLoading(false);
     }
   };
+
+
+
+
   return (
     <div className="w-full h-full rounded-lg shadow-md px-10 pb-10 bg-white">
       <div className="w-full bg-white rounded">
@@ -242,21 +255,23 @@ function VendorAddAProduct() {
               />
             </div>
 
-            <Uploader />
+            {/* <Uploader /> */}
 
-            {/* <div className="flex flex-col items-start">
+            <div className="flex flex-col items-start">
               <label className="text-xs mb-3" htmlFor="productThumb">
-                Other Images Upload
+                Upload Other Images
               </label>
               <input
                 id="productImg"
+                multiple
+                name="productsImg"
                 className="w-full text-lg text-black"
                 type="file"
                 accept="image/*"
-                onChange={handleThumbChange}
+                onChange={handleFileChange}
                 required
               />
-            </div> */}
+            </div>
           </div>
           <div className="mt-10">
             <input
