@@ -23,6 +23,7 @@ function SingleProductPage() {
   const [allTotalRating, setAllTotalRating] = useState([]);
   const [fetchRatingState, setFetchRatingState] = useState(false);
   const [calculatedRating, setCalculatedRating] = useState(0);
+  const [mainImage, setMainImage] = useState("");
 
   const fetchTotalRatings = async () => {
     try {
@@ -146,6 +147,17 @@ function SingleProductPage() {
     }
   };
 
+  useEffect(() => {
+    if (productInfo) {
+      setMainImage(productInfo?.productThumb);
+    }
+  }, [productInfo]);
+
+  const handleThumbnailClick = (imagePath) => {
+    // Update the main image when a thumbnail is clicked
+    setMainImage(imagePath);
+  };
+
   if (!productInfo) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -158,17 +170,27 @@ function SingleProductPage() {
     <div className="container mt-10 md:mt-0 mx-auto px-4 py-8">
       <div className="flex flex-col md:flex-row gap-8 bg-white pb-8 px-4 md:px-8">
         <div className="md:w-1/2 flex flex-col items-center justify-center">
-          <div className="relative">
+          <div className="relative w-96 h-96">
             <img
-              src={`http://localhost:8000/images/${productInfo?.productThumb}`}
+              src={`http://localhost:8000/images/${mainImage}`}
               alt={productInfo?.name}
-              className="w-full h-full object-cover rounded-lg"
+              className="w-full h-full object-contain rounded-lg"
             />
           </div>
-          <div className="flex gap-2 mt-4"></div>
+          <div className="flex items-center gap-x-2 md:gap-x-14 mt-4">
+            {
+              productInfo && productInfo.productsImg.map((item)=> 
+              <div 
+              onClick={() => handleThumbnailClick(item.path)}
+              key={item.path} className="w-20 h-20 rounded-xl border-2 hover:cursor-pointer hover:scale-105">
+                <img className="w-full h-full object-cover" src={`http://localhost:8000/images/${item?.path}`} alt="productImg" />
+              </div>
+              )
+            }
+          </div>
         </div>
 
-        <div className="md:w-1/2">
+        <div className="md:w-1/2 md:-mt-8">
           <div className="flex justify-between items-start mb-4">
             <h1 className="text-2xl font-bold text-gray-800">
               {productInfo?.productName}
@@ -294,7 +316,7 @@ function SingleProductPage() {
 
             {/* Rating and Review Section */}
             {user && user?.userType === 103 ? (
-              <div className="mt-6">
+              <div className="mt-2">
                 <h3 className="font-semibold">Your Rating and Review:</h3>
                 <div className="flex gap-x-4 items-center mt-2">
                   {/* Star Rating Input */}
@@ -338,7 +360,7 @@ function SingleProductPage() {
           </div>
         </div>
       </div>
-      <div className="mt-8">
+      <div className="mt-16 md:mx-10">
         <h3 className="font-semibold text-xl underline">Customer Reviews:</h3>
         <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-x-4 gap-y-4 ">
           {allTotalRating.length > 0 ? (
