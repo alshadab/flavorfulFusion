@@ -44,7 +44,7 @@ function UserDashHomePage() {
   }, [uptUserInfo]);
 
   return (
-    <div className="mx-5 my-5 border-2 rounded-lg shadow-md px-5 py-5">
+    <div className="md:mx-5 md:my-5 border-2 rounded-lg shadow-md px-5 py-5">
       <div>
         <h1 className="text-lg font-semibold underline underline-offset-8">
           User Information

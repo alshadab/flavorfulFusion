@@ -3,7 +3,12 @@ import { AuthContext } from "../../../providers/AuthProviders";
 import useRequest from "../../../APIServices/useRequest";
 import UserOrdersList from "../../../components/UserDashCompos/UserOrdersCompos/UserOrdersList/UserOrdersList";
 import UserOrdersDetailsCompo from "../../../components/UserDashCompos/UserOrdersCompos/UserOrdersDetailsCompo/UserOrdersDetailsCompo";
+import Modal from "react-modal";
 import Swal from "sweetalert2";
+import useIsSmallScreen from "../../../hooks/useIsSmallScreen";
+
+// Set app element for accessibility
+Modal.setAppElement("#root");
 
 function UserDashAllOrders() {
   const { user } = useContext(AuthContext);
@@ -11,10 +16,12 @@ function UserDashAllOrders() {
   const [ordersList, setOrdersList] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [selectedOrderIndex, setSelectedOrderIndex] = useState(null);
-  const [deliverState, setDeliverState] = useState(false); // Lift state here
-  const [orderStatusMap, setOrderStatusMap] = useState({}); // Map to track statuses
+  const [deliverState, setDeliverState] = useState(false);
+  const [orderStatusMap, setOrderStatusMap] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
 
-  // Fetch initial order list
+  const isSmallScreen = useIsSmallScreen(); // Check if the screen is small
+
   const fetchOrdersList = async () => {
     try {
       const fetchData = await getRequest(`/orders/src/user/byid/${user?._id}`);
@@ -28,7 +35,6 @@ function UserDashAllOrders() {
     fetchOrdersList();
   }, [deliverState]);
 
-  // Updates state when order is delivered
   const handleOrderDelivered = async (id) => {
     try {
       const deliverConfirm = await getRequest(
@@ -36,14 +42,10 @@ function UserDashAllOrders() {
       );
       if (deliverConfirm?.data?.error === false) {
         Swal.fire("Delivery Confirmed !!");
-
-        // Update order status map to refresh both components
         setOrderStatusMap((prevStatus) => ({
           ...prevStatus,
           [id]: "Delivered",
         }));
-
-        // Update deliverState to trigger re-render
         setDeliverState(!deliverState);
       }
     } catch (err) {
@@ -51,16 +53,20 @@ function UserDashAllOrders() {
     }
   };
 
-  // Sync selected order and its status on selection
   const handleSelectOrder = (order, index) => {
     setSelectedOrder(order);
     setSelectedOrderIndex(index);
+    if (isSmallScreen) setIsModalOpen(true); // Open modal only on small screens
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
     <>
       {ordersList && ordersList.length > 0 ? (
-        <div className="grid grid-cols-12">
+        <div className="grid grid-cols-1 md:grid-cols-12">
           <div className="col-span-3 h-[85vh] overflow-y-scroll pr-5">
             <h1 className="text-xl font-bold">
               Orders List{" "}
@@ -82,7 +88,7 @@ function UserDashAllOrders() {
               ))}
             </div>
           </div>
-          <div className="col-span-9">
+          <div className="col-span-9 hidden md:block">
             {selectedOrder ? (
               <UserOrdersDetailsCompo
                 order={{
@@ -105,6 +111,35 @@ function UserDashAllOrders() {
         <div className="border-2 w-full h-[85vh] rounded-lg flex items-center justify-center text-3xl font-semibold text-gray-300">
           <h1 className="underline">No Orders are Placed Yet</h1>
         </div>
+      )}
+
+      {/* Modal for smaller screens */}
+      {isSmallScreen && (
+        <Modal
+          isOpen={isModalOpen}
+          onRequestClose={closeModal}
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white shadow-lg rounded-lg p-5 w-[90%] md:w-[60%]"
+          overlayClassName="fixed inset-0 bg-black bg-opacity-50"
+        >
+          {selectedOrder && (
+            <UserOrdersDetailsCompo
+              order={{
+                ...selectedOrder,
+                currentState:
+                  orderStatusMap[selectedOrder._id] ||
+                  selectedOrder.currentState,
+              }}
+              index={selectedOrderIndex}
+              handleOrderDelivered={handleOrderDelivered}
+            />
+          )}
+          <button
+            onClick={closeModal}
+            className="mt-5 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-400"
+          >
+            Close
+          </button>
+        </Modal>
       )}
     </>
   );

@@ -58,7 +58,7 @@ function UserUpdateInformationCompo({ customerDetails, user, updateUserInfo }) {
   };
 
   return (
-    <div className="grid grid-cols-2 gap-4 p-6 bg-white">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 p-0 md:p-6 bg-white">
       {/* UserName Field */}
       <div className="relative flex flex-col">
         <label htmlFor="userName" className="mb-1 text-gray-600 capitalize">

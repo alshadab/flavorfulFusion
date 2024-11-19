@@ -2,7 +2,7 @@ import React from "react";
 
 function UserPersonalInfo({ customerDetails, user }) {
   return (
-    <div className="mt-5 flex justify-between">
+    <div className="mt-5 flex flex-col md:flex-row justify-between">
       <div>
         <p className="font-semibold">
           Username: <span className="ml-2 font-normal">{user?.userName}</span>
@@ -22,7 +22,7 @@ function UserPersonalInfo({ customerDetails, user }) {
           Gender: <span className="ml-2 font-normal">{user?.gender}</span>
         </p>
       </div>
-      <div className="">
+      <div className="mt-2 md:mt-0">
         <p className="font-semibold">
           Country: <span className="ml-2 font-normal">Bangladesh</span>
         </p>

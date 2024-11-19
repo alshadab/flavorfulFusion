@@ -59,7 +59,7 @@ function VendorDashPage() {
 
   const fetchPendingOrders = async () => {
     try {
-      const fetechedData = await postRequest(
+      const fetechedData = await getRequest(
         `/orders/src/pending/orders/bysellerid/${user?._id}`
       );
       setTotalPendingOrders(fetechedData?.data?.data);

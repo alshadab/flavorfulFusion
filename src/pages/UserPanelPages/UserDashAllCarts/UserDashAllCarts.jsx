@@ -85,7 +85,7 @@ function UserDashAllCarts() {
       ) : (
         <div>
           {cartItem && cartItem.length > 0 ? (
-            <div className="grid grid-cols-12 gap-x-2">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-x-2">
               {/* Shopping Cart Section */}
               <div className="col-span-8 py-5 px-5 bg-gray-50 rounded shadow-md overflow-y-auto">
                 <div className="flex items-start justify-between text-xl pb-5 border-b-2 border-gray-300">

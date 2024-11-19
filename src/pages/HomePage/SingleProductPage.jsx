@@ -6,6 +6,7 @@ import useRequest from "../../APIServices/useRequest";
 import { FaHeart, FaStar } from "react-icons/fa";
 import GlobalLoading from "../../components/GlobalComponents/GlobalLoading/GlobalLoading";
 import Swal from "sweetalert2";
+import RatingReviewShow from "../../components/HomePageCompos/RatingReviewShow/RatingReviewShow";
 
 function SingleProductPage() {
   const { id } = useParams();
@@ -124,7 +125,6 @@ function SingleProductPage() {
       setQuantity(quantity - 1);
     }
   };
-
 
   const handleStarClick = (star) => {
     setRating(star);
@@ -336,6 +336,20 @@ function SingleProductPage() {
               <></>
             )}
           </div>
+        </div>
+      </div>
+      <div className="mt-8">
+        <h3 className="font-semibold text-xl underline">Customer Reviews:</h3>
+        <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-x-4 gap-y-4 ">
+          {allTotalRating.length > 0 ? (
+            allTotalRating.map((reviewData, index) => (
+              <RatingReviewShow reviewData = {reviewData} key={index}/>
+            ))
+          ) : (
+            <p className="text-gray-500">
+              No reviews yet. Be the first to review this product!
+            </p>
+          )}
         </div>
       </div>
     </div>

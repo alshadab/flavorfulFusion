@@ -46,12 +46,14 @@ function UserOrdersDetailsCompo({ order, index, handleOrderDelivered }) {
   };
 
   return (
-    <div className="mx-5">
-      <h1 className="font-bold text-lg">
+    <div className="mt-40 md:mt-0 mx-0 md:mx-5 h-full">
+      <h1 className="font-bold md:text-lg">
         Details of Order No: <span className="text-orange-600">{index}</span>
       </h1>
-      <div className="mt-5 border-2 rounded-lg px-5 py-5">
-        <div className="flex items-center justify-between">
+      {/* Scrollable container for mobile */}
+      <div className="mt-5 md:border-2 rounded-lg px-0 md:px-5 py-0 md:py-5 overflow-y-auto max-h-[80vh] md:max-h-none">
+        {/* Content remains unchanged */}
+        <div className="flex flex-col md:flex-row items-center justify-between">
           <div className="flex items-center gap-x-2 justify-start font-semibold">
             <h1>Cart ID:</h1>
             <p className="text-orange-600">{order?.cartId}</p>
@@ -65,10 +67,12 @@ function UserOrdersDetailsCompo({ order, index, handleOrderDelivered }) {
         </div>
 
         <div className="mt-5">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="flex items-center gap-x-2 justify-start font-semibold"></div>
             <div className="flex items-center gap-x-2 justify-start font-semibold">
-              {order.isConfirmed && order.isLaunched === true && order.isDelivered === false ? (
+              {order.isConfirmed &&
+              order.isLaunched === true &&
+              order.isDelivered === false ? (
                 <div className="flex items-center gap-1 text-seventh font-semibold text-sm">
                   <h1 className="text-xs">Is Product Delivered ?</h1>
                   <button
@@ -85,7 +89,8 @@ function UserOrdersDetailsCompo({ order, index, handleOrderDelivered }) {
           </div>
         </div>
 
-        <div className="mt-10 grid grid-cols-12 items-start">
+        {/* Other content */}
+        <div className="mt-5 md:mt-10 grid grid-cols-1 md:grid-cols-12 items-start">
           <div className="col-span-8 text-left">
             <div className="">
               <h1 className="font-bold">Shipping Address: </h1>
@@ -96,7 +101,7 @@ function UserOrdersDetailsCompo({ order, index, handleOrderDelivered }) {
               <p className="text-sm">{order?.userAddress}</p>
             </div>
           </div>
-          <div className="pl-5 col-span-4 text-left text-sm border-l-2">
+          <div className="mt-5 md:mt-0 md:pl-5 col-span-4 text-left text-sm md:border-l-2">
             <div className="flex items-center justify-between">
               <h1 className="">Product Price: </h1>
               <p className="">{order?.productSellingPrice} TK</p>
@@ -127,6 +132,7 @@ function UserOrdersDetailsCompo({ order, index, handleOrderDelivered }) {
           </div>
         </div>
 
+        {/* Table content */}
         <div className="my-10 overflow-x-auto">
           <table className="min-w-full bg-white border border-gray-200">
             <thead>
@@ -138,11 +144,11 @@ function UserOrdersDetailsCompo({ order, index, handleOrderDelivered }) {
                   Quantity
                 </th>
                 <th className="text-left p-4 text-gray-700 font-semibold">
-                  Selling Price
+                  Products Price
                 </th>
-                <th className="text-left p-4 text-gray-700 font-semibold">
+                {/* <th className="text-left p-4 text-gray-700 font-semibold">
                   Delivery Fee
-                </th>
+                </th> */}
                 <th className="text-left p-4 text-gray-700 font-semibold">
                   Total Price
                 </th>
@@ -150,21 +156,22 @@ function UserOrdersDetailsCompo({ order, index, handleOrderDelivered }) {
             </thead>
             <tbody>
               <tr className="border-b hover:bg-gray-50">
-                <td className="p-4 flex items-center">
+                <td className="p-4 flex items-center h-20 md:h-0">
                   <img
                     src={`http://localhost:8000/images/${order?.productThumb}`}
                     alt="Product"
-                    className="w-12 h-12 mr-4 rounded-full object-cover border-2 border-orange-600"
+                    className="hidden md:block w-12 h-12 mr-4 rounded-full object-cover border-2 border-orange-600"
                   />
                   <span>{order?.productName}</span>
                 </td>
-                <td className="p-4">{order?.totalQuantity}</td>
+                <td className="p-4 pl-5 md:pl-0">{order?.totalQuantity}</td>
                 <td className="p-4">TK {order?.productSellingPrice}</td>
-                <td className="p-4">TK {order?.deliveryFee}</td>
+                {/* <td className="p-4">TK {order?.deliveryFee}</td> */}
                 <td className="p-4">TK {order?.allTotalPrice}</td>
               </tr>
             </tbody>
           </table>
+          <div className="block md:hidden mt-5 w-full"></div>
         </div>
       </div>
     </div>

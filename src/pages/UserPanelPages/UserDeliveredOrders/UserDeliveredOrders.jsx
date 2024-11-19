@@ -25,8 +25,8 @@ function UserDeliveredOrders() {
 
 
   return (
-    <div className="w-full h-full rounded-lg shadow-md px-10 bg-white">
-      <div className="w-full bg-white rounded px-10 pt-10">
+    <div className="w-full h-full rounded-lg shadow-md px-0 md:px-10 bg-white">
+      <div className="w-full bg-white rounded px-2 md:px-10 pt-0 md:pt-10">
         <GlobalHeaders title={"All Delivered Orders"} />
       </div>
 

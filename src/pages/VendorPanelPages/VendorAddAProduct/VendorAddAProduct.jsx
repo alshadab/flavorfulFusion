@@ -4,6 +4,7 @@ import { AuthContext } from "../../../providers/AuthProviders";
 import useRequest from "../../../APIServices/useRequest";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import Uploader from "../../../components/GlobalComponents/Uploader/Uploader";
 
 function VendorAddAProduct() {
   const { user, loading, setLoading } = useContext(AuthContext);
@@ -21,6 +22,14 @@ function VendorAddAProduct() {
   const [allShops, setAllShops] = useState([]);
   const navigate = useNavigate();
   const [postRequest, getRequest] = useRequest();
+
+  const multipleFilesUpload = async (data, options) => {
+    try {
+      await postRequest("/multipleFiles", data, options);
+    } catch (error) {
+      throw error;
+    }
+  };
 
   const fetchAllCategories = async () => {
     try {
@@ -215,7 +224,10 @@ function VendorAddAProduct() {
               />
             </div>
           </div>
-          <div className="flex justify-start items-center gap-5 w-full mt-10">
+          <div
+            className="flex justify-between
+           items-center gap-5 w-full mt-10"
+          >
             <div className="flex flex-col items-start">
               <label className="text-xs mb-3" htmlFor="productThumb">
                 Thumbnail Upload
@@ -229,6 +241,22 @@ function VendorAddAProduct() {
                 required
               />
             </div>
+
+            <Uploader />
+
+            {/* <div className="flex flex-col items-start">
+              <label className="text-xs mb-3" htmlFor="productThumb">
+                Other Images Upload
+              </label>
+              <input
+                id="productImg"
+                className="w-full text-lg text-black"
+                type="file"
+                accept="image/*"
+                onChange={handleThumbChange}
+                required
+              />
+            </div> */}
           </div>
           <div className="mt-10">
             <input

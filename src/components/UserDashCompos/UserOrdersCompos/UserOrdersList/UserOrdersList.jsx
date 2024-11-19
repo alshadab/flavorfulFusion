@@ -56,7 +56,7 @@ function UserOrdersList({ order, index, onSelect, isSelected }) {
 
   return (
     <div
-      className={`py-3 px-3 border rounded-lg mb-5 cursor-pointer hover:bg-orange-50 ${
+      className={`ml-5 md:ml-0 py-3 px-3 border rounded-lg mb-5 cursor-pointer hover:bg-orange-50 ${
         isSelected ? "border-green-600" : "border-orange-600"
       }`}
       onClick={onSelect}
