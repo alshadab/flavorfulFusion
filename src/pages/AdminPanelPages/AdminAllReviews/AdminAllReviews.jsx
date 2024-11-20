@@ -9,6 +9,8 @@ function AdminAllReviews() {
   const [postRequest, getRequest] = useRequest();
   const [ratingReviews, setRatingReviews] = useState([]);
   const [deleteState, setDeleteState] = useState(false);
+  const [selectedReview, setSelectedReview] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fetchAllUserRatings = async () => {
     try {
@@ -39,6 +41,16 @@ function AdminAllReviews() {
     console.log("Deleting review:", review);
   };
 
+  const openModal = (review) => {
+    setSelectedReview(review);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedReview(null);
+  };
+
   return (
     <div className="p-4 max-w-screen-lg mx-auto">
       <h2 className="text-2xl font-semibold mb-4">All Reviews</h2>
@@ -47,13 +59,12 @@ function AdminAllReviews() {
           <div
             key={review._id}
             className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 relative"
-            title={review.review || "No review available"}
           >
             <div className="flex flex-col items-center relative">
               <img
                 src={`http://localhost:8000/images/${review?.productThumb}`}
                 alt={review.productName}
-                className="w-20 h-20 object-cover rounded mb-2"
+                className="w-60 h-40 object-contain rounded mb-2"
               />
               <h3 className="text-lg font-semibold text-center">
                 {review.productName}
@@ -71,6 +82,14 @@ function AdminAllReviews() {
                 {review.createdDate}
               </span>
 
+              {/* View Button */}
+              <button
+                onClick={() => openModal(review)}
+                className="mt-2 px-4 py-1 bg-orange-600 text-white text-sm rounded hover:bg-orange-700"
+              >
+                View
+              </button>
+
               {/* Delete Button */}
               <button
                 onClick={() => handleDelete(review)}
@@ -83,6 +102,42 @@ function AdminAllReviews() {
           </div>
         ))}
       </div>
+
+      {/* Modal */}
+      {isModalOpen && selectedReview && (
+        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+            <h3 className="text-lg font-semibold mb-4">Review Details</h3>
+            <div className="mb-4">
+              <strong>Product Name:</strong> {selectedReview.productName}
+            </div>
+            <div className="mb-4">
+              <strong>Rating:</strong> {selectedReview.rating} / 5
+            </div>
+            <div className="mb-4">
+              <strong>Review:</strong> {selectedReview.review || "N/A"}
+            </div>
+            <div className="mb-4">
+              <strong>Date:</strong> {selectedReview.createdDate}
+            </div>
+            <div className="mb-4">
+              <img
+                src={`http://localhost:8000/images/${selectedReview?.productThumb}`}
+                alt={selectedReview.productName}
+                className="w-full h-auto rounded"
+              />
+            </div>
+            <div className="flex justify-end">
+              <button
+                onClick={closeModal}
+                className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

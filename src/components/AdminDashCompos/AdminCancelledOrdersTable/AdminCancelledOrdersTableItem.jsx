@@ -53,7 +53,7 @@ function AdminCancelledOrdersTableItem({ order }) {
         {order.deliveryFee} $
       </td> */}
       <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-        {order.allTotalPrice} $
+        {order.allTotalPrice} Tk
       </td>
     </tr>
   );

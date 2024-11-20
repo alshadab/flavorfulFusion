@@ -15,6 +15,8 @@ export default function AdminAllFaqTable({
   handleModalClose,
 }) {
   const [currentPage, setCurrentPage] = useState(1);
+  const [viewModalOpen, setViewModalOpen] = useState(false);
+  const [viewFaqContent, setViewFaqContent] = useState(null);
   const entriesPerPage = 6;
   const totalPages = Math.ceil(allFAQ.length / entriesPerPage);
 
@@ -28,8 +30,18 @@ export default function AdminAllFaqTable({
     setCurrentPage((prev) => Math.min(prev + 1, totalPages));
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
 
+  const handleViewClick = (faq) => {
+    setViewFaqContent(faq);
+    setViewModalOpen(true);
+  };
+
+  const handleViewModalClose = () => {
+    setViewModalOpen(false);
+    setViewFaqContent(null);
+  };
+
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="container mx-auto px-6 md:px-0">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
         {displayedFaqs.map((faq) => (
           <div
@@ -40,17 +52,19 @@ export default function AdminAllFaqTable({
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
                 {faq.question}
               </h3>
-              <p className="text-gray-600 text-sm break-words relative group">
+              <p className="text-gray-600 text-sm break-words">
                 {faq.answer.length > 100
                   ? `${faq.answer.slice(0, 100)}...`
                   : faq.answer}
-
-                <span className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-gray-900 text-white text-xs rounded-lg p-2 shadow-lg -mt-2 w-64 left-1/2 transform -translate-x-1/2 z-10">
-                  {faq.answer}
-                </span>
               </p>
             </div>
             <div className="mt-4 flex justify-end space-x-4">
+              <button
+                onClick={() => handleViewClick(faq)}
+                className="px-4 py-1 bg-blue-600 text-white text-xs rounded-lg hover:bg-blue-800"
+              >
+                View
+              </button>
               <button
                 onClick={() => handleEditClick(faq)}
                 className="px-4 py-1 bg-indigo-600 text-white text-xs rounded-lg hover:bg-indigo-900"
@@ -78,6 +92,25 @@ export default function AdminAllFaqTable({
         />
       )}
 
+      {/* View Modal */}
+      {viewModalOpen && viewFaqContent && (
+        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-lg">
+            <h2 className="text-lg font-semibold mb-4">{viewFaqContent.question}</h2>
+            <p className="text-gray-700 mb-6">{viewFaqContent.answer}</p>
+            <div className="flex justify-end">
+              <button
+                onClick={handleViewModalClose}
+                className="inline-flex justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Edit Modal */}
       {isModalOpen && selectedFaq && (
         <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center">
           <div className="bg-white rounded-lg p-6 w-full max-w-lg">

@@ -14,37 +14,24 @@ function AdminSingleProductTableData({
 }) {
   const [, getRequest] = useRequest();
   const [stockCount, setStockCount] = useState(0);
-  const [category, setCategory] = useState("");
-  const [vendor, setVendor] = useState([]);
-
-
-  const fetchVendorData = async() =>{
-    try{
-      const fetchData = await getRequest(`/users/seller/src/byId/${product?.userId}`);
-      setVendor(fetchData?.data?.data);
-    }catch(error){
-      console.log(error);
-    }
-  }
-
-  useEffect(()=>{
-    fetchVendorData();
-  },[]);
-
-  console.log(vendor, "Vedors")
-
+  const [category, setCategory] = useState("Loading...");
 
   const fetchIndividualProductStock = async () => {
-    let stockCount = await getRequest(`/stocks/src/${product?._id}`);
-    setStockCount(stockCount?.data?.data?.stockQTY);
+    if (product?._id) {
+      const stockCount = await getRequest(`/stocks/src/${product?._id}`);
+      setStockCount(stockCount?.data?.data?.stockQTY || 0);
+    }
   };
 
-  
   const fetchCategoryOfIndividualProduct = async () => {
-    let categoryFetch = await getRequest(
-      `/categories/src/${product?.categoryId}`
-    );
-    setCategory(categoryFetch?.data?.data?.categoryName);
+    if (product?.categoryId) {
+      const categoryFetch = await getRequest(
+        `/categories/src/${product?.categoryId}`
+      );
+      setCategory(categoryFetch?.data?.data?.categoryName || "Unknown");
+    } else {
+      setCategory("No Category");
+    }
   };
 
   useEffect(() => {
@@ -123,15 +110,6 @@ function AdminSingleProductTableData({
         <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
           {category}
         </td>
-        {/* <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
-          <div className="flex items-center">
-            <div className="">
-              <div className="font-medium text-gray-900">
-                {product.shopName}
-              </div>
-            </div>
-          </div>
-        </td> */}
         <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
           {product?.buyingPrice} $
         </td>
@@ -139,9 +117,7 @@ function AdminSingleProductTableData({
           {product?.sellingPrice} $
         </td>
         <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-          {product &&
-          product.isActive === true &&
-          product.isDeleted === false ? (
+          {product?.isActive && !product?.isDeleted ? (
             <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
               Active
             </span>
@@ -152,9 +128,7 @@ function AdminSingleProductTableData({
           )}
         </td>
         <td className="relative whitespace-nowrap py-5 pl-14 text-center text-xl font-medium sm:pr-0">
-          {product &&
-          product?.isActive === true &&
-          product?.isDeleted === false ? (
+          {product?.isActive && !product?.isDeleted ? (
             <IoTrashBinOutline
               onClick={handleDeleteProd}
               className="text-red-600 duration-400 hover:duration-400 hover:scale-110 hover:cursor-pointer"
