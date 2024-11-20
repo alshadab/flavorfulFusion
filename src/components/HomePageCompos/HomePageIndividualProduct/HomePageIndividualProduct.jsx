@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
-import useRequest from "../../../APIServices/useRequest";
-import { AuthContext } from "../../../providers/AuthProviders";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from 'react';
+import useRequest from '../../../APIServices/useRequest';
+import { AuthContext } from '../../../providers/AuthProviders';
+import { Link, useNavigate } from 'react-router-dom';
 
 function HomePageIndividualProduct({ product }) {
   const { addToCart, addedProduct, user } = useContext(AuthContext);
@@ -49,31 +49,31 @@ function HomePageIndividualProduct({ product }) {
     }
   };
 
-  const calculateRating = async ()=>{
-    try{
+  const calculateRating = async () => {
+    try {
       const totalRating = rating.length;
       let sumOfAllRatings = 0;
       let avgRating = 0;
 
-      rating && rating.map((item)=>{
-        sumOfAllRatings += item.rating;
-      })
+      rating &&
+        rating.map((item) => {
+          sumOfAllRatings += item.rating;
+        });
 
-      avgRating = sumOfAllRatings/totalRating 
+      avgRating = sumOfAllRatings / totalRating;
 
       setCalculatedRating(avgRating);
-    }catch(error){
+    } catch (error) {
       console.log(error);
     }
-  }
-  
+  };
+
   const staticRating = calculatedRating ? calculatedRating : 0;
   const staticRatingCount = rating.length;
 
-
-  useEffect(()=>{
+  useEffect(() => {
     calculateRating();
-  },[rating])
+  }, [rating]);
 
   return (
     <div className="w-full p-4 bg-white border rounded-lg shadow-md hover:cursor-pointer">
@@ -81,7 +81,7 @@ function HomePageIndividualProduct({ product }) {
         <div className="relative">
           <img
             className="w-full h-60 rounded-t-lg object-contain"
-            src={`http://localhost:8000/images/${product?.productThumb}`}
+            src={`${process.env.REACT_APP_BackendURLIMG}/images/${product?.productThumb}`}
             alt="Product"
           />
         </div>
@@ -96,8 +96,8 @@ function HomePageIndividualProduct({ product }) {
               key={index}
               className={`w-6 h-6 ${
                 index < Math.floor(staticRating)
-                  ? "text-yellow-400"
-                  : "text-gray-300"
+                  ? 'text-yellow-400'
+                  : 'text-gray-300'
               }`}
               fill="currentColor"
               viewBox="0 0 20 20"
@@ -121,8 +121,8 @@ function HomePageIndividualProduct({ product }) {
               disabled={quantity === 1}
               className={`px-2 border rounded-lg ${
                 quantity === 1
-                  ? "text-gray-400 cursor-not-allowed"
-                  : "text-black bg-red-100 border-red-100"
+                  ? 'text-gray-400 cursor-not-allowed'
+                  : 'text-black bg-red-100 border-red-100'
               }`}
             >
               -
@@ -138,8 +138,8 @@ function HomePageIndividualProduct({ product }) {
               disabled={quantity === stock}
               className={`px-2 border rounded-lg ${
                 quantity === stock
-                  ? "text-gray-400 cursor-not-allowed"
-                  : "text-black bg-green-100 border-green-100"
+                  ? 'text-gray-400 cursor-not-allowed'
+                  : 'text-black bg-green-100 border-green-100'
               }`}
             >
               +

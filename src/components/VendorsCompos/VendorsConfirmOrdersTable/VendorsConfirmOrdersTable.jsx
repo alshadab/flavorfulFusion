@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import Paginations from "../../GlobalComponents/Paginations/Paginations";
+import React, { useState } from 'react';
+import Paginations from '../../GlobalComponents/Paginations/Paginations';
 
 export default function VendorsConfirmOrdersTable({ confirmedOrders }) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -78,7 +78,7 @@ export default function VendorsConfirmOrdersTable({ confirmedOrders }) {
                         <div className="h-11 w-11 flex-shrink-0">
                           <img
                             className="h-11 w-11 rounded-full"
-                            src={`http://localhost:8000/images/${order?.productThumb}`}
+                            src={`${process.env.REACT_APP_BackendURLIMG}/images/${order?.productThumb}`}
                             alt=""
                           />
                         </div>

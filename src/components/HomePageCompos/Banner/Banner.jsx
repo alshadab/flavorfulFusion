@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './banner.css';
 import { Link } from 'react-router-dom';
+import useRequest from '../../../APIServices/useRequest';
 
 function Banner() {
+  const [postRequest, getRequest] = useRequest();
   const [searchTerm, setSearchTerm] = useState('');
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -26,12 +28,9 @@ function Banner() {
   const fetchSearchResults = async (query) => {
     setLoading(true);
     try {
-      const response = await axios.post(
-        'http://localhost:8000/api/v1/products/src/prd',
-        {
-          pQuery: query,
-        }
-      );
+      const response = await postRequest(`/products/src/prd`, {
+        pQuery: query,
+      });
       setResults(response.data.data || []);
       setShowResults(true);
     } catch (error) {

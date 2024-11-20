@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from "react";
-import useRequest from "../../../APIServices/useRequest";
+import React, { useEffect, useState } from 'react';
+import useRequest from '../../../APIServices/useRequest';
 
-function AdminPendingOrderTableItems({person}) {
-    const [postRequest, getRequest] = useRequest();
-    const [sellers, setSellers] = useState([]);
+function AdminPendingOrderTableItems({ person }) {
+  const [postRequest, getRequest] = useRequest();
+  const [sellers, setSellers] = useState([]);
 
-    const fetchSellerInfo = async ()=>{
-        try{
-            const fetchData = await getRequest(`/users/src/byId/${person?.sellerId}`);
-            setSellers(fetchData?.data?.data);
-        }catch(error){
-            console.log(error);
-        }
+  const fetchSellerInfo = async () => {
+    try {
+      const fetchData = await getRequest(`/users/src/byId/${person?.sellerId}`);
+      setSellers(fetchData?.data?.data);
+    } catch (error) {
+      console.log(error);
     }
+  };
 
-    useEffect(()=>{
-        fetchSellerInfo();
-    },[])
+  useEffect(() => {
+    fetchSellerInfo();
+  }, []);
 
   return (
     <tr>
@@ -46,12 +46,14 @@ function AdminPendingOrderTableItems({person}) {
           {/* <div className="h-11 w-11 flex-shrink-0">
             <img
               className="h-11 w-11 rounded"
-              src={`http://localhost:8000/images/${person?.image}`}
+              src={`${process.env.REACT_APP_BackendURL}/images/${person?.image}`}
               alt=""
             />
           </div> */}
           <div className="">
-            <div className="font-medium text-gray-900">{sellers?.userFullName}</div>
+            <div className="font-medium text-gray-900">
+              {sellers?.userFullName}
+            </div>
           </div>
         </div>
       </td>

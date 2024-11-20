@@ -32,7 +32,7 @@ function CreateUserInfoPage() {
 
     try {
       const res = await axios.post(
-        `http://localhost:8000/api/v1/users/crt/usr/info`,
+        `${process.env.REACT_APP_BackendURL}/api/v1/users/crt/usr/info`,
         {
           userType: userInfo.userType,
           gender: userInfo.gender,

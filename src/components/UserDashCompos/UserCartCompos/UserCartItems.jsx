@@ -1,14 +1,14 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function UserCartItems({ item, removeFromCart, confirmCartItem }) {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <div class="w-full p-4 bg-white border rounded-lg shadow-md">
       <div class="relative">
         <img
           class="w-full h-28 rounded-t-lg object-contain"
-          src={`http://localhost:8000/images/${item?.productImage}`}
+          src={`${process.env.REACT_APP_BackendURLIMG}/images/${item?.productImage}`}
           alt="Apples"
         />
         {/* <span class="absolute top-2 right-2 bg-yellow-400 text-white text-sm font-semibold px-2 py-1 rounded-full">
@@ -19,10 +19,10 @@ function UserCartItems({ item, removeFromCart, confirmCartItem }) {
       <div class="mt-5 text-left">
         <h3 class="text-lg font-semibold">{item?.productName}</h3>
         <p class="mt-2 text-md text-gray-900">
-          Quantity:{" "}
+          Quantity:{' '}
           <span className="italic text-orange-500 font-extrabold">
             {item?.quantity}
-          </span>{" "}
+          </span>{' '}
           pieces
         </p>
         <div class="flex items-end justify-between">
@@ -37,11 +37,11 @@ function UserCartItems({ item, removeFromCart, confirmCartItem }) {
           <button
             // onClick={()=> {confirmCartItem(item?._id); navigate('/') }}
             onClick={async () => {
-                const success = await confirmCartItem(item?._id);
-                if (success) {
-                  navigate("/");
-                }
-              }}
+              const success = await confirmCartItem(item?._id);
+              if (success) {
+                navigate('/');
+              }
+            }}
             class="flex items-center justify-center border px-3 py-1 text-xs bg-green-600 text-white font-bold rounded duration-200 hover:duration-200 hover:scale-105"
           >
             Confirm

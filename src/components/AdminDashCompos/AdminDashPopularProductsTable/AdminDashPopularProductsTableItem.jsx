@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import useRequest from "../../../APIServices/useRequest";
+import React, { useEffect, useState } from 'react';
+import useRequest from '../../../APIServices/useRequest';
 
 function AdminDashPopularProductsTableItem({ prod }) {
   const [postRequest, getRequest] = useRequest();
@@ -23,7 +23,10 @@ function AdminDashPopularProductsTableItem({ prod }) {
       <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
         <div className="flex items-center">
           <div className="h-11 w-11 flex items-center">
-            <img src={`http://localhost:8000/images/${prod?.productThumb}`} alt="product_image"/>
+            <img
+              src={`${process.env.REACT_APP_BackendURLIMG}/images/${prod?.productThumb}`}
+              alt="product_image"
+            />
           </div>
           <div className="ml-4">
             <div className="font-medium text-gray-900">{prod.productName}</div>

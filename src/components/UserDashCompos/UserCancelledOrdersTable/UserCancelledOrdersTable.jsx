@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import Paginations from "../../GlobalComponents/Paginations/Paginations";
+import React, { useState } from 'react';
+import Paginations from '../../GlobalComponents/Paginations/Paginations';
 
 export default function UserCancelledOrdersTable({ cancelOrderList }) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -72,7 +72,7 @@ export default function UserCancelledOrdersTable({ cancelOrderList }) {
                         <div className="h-11 w-11 flex-shrink-0">
                           <img
                             className="h-11 w-11 rounded-full"
-                            src={`http://localhost:8000/images/${product?.productThumb}`}
+                            src={`${process.env.REACT_APP_BackendURLIMG}/images/${product?.productThumb}`}
                             alt=""
                           />
                         </div>

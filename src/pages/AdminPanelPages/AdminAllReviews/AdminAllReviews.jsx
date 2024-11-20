@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../../providers/AuthProviders";
-import { FaTrashAlt } from "react-icons/fa";
-import useRequest from "../../../APIServices/useRequest";
-import Swal from "sweetalert2";
+import React, { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../../../providers/AuthProviders';
+import { FaTrashAlt } from 'react-icons/fa';
+import useRequest from '../../../APIServices/useRequest';
+import Swal from 'sweetalert2';
 
 function AdminAllReviews() {
   const { user } = useContext(AuthContext);
@@ -14,7 +14,7 @@ function AdminAllReviews() {
 
   const fetchAllUserRatings = async () => {
     try {
-      const fetchData = await getRequest("/ratings/src/all");
+      const fetchData = await getRequest('/ratings/src/all');
       setRatingReviews(fetchData?.data?.data);
     } catch (error) {
       console.log(error);
@@ -26,7 +26,7 @@ function AdminAllReviews() {
   }, [deleteState]);
 
   const truncateText = (text, maxLength) => {
-    if (!text) return "";
+    if (!text) return '';
     return text.length > maxLength
       ? `${text.substring(0, maxLength)}...`
       : text;
@@ -35,10 +35,10 @@ function AdminAllReviews() {
   const handleDelete = async (review) => {
     const deleteData = await getRequest(`/ratings/del/byId/${review?._id}`);
     if (deleteData?.data?.error === false) {
-      Swal.fire("Removed the Review");
+      Swal.fire('Removed the Review');
       setDeleteState(!deleteState);
     }
-    console.log("Deleting review:", review);
+    console.log('Deleting review:', review);
   };
 
   const openModal = (review) => {
@@ -62,7 +62,7 @@ function AdminAllReviews() {
           >
             <div className="flex flex-col items-center relative">
               <img
-                src={`http://localhost:8000/images/${review?.productThumb}`}
+                src={`${process.env.REACT_APP_BackendURLIMG}/images/${review?.productThumb}`}
                 alt={review.productName}
                 className="w-60 h-40 object-contain rounded mb-2"
               />
@@ -70,7 +70,7 @@ function AdminAllReviews() {
                 {review.productName}
               </h3>
               <div className="flex items-center text-yellow-400 my-2">
-                {"★".repeat(review.rating)}{" "}
+                {'★'.repeat(review.rating)}{' '}
                 <span className="text-gray-400 ml-2">
                   ({review.rating} / 5)
                 </span>
@@ -115,14 +115,14 @@ function AdminAllReviews() {
               <strong>Rating:</strong> {selectedReview.rating} / 5
             </div>
             <div className="mb-4">
-              <strong>Review:</strong> {selectedReview.review || "N/A"}
+              <strong>Review:</strong> {selectedReview.review || 'N/A'}
             </div>
             <div className="mb-4">
               <strong>Date:</strong> {selectedReview.createdDate}
             </div>
             <div className="mb-4">
               <img
-                src={`http://localhost:8000/images/${selectedReview?.productThumb}`}
+                src={`${process.env.REACT_APP_BackendURLIMG}/images/${selectedReview?.productThumb}`}
                 alt={selectedReview.productName}
                 className="w-full h-auto rounded"
               />

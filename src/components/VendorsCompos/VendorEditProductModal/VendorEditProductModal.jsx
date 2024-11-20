@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import useRequest from "../../../APIServices/useRequest";
+import React, { useEffect, useState } from 'react';
+import useRequest from '../../../APIServices/useRequest';
 
 function VendorEditProductModal({ isOpen, onClose, product, onSave }) {
   const [editedProduct, setEditedProduct] = useState({ ...product });
@@ -51,7 +51,7 @@ function VendorEditProductModal({ isOpen, onClose, product, onSave }) {
           <div className="w-full flex items-center justify-center">
             <img
               className="h-20 w-20 rounded-full object-contain"
-              src={`http://localhost:8000/images/${product?.productThumb}`}
+              src={`${process.env.REACT_APP_BackendURLIMG}/images/${product?.productThumb}`}
               alt=""
             />
           </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
 function UserOrdersDetailsCompo({ order, index, handleOrderDelivered }) {
   const [currentState, setCurrentState] = useState(null);
@@ -6,19 +6,19 @@ function UserOrdersDetailsCompo({ order, index, handleOrderDelivered }) {
   const orderStateHandle = async () => {
     try {
       if (order.isCancelled === true) {
-        setCurrentState("Cancelled");
+        setCurrentState('Cancelled');
       } else if (
         order.isConfirmed === true &&
         order.isLaunched === true &&
         order.isDelivered === false
       ) {
-        setCurrentState("Released");
+        setCurrentState('Released');
       } else if (order.isPending === true) {
-        setCurrentState("Processing");
+        setCurrentState('Processing');
       } else if (order.isDelivered === true) {
-        setCurrentState("Delivered");
+        setCurrentState('Delivered');
       } else {
-        setCurrentState("Cancelled");
+        setCurrentState('Cancelled');
       }
     } catch (error) {
       console.log(error);
@@ -32,16 +32,16 @@ function UserOrdersDetailsCompo({ order, index, handleOrderDelivered }) {
   // Function to determine color class based on currentState
   const getStateColor = () => {
     switch (currentState) {
-      case "Cancelled":
-        return "text-red-600";
-      case "Released":
-        return "text-blue-600";
-      case "Processing":
-        return "text-green-600";
-      case "Delivered":
-        return "text-orange-600";
+      case 'Cancelled':
+        return 'text-red-600';
+      case 'Released':
+        return 'text-blue-600';
+      case 'Processing':
+        return 'text-green-600';
+      case 'Delivered':
+        return 'text-orange-600';
       default:
-        return "text-gray-600";
+        return 'text-gray-600';
     }
   };
 
@@ -158,7 +158,7 @@ function UserOrdersDetailsCompo({ order, index, handleOrderDelivered }) {
               <tr className="border-b hover:bg-gray-50">
                 <td className="p-4 flex items-center h-20 md:h-0">
                   <img
-                    src={`http://localhost:8000/images/${order?.productThumb}`}
+                    src={`${process.env.REACT_APP_BackendURLIMG}/images/${order?.productThumb}`}
                     alt="Product"
                     className="hidden md:block w-12 h-12 mr-4 rounded-full object-cover border-2 border-orange-600"
                   />

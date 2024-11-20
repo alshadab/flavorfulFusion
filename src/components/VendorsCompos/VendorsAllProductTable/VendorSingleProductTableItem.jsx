@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import useRequest from "../../../APIServices/useRequest";
-import { IoTrashBinOutline } from "react-icons/io5";
-import { FaUndo } from "react-icons/fa";
-import Swal from "sweetalert2";
+import React, { useEffect, useState } from 'react';
+import useRequest from '../../../APIServices/useRequest';
+import { IoTrashBinOutline } from 'react-icons/io5';
+import { FaUndo } from 'react-icons/fa';
+import Swal from 'sweetalert2';
 
 function VendorSingleProductTableItem({
   deleteProduct,
@@ -15,7 +15,7 @@ function VendorSingleProductTableItem({
 }) {
   const [, getRequest] = useRequest();
   const [stockCount, setStockCount] = useState(0);
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState('');
 
   // const handleRowClick = () => {
   //   onRowClick(product);
@@ -40,21 +40,21 @@ function VendorSingleProductTableItem({
 
   const handleDeleteProd = () => {
     Swal.fire({
-      title: "Are you sure?",
+      title: 'Are you sure?',
       text: "You won't be able to revert this!",
-      icon: "warning",
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#db5800",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonColor: '#db5800',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
         deleteProduct(product?._id);
         if (deleteState?.data?.error === false) {
           Swal.fire({
-            title: "Deleted!",
-            text: "Your product has been deleted.",
-            icon: "success",
+            title: 'Deleted!',
+            text: 'Your product has been deleted.',
+            icon: 'success',
           });
         }
       }
@@ -63,21 +63,21 @@ function VendorSingleProductTableItem({
 
   const handleActivateProd = () => {
     Swal.fire({
-      title: "Are you sure?",
+      title: 'Are you sure?',
       text: "You won't be able to revert this!",
-      icon: "warning",
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: "#db5800",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Activate it!",
+      confirmButtonColor: '#db5800',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Activate it!',
     }).then((result) => {
       if (result.isConfirmed) {
         activateProduct(product?._id);
         if (activateState?.data?.error === false) {
           Swal.fire({
-            title: "Activated!",
-            text: "Your Product has been Activated.",
-            icon: "success",
+            title: 'Activated!',
+            text: 'Your Product has been Activated.',
+            icon: 'success',
           });
         }
       }
@@ -85,13 +85,17 @@ function VendorSingleProductTableItem({
   };
 
   return (
-    <tr onClick={() => handleRowClick(product)} className="hover:cursor-pointer" key={`${product?._id}`}>
+    <tr
+      onClick={() => handleRowClick(product)}
+      className="hover:cursor-pointer"
+      key={`${product?._id}`}
+    >
       <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
         <div className="flex items-center">
           <div className="h-11 w-11 flex-shrink-0">
             <img
               className="h-14 w-14 rounded-full object-cover"
-              src={`http://localhost:8000/images/${product?.productThumb}`}
+              src={`${process.env.REACT_APP_BackendURLIMG}/images/${product?.productThumb}`}
               alt=""
             />
           </div>

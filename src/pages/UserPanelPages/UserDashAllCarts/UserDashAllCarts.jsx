@@ -1,8 +1,8 @@
-import React, { useContext, useState } from "react";
-import useRequest from "../../../APIServices/useRequest";
-import { AuthContext } from "../../../providers/AuthProviders";
-import { FaRegTrashCan } from "react-icons/fa6";
-import Swal from "sweetalert2";
+import React, { useContext, useState } from 'react';
+import useRequest from '../../../APIServices/useRequest';
+import { AuthContext } from '../../../providers/AuthProviders';
+import { FaRegTrashCan } from 'react-icons/fa6';
+import Swal from 'sweetalert2';
 
 function UserDashAllCarts() {
   const { cartItem, setLoading, loading, removeFromCart, setCartItem } =
@@ -48,7 +48,7 @@ function UserDashAllCarts() {
       setLoading(false);
     } catch (error) {
       console.log(error);
-      Swal.fire("Failed to remove the item from the cart");
+      Swal.fire('Failed to remove the item from the cart');
       setLoading(false);
     }
   };
@@ -58,12 +58,12 @@ function UserDashAllCarts() {
     try {
       setLoadingTwo(true);
       const orderPromises = items.map((item) =>
-        postRequest("/orders/crt", { cartId: item?._id })
+        postRequest('/orders/crt', { cartId: item?._id })
       );
       const orderConfirm = await Promise.all(orderPromises);
       if (orderConfirm) {
         setCartItem([]);
-        Swal.fire("Successfull Placed the Order");
+        Swal.fire('Successfull Placed the Order');
         setItems([]);
 
         setLoadingTwo(false);
@@ -71,7 +71,7 @@ function UserDashAllCarts() {
 
       setLoadingTwo(false);
     } catch (error) {
-      console.log("Error placing order:", error);
+      console.log('Error placing order:', error);
       setLoadingTwo(false);
     }
   };
@@ -91,7 +91,7 @@ function UserDashAllCarts() {
                 <div className="flex items-start justify-between text-xl pb-5 border-b-2 border-gray-300">
                   <h1 className="font-extrabold">Shopping Cart</h1>
                   <p className="font-semibold">
-                    Total Items:{" "}
+                    Total Items:{' '}
                     <span className="font-normal">{items.length}</span>
                   </p>
                 </div>
@@ -125,7 +125,7 @@ function UserDashAllCarts() {
                       >
                         <div className="col-span-4 flex items-center gap-3">
                           <img
-                            src={`http://localhost:8000/images/${item?.productImage}`}
+                            src={`${process.env.REACT_APP_BackendURLIMG}/images/${item?.productImage}`}
                             alt={item.productName}
                             className="w-16 h-16 rounded-full object-contain"
                           />
@@ -174,7 +174,9 @@ function UserDashAllCarts() {
 
                         <div className="col-span-2 text-center">
                           <button
-                            onClick={() => handleRemoveItem(index, item?.productId)}
+                            onClick={() =>
+                              handleRemoveItem(index, item?.productId)
+                            }
                             className="text-xl text-red-500 font-bold"
                           >
                             <FaRegTrashCan />

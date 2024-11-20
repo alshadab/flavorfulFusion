@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import Paginations from "../../GlobalComponents/Paginations/Paginations";
+import React, { useState } from 'react';
+import Paginations from '../../GlobalComponents/Paginations/Paginations';
 
 export default function UserDeliveredOrdersTable({ deliveredOrders }) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -72,7 +72,7 @@ export default function UserDeliveredOrdersTable({ deliveredOrders }) {
                         <div className="h-11 w-11 flex-shrink-0">
                           <img
                             className="h-11 w-11 rounded-full"
-                            src={`http://localhost:8000/images/${product?.productThumb}`}
+                            src={`${process.env.REACT_APP_BackendURLIMG}/images/${product?.productThumb}`}
                             alt=""
                           />
                         </div>
@@ -90,7 +90,10 @@ export default function UserDeliveredOrdersTable({ deliveredOrders }) {
                       {product?.totalQuantity}
                     </td>
                     <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                       {product && product?.deliveryFee ? product?.deliveryFee : 0}TK
+                      {product && product?.deliveryFee
+                        ? product?.deliveryFee
+                        : 0}
+                      TK
                     </td>
                     <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                       {product?.productSellingPrice} TK

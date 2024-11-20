@@ -8,7 +8,10 @@ function ProductDetailModal({ product, stock, isOpen, onClose, addToCart }) {
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
       <div className="bg-white w-full max-w-3xl mx-5 p-6 rounded-lg shadow-lg relative">
         {/* Close Button */}
-        <button onClick={onClose} className="absolute top-3 right-3 text-4xl text-red-500 hover:text-gray-800">
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-3 text-4xl text-red-500 hover:text-gray-800"
+        >
           &times;
         </button>
 
@@ -17,7 +20,7 @@ function ProductDetailModal({ product, stock, isOpen, onClose, addToCart }) {
           {/* Product Image */}
           <div className="md:w-1/2 flex justify-center items-center">
             <img
-              src={`http://localhost:8000/images/${product?.productThumb}`}
+              src={`${process.env.REACT_APP_BackendURLIMG}/images/${product?.productThumb}`}
               alt={product?.productName}
               className="object-contain w-full h-80"
             />
@@ -31,8 +34,10 @@ function ProductDetailModal({ product, stock, isOpen, onClose, addToCart }) {
 
             {/* Price and Cart Button */}
             <div className="mt-5 flex flex-col items-start space-y-4">
-              <span className="text-xl font-semibold text-green-600">${product?.sellingPrice}</span>
-              
+              <span className="text-xl font-semibold text-green-600">
+                ${product?.sellingPrice}
+              </span>
+
               <button
                 onClick={async () => {
                   const success = await addToCart(product, stock);

@@ -1,7 +1,10 @@
-import React, { useState } from "react";
-import Paginations from "../../GlobalComponents/Paginations/Paginations";
+import React, { useState } from 'react';
+import Paginations from '../../GlobalComponents/Paginations/Paginations';
 
-export default function UserPendingOrdersTable({ pendingOrdersList, deletePendingOrders }) {
+export default function UserPendingOrdersTable({
+  pendingOrdersList,
+  deletePendingOrders,
+}) {
   const [currentPage, setCurrentPage] = useState(1);
   const entriesPerPage = 5;
   const totalPages = Math.ceil(pendingOrdersList.length / entriesPerPage);
@@ -72,7 +75,7 @@ export default function UserPendingOrdersTable({ pendingOrdersList, deletePendin
                         <div className="h-11 w-11 flex-shrink-0">
                           <img
                             className="h-11 w-11 rounded-full"
-                            src={`http://localhost:8000/images/${product?.productThumb}`}
+                            src={`${process.env.REACT_APP_BackendURLIMG}/images/${product?.productThumb}`}
                             alt=""
                           />
                         </div>
@@ -90,7 +93,10 @@ export default function UserPendingOrdersTable({ pendingOrdersList, deletePendin
                       {product?.totalQuantity}
                     </td>
                     <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                       {product && product?.deliveryFee ? product?.deliveryFee : 0}TK
+                      {product && product?.deliveryFee
+                        ? product?.deliveryFee
+                        : 0}
+                      TK
                     </td>
                     <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                       {product?.productSellingPrice} TK
@@ -99,9 +105,12 @@ export default function UserPendingOrdersTable({ pendingOrdersList, deletePendin
                       {product?.allTotalPrice} $
                     </td>
                     <td className="relative whitespace-nowrap py-5 px-3.5 text-right text-sm font-medium sm:pr-0">
-                      <button 
-                      onClick={()=>deletePendingOrders(product?._id)}
-                      className="px-2 py-1 rounded bg-red-500 text-white font-semibold text-xs hover:bg-red-600">Cancel</button>
+                      <button
+                        onClick={() => deletePendingOrders(product?._id)}
+                        className="px-2 py-1 rounded bg-red-500 text-white font-semibold text-xs hover:bg-red-600"
+                      >
+                        Cancel
+                      </button>
                     </td>
                   </tr>
                 ))}

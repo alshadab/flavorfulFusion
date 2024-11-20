@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { AuthContext } from "../../providers/AuthProviders";
-import useRequest from "../../APIServices/useRequest";
-import { FaHeart, FaStar } from "react-icons/fa";
-import GlobalLoading from "../../components/GlobalComponents/GlobalLoading/GlobalLoading";
-import Swal from "sweetalert2";
-import RatingReviewShow from "../../components/HomePageCompos/RatingReviewShow/RatingReviewShow";
+import React, { useContext, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { AuthContext } from '../../providers/AuthProviders';
+import useRequest from '../../APIServices/useRequest';
+import { FaHeart, FaStar } from 'react-icons/fa';
+import GlobalLoading from '../../components/GlobalComponents/GlobalLoading/GlobalLoading';
+import Swal from 'sweetalert2';
+import RatingReviewShow from '../../components/HomePageCompos/RatingReviewShow/RatingReviewShow';
 
 function SingleProductPage() {
   const { id } = useParams();
@@ -18,12 +18,12 @@ function SingleProductPage() {
   const [categories, setCategories] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [rating, setRating] = useState(0); // Rating state
-  const [review, setReview] = useState("");
+  const [review, setReview] = useState('');
   const [crtReviewState, setCrtReviewState] = useState(false);
   const [allTotalRating, setAllTotalRating] = useState([]);
   const [fetchRatingState, setFetchRatingState] = useState(false);
   const [calculatedRating, setCalculatedRating] = useState(0);
-  const [mainImage, setMainImage] = useState("");
+  const [mainImage, setMainImage] = useState('');
 
   const fetchTotalRatings = async () => {
     try {
@@ -72,7 +72,7 @@ function SingleProductPage() {
     };
     try {
       const fetchData = await postRequest(
-        "/products/src/byid",
+        '/products/src/byid',
         singleProdFetchInfo
       );
       setProductInfo(fetchData?.data?.data);
@@ -132,7 +132,7 @@ function SingleProductPage() {
   };
 
   const handleSubmitReview = async () => {
-    const crtReview = await postRequest("/ratings/crt", {
+    const crtReview = await postRequest('/ratings/crt', {
       userId: user?._id,
       productId: id,
       rating: rating,
@@ -140,9 +140,9 @@ function SingleProductPage() {
     });
 
     if (crtReview?.data?.error === false) {
-      Swal.fire("Successfully Added the Review");
+      Swal.fire('Successfully Added the Review');
       setRating(0);
-      setReview("");
+      setReview('');
       setCrtReviewState(!crtReviewState);
     }
   };
@@ -172,21 +172,26 @@ function SingleProductPage() {
         <div className="md:w-1/2 flex flex-col items-center justify-center">
           <div className="relative w-96 h-96">
             <img
-              src={`http://localhost:8000/images/${mainImage}`}
+              src={`${process.env.REACT_APP_BackendURLIMG}/images/${mainImage}`}
               alt={productInfo?.name}
               className="w-full h-full object-contain rounded-lg"
             />
           </div>
           <div className="flex items-center gap-x-2 md:gap-x-14 mt-4">
-            {
-              productInfo && productInfo.productsImg.map((item)=> 
-              <div 
-              onClick={() => handleThumbnailClick(item.path)}
-              key={item.path} className="w-20 h-20 rounded-xl border-2 hover:cursor-pointer hover:scale-105">
-                <img className="w-full h-full object-cover" src={`http://localhost:8000/images/${item?.path}`} alt="productImg" />
-              </div>
-              )
-            }
+            {productInfo &&
+              productInfo.productsImg.map((item) => (
+                <div
+                  onClick={() => handleThumbnailClick(item.path)}
+                  key={item.path}
+                  className="w-20 h-20 rounded-xl border-2 hover:cursor-pointer hover:scale-105"
+                >
+                  <img
+                    className="w-full h-full object-cover"
+                    src={`${process.env.REACT_APP_BackendURLIMG}/images/${item?.path}`}
+                    alt="productImg"
+                  />
+                </div>
+              ))}
           </div>
         </div>
 
@@ -211,8 +216,8 @@ function SingleProductPage() {
                 key={index}
                 className={`w-6 h-6 ${
                   index < Math.floor(staticRating)
-                    ? "text-yellow-400"
-                    : "text-gray-300"
+                    ? 'text-yellow-400'
+                    : 'text-gray-300'
                 }`}
                 fill="currentColor"
                 viewBox="0 0 20 20"
@@ -303,13 +308,13 @@ function SingleProductPage() {
           <div className="flex flex-col gap-4 text-sm text-gray-600">
             <div className="flex items-center gap-x-5">
               <div>
-                <span className="font-semibold">Categories:</span>{" "}
-                {categories?.categoryName || "not defined"}
+                <span className="font-semibold">Categories:</span>{' '}
+                {categories?.categoryName || 'not defined'}
               </div>
               <div className="flex items-center gap-x-2">
                 <span className="font-semibold">Sellers:</span>
                 <p className="text-orange-600 hover:underline cursor-pointer">
-                  {productInfo.seller || "Grocery Shop"}
+                  {productInfo.seller || 'Grocery Shop'}
                 </p>
               </div>
             </div>
@@ -327,7 +332,7 @@ function SingleProductPage() {
                           key={star}
                           onClick={() => handleStarClick(star)}
                           className={`cursor-pointer w-5 h-5 ${
-                            star <= rating ? "text-yellow-500" : "text-gray-300"
+                            star <= rating ? 'text-yellow-500' : 'text-gray-300'
                           }`}
                         />
                       ))}
@@ -337,8 +342,8 @@ function SingleProductPage() {
                       disabled={!rating || !review} // Button is disabled until both rating and review are provided
                       className={`w-full mt-3 px-4 py-1 text-sm font-semibold rounded transition ${
                         rating && review
-                          ? "bg-orange-600 text-white hover:bg-orange-700"
-                          : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                          ? 'bg-orange-600 text-white hover:bg-orange-700'
+                          : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                       }`}
                     >
                       Submit
@@ -365,7 +370,7 @@ function SingleProductPage() {
         <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-x-4 gap-y-4 ">
           {allTotalRating.length > 0 ? (
             allTotalRating.map((reviewData, index) => (
-              <RatingReviewShow reviewData = {reviewData} key={index}/>
+              <RatingReviewShow reviewData={reviewData} key={index} />
             ))
           ) : (
             <p className="text-gray-500">
