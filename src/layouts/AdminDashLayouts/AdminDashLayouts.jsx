@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
-import { Fragment, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import logo from "../../assets/logo.png";
 import { CiShop } from "react-icons/ci";
 import {
@@ -29,12 +29,15 @@ import {
   UserGroupIcon,
   HomeModernIcon,
   XCircleIcon,
+  StarIcon,
 } from "@heroicons/react/24/outline";
 import {
   ChevronDownIcon,
   MagnifyingGlassIcon,
 } from "@heroicons/react/20/solid";
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { AuthContext } from "../../providers/AuthProviders";
 
 const navigation = [
   {
@@ -68,6 +71,14 @@ const navigation = [
     current: false,
     accordion: false,
     navigation: "/allcategories",
+  },
+  {
+    name: "Recommendations",
+    href: "#",
+    icon: StarIcon,
+    current: false,
+    accordion: false,
+    navigation: "/recommendations",
   },
 ];
 
@@ -142,14 +153,14 @@ const navigationFour = [
     accordion: false,
     navigation: "/allusers",
   },
-  {
-    name: "All Admin",
-    href: "#",
-    icon: UserCircleIcon,
-    current: false,
-    accordion: false,
-    navigation: "/alladmins",
-  },
+  // {
+  //   name: "All Admin",
+  //   href: "#",
+  //   icon: UserCircleIcon,
+  //   current: false,
+  //   accordion: false,
+  //   navigation: "/alladmins",
+  // },
   {
     name: "All Vendors",
     href: "#",
@@ -170,7 +181,16 @@ function classNames(...classes) {
 }
 
 export default function AdminDashLayouts() {
+  const { user, setUser } = useContext(AuthContext);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("userCreds");
+    Swal.fire("Logged Out");
+    setUser(null);
+    navigate("/");
+  };
 
   return (
     <>
@@ -352,7 +372,7 @@ export default function AdminDashLayouts() {
                             ))}
                           </ul>
                         </li>
-                        <li className="mt-auto">
+                        {/* <li className="mt-auto">
                           <p
                             href="#"
                             className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-orange-200 hover:bg-orange-700 hover:text-white"
@@ -363,7 +383,7 @@ export default function AdminDashLayouts() {
                             />
                             Settings
                           </p>
-                        </li>
+                        </li> */}
                       </ul>
                     </nav>
                   </div>
@@ -515,7 +535,7 @@ export default function AdminDashLayouts() {
                     ))}
                   </ul>
                 </li>
-                <li className="mt-auto">
+                {/* <li className="mt-auto">
                   <p
                     href="#"
                     className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-orange-600 hover:bg-orange-700 hover:text-white"
@@ -526,7 +546,7 @@ export default function AdminDashLayouts() {
                     />
                     Settings
                   </p>
-                </li>
+                </li> */}
               </ul>
             </nav>
           </div>
@@ -573,10 +593,12 @@ export default function AdminDashLayouts() {
                   </button>
                 </Link>
 
-                <button className="flex items-center gap-x-2 px-4 py-2 rounded-3xl text-sm font-semibold border border-orange-600 text-orange-600 duration-200 hover:duration-200 hover:cursor-pointer hover:bg-orange-500 hover:text-white">
-                  <CiShop className="text-xl" />
-                  Create Shop
-                </button>
+                {/* <Link to="">
+                  <button className="flex items-center gap-x-2 px-4 py-2 rounded-3xl text-sm font-semibold border border-orange-600 text-orange-600 duration-200 hover:duration-200 hover:cursor-pointer hover:bg-orange-500 hover:text-white">
+                    <CiShop className="text-xl" />
+                    Create Shop
+                  </button>
+                </Link> */}
 
                 <div
                   className="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-900/10"
@@ -587,17 +609,17 @@ export default function AdminDashLayouts() {
                 <Menu as="div" className="relative">
                   <MenuButton className="-m-1.5 flex items-center p-1.5">
                     <span className="sr-only">Open user menu</span>
-                    <img
+                    {/* <img
                       className="h-8 w-8 rounded-full bg-gray-50"
                       src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                       alt=""
-                    />
+                    /> */}
                     <span className="hidden lg:flex lg:items-center">
                       <span
                         className="ml-4 text-sm font-semibold leading-6 text-gray-900"
                         aria-hidden="true"
                       >
-                        Tom Cook
+                        {user?.userName}
                       </span>
                       <ChevronDownIcon
                         className="ml-2 h-5 w-5 text-gray-400"
@@ -614,21 +636,20 @@ export default function AdminDashLayouts() {
                     leaveTo="transform opacity-0 scale-95"
                   >
                     <MenuItems className="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
-                      {userNavigation.map((item) => (
-                        <MenuItem key={item.name}>
-                          {({ focus }) => (
-                            <a
-                              href={item.href}
-                              className={classNames(
-                                focus ? "bg-gray-50" : "",
-                                "block px-3 py-1 text-sm leading-6 text-gray-900"
-                              )}
-                            >
-                              {item.name}
-                            </a>
-                          )}
-                        </MenuItem>
-                      ))}
+                      <MenuItem>
+                        {({ focus }) => (
+                          <p
+                            onClick={handleLogout}
+                            // href={item.href}
+                            className={classNames(
+                              focus ? "bg-gray-50" : "",
+                              "block px-3 py-1 text-sm leading-6 text-gray-900"
+                            )}
+                          >
+                            Logout
+                          </p>
+                        )}
+                      </MenuItem>
                     </MenuItems>
                   </Transition>
                 </Menu>

@@ -1,11 +1,11 @@
-import React, { useContext, useState } from "react";
-import img from "../../assets/logo.png";
-import signupLogo from "../../assets/signupPage.png";
-import { Link, useNavigate } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
-import useRequest from "../../APIServices/useRequest";
-import Swal from "sweetalert2";
-import { AuthContext } from "../../providers/AuthProviders";
+import React, { useContext, useState } from 'react';
+import img from '../../assets/logo.png';
+import signupLogo from '../../assets/signupPage.png';
+import { Link, useNavigate } from 'react-router-dom';
+import { FcGoogle } from 'react-icons/fc';
+import useRequest from '../../APIServices/useRequest';
+import Swal from 'sweetalert2';
+import { AuthContext } from '../../providers/AuthProviders';
 
 function SignUpPage() {
   const { user, setLoading } = useContext(AuthContext);
@@ -85,17 +85,18 @@ function SignUpPage() {
       shippingAddress,
       shippingPostalCode,
     };
-    const createUser = await postRequest("/users/crt", userDetails);
+    console.log('userDetails', userDetails);
+    const createUser = await postRequest('/users/crt', userDetails);
     if (createUser?.data?.data) {
       setLoading(false);
-      Swal.fire("Created User");
-      navigate("/login");
+      Swal.fire('Created User');
+      navigate('/login');
     }
   };
 
   return (
-    <div className="w-screen h-screen bg-orange-300 flex justify-center items-center p-4 sm:px-10 sm:py-8 lg:px-20 lg:py-10">
-      <div className="w-full max-w-8xl h-full bg-white rounded-lg shadow-lg">
+    <div className="w-screen h-screen bg-transparent md:bg-orange-300 flex justify-center items-center p-4 sm:px-10 sm:py-8 lg:px-20 lg:py-10">
+      <div className="w-full max-w-8xl h-full bg-white md:rounded-lg md:shadow-lg">
         <div className="grid grid-cols-1 lg:grid-cols-2 w-full h-full">
           <form
             onSubmit={handleSignUpUser}
@@ -106,8 +107,8 @@ function SignUpPage() {
               <Link to="/">
                 <img src={img} className="w-16 lg:w-20" alt="Logo" />
               </Link>
-              <h1 className="text-lg sm:text-xl lg:text-2xl font-poppins font-extrabold text-center lg:text-left">
-                Signup to <span className="text-orange-600">Flavourfull</span>{" "}
+              <h1 className="text-2xl sm:text-xl lg:text-2xl font-poppins font-extrabold text-center lg:text-left">
+                Signup to <span className="text-orange-600">Flavourfull</span>{' '}
                 Fusion
               </h1>
             </div>
@@ -230,7 +231,7 @@ function SignUpPage() {
 
             {/* Photo Upload and User Type fields */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-5">
-              <div className="flex flex-col col-span-2">
+              {/* <div className="flex flex-col col-span-2">
                 <label htmlFor="photoUpload">Upload Photo</label>
                 <input
                   type="file"
@@ -240,10 +241,10 @@ function SignUpPage() {
                   id="photoUpload"
                   onChange={handleImageChange}
                 />
-              </div>
+              </div> */}
 
               <div className="flex items-end space-x-2">
-                {selectedImage && (
+                {/* {selectedImage && (
                   <div className="w-14 h-14">
                     <img
                       src={selectedImage}
@@ -251,7 +252,7 @@ function SignUpPage() {
                       className="object-cover rounded-xl w-full h-full"
                     />
                   </div>
-                )}
+                )} */}
                 <div className="flex flex-col w-full">
                   <label htmlFor="userType">User Type</label>
                   <select

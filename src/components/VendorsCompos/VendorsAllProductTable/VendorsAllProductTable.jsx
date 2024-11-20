@@ -3,7 +3,14 @@ import Paginations from "../../GlobalComponents/Paginations/Paginations";
 import AdminSingleProductTableData from "../../AdminDashCompos/AdminAllProductsTableCompos/AdminSingleProductTableData";
 import VendorSingleProductTableItem from "./VendorSingleProductTableItem";
 
-export default function VendorsAllProductTable({deleteProduct, activateProduct, activateState, deleteState, allProdList }) {
+export default function VendorsAllProductTable({
+  deleteProduct,
+  activateProduct,
+  activateState,
+  deleteState,
+  allProdList,
+  handleRowClick,
+}) {
   const [currentPage, setCurrentPage] = useState(1);
   const entriesPerPage = 5;
   const totalPages = Math.ceil(allProdList.length / entriesPerPage);
@@ -46,12 +53,12 @@ export default function VendorsAllProductTable({deleteProduct, activateProduct, 
                   >
                     Category
                   </th>
-                  <th
+                  {/* <th
                     scope="col"
                     className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
                   >
                     Vendor
-                  </th>
+                  </th> */}
                   <th
                     scope="col"
                     className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
@@ -80,17 +87,30 @@ export default function VendorsAllProductTable({deleteProduct, activateProduct, 
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
                 {displayedPeople.map((product, index) => (
-                  <VendorSingleProductTableItem key={product?._id} activateState={activateState} deleteProduct={deleteProduct} activateProduct={activateProduct} deleteState={deleteState} product={product} index={index}/>
+                  <VendorSingleProductTableItem
+                    key={product?._id}
+                    activateState={activateState}
+                    deleteProduct={deleteProduct}
+                    activateProduct={activateProduct}
+                    deleteState={deleteState}
+                    product={product}
+                    handleRowClick={handleRowClick}
+                    index={index}
+                  />
                 ))}
               </tbody>
             </table>
-            <Paginations
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPrevPage={handlePrevPage}
-              onNextPage={handleNextPage}
-              onPageChange={handlePageChange}
-            />
+            {allProdList && allProdList.length > 5 ? (
+              <Paginations
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPrevPage={handlePrevPage}
+                onNextPage={handleNextPage}
+                onPageChange={handlePageChange}
+              />
+            ) : (
+              <> </>
+            )}
           </div>
         </div>
       </div>

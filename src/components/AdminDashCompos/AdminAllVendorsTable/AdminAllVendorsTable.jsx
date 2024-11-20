@@ -4,65 +4,11 @@ import { AiFillDelete } from "react-icons/ai";
 import { IoTrashBinOutline } from "react-icons/io5";
 import { FaUndo } from "react-icons/fa";
 
-const people = [
-  {
-    name: "Lindsay Walton",
-    title: "Front-end Developer",
-    department: "Optimization",
-    email: "lindsay.walton@example.com",
-    role: "Member",
-    image:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    name: "Lindsay Walton",
-    title: "Front-end Developer",
-    department: "Optimization",
-    email: "lindsay.walton@example.com",
-    role: "Member",
-    image:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    name: "Lindsay Walton",
-    title: "Front-end Developer",
-    department: "Optimization",
-    email: "lindsay.walton@example.com",
-    role: "Member",
-    image:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-
-  {
-    name: "Lindsay Walton",
-    title: "Front-end Developer",
-    department: "Optimization",
-    email: "lindsay.walton@example.com",
-    role: "Member",
-    image:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    name: "Lindsay Walton",
-    title: "Front-end Developer",
-    department: "Optimization",
-    email: "lindsay.walton@example.com",
-    role: "Member",
-    image:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  {
-    name: "Lindsay Walton",
-    title: "Front-end Developer",
-    department: "Optimization",
-    email: "lindsay.walton@example.com",
-    role: "Member",
-    image:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-];
-
-export default function AdminAllVendorsTable({ allVendors }) {
+export default function AdminAllVendorsTable({
+  allVendors,
+  handleActivateVendor,
+  handleInActiveVendor,
+}) {
   const [currentPage, setCurrentPage] = useState(1);
   const entriesPerPage = 5;
   const totalPages = Math.ceil(allVendors.length / entriesPerPage);
@@ -112,7 +58,7 @@ export default function AdminAllVendorsTable({ allVendors }) {
                   <tr key={`${person.email}-${index}`}>
                     <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
                       <div className="flex items-center">
-                        <div className="ml-4">
+                        <div className="">
                           <div className="font-medium text-gray-900">
                             {person?.userName}
                           </div>
@@ -135,21 +81,23 @@ export default function AdminAllVendorsTable({ allVendors }) {
                       )}
                     </td>
                     <td className="relative whitespace-nowrap py-5 text-center text-xs font-medium sm:pr-0">
-                      {person &&
-                      person?.isActive === false &&
-                      person?.isDeleted === false ? (
-                        <button
-                          // onClick={handleActivateProd}
-                          className="border-2 border-green-400 px-2 py-1 rounded-lg text-green-600 duration-400 hover:duration-400 hover:scale-110 hover:cursor-pointer"
-                        >
-                          Activate
-                        </button>
-                      ) : (
-                        <button
-                          // onClick={handleDeleteProd}
-                          className="text-red-600 duration-400 hover:duration-400 hover:scale-110 hover:cursor-pointer"
-                        ></button>
-                      )}
+                      {person && person?.isDeleted === false ? (
+                        person?.isActive === false ? (
+                          <button
+                            onClick={()=>handleActivateVendor(person)}
+                            className="w-20 bg-green-700 px-2 py-1 rounded text-white shadow-md duration-400 hover:duration-400 hover:scale-110 hover:cursor-pointer"
+                          >
+                            Activate
+                          </button>
+                        ) : (
+                          <button
+                            onClick={()=>handleInActiveVendor(person)}
+                            className="w-20 bg-red-700 px-2 py-1 rounded text-white shadow-md duration-400 hover:duration-400 hover:scale-110 hover:cursor-pointer"
+                          >
+                            Inactivate
+                          </button>
+                        )
+                      ) : null}
                     </td>
                   </tr>
                 ))}

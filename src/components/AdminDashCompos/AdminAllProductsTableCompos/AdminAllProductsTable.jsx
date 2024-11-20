@@ -51,12 +51,12 @@ export default function AdminAllProductsTable({
                   >
                     Category
                   </th>
-                  <th
+                  {/* <th
                     scope="col"
                     className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
                   >
                     Vendor
-                  </th>
+                  </th> */}
                   <th
                     scope="col"
                     className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
@@ -97,7 +97,7 @@ export default function AdminAllProductsTable({
                 ))}
               </tbody>
             </table>
-            {displayedPeople && displayedPeople.length > 5 ? (
+            {displayedPeople && displayedPeople.length >= 5 ? (
               <Paginations
                 currentPage={currentPage}
                 totalPages={totalPages}

@@ -24,7 +24,7 @@ function SummaryDataCards({
         <dd className="w-full mt-1 ml-2 flex-none text-3xl font-medium leading-10 tracking-tight text-gray-900">
           {isAmount ? (
             <>
-              $ <span>{amount}</span>
+              TK <span>{amount}</span>
             </>
           ) : (
             <p>

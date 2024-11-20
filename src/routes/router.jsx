@@ -38,6 +38,14 @@ import AdminAllConfirmedOrdersPage from "../pages/AdminPanelPages/AdminAllConfir
 import TermsAndConditions from "../pages/TermsAndConditions/TermsAndConditions";
 import FAQs from "../pages/FAQs/FAQs";
 import Manufacturers from "../pages/Manufacturers/Manufacturers";
+import SingleProductPage from "../pages/HomePage/SingleProductPage";
+import CreateUserInfoPage from "../pages/LoginPage/CrtUserInfo";
+import VendorsShopPage from "../pages/VendorPanelPages/VendorsShopPage/VendorsShopPage";
+import PrivateRoute from "./PrivateRoute";
+import AdminPrivateRoute from "./AdminPrivateRoute";
+import VendorPrivateRoute from "./VendorPrivateRoute";
+import BuyerPrivateRoute from "./BuyerPrivateRoute";
+import AminRecommendations from "../pages/AdminPanelPages/AdminRecommendations/AminRecommendations";
 
 const router = createBrowserRouter([
   {
@@ -72,6 +80,10 @@ const router = createBrowserRouter([
         path: "/manufacturers",
         element: <Manufacturers />,
       },
+      {
+        path: "/singleproductpage/:id",
+        element: <SingleProductPage />,
+      },
     ],
   },
   {
@@ -80,31 +92,73 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/userdash",
-        element: <UserDashHomePage />,
+        element: (
+          <BuyerPrivateRoute>
+            <PrivateRoute>
+              <UserDashHomePage />
+            </PrivateRoute>
+          </BuyerPrivateRoute>
+        ),
       },
       {
         path: "/userallorders",
-        element: <UserDashAllOrders />,
+        element: (
+          <BuyerPrivateRoute>
+            <PrivateRoute>
+              <UserDashAllOrders />
+            </PrivateRoute>
+          </BuyerPrivateRoute>
+        ),
       },
       {
         path: "/usercarts",
-        element: <UserDashAllCarts />,
+        element: (
+          <BuyerPrivateRoute>
+            <PrivateRoute>
+              <UserDashAllCarts />
+            </PrivateRoute>
+          </BuyerPrivateRoute>
+        ),
       },
       {
         path: "/userallreviews",
-        element: <UserDashAllReviews />,
+        element: (
+          <BuyerPrivateRoute>
+            <PrivateRoute>
+              <UserDashAllReviews />
+            </PrivateRoute>
+          </BuyerPrivateRoute>
+        ),
       },
       {
         path: "/usercancelledorders",
-        element: <UserCancelledOrders />,
+        element: (
+          <BuyerPrivateRoute>
+            <PrivateRoute>
+              <UserCancelledOrders />
+            </PrivateRoute>
+          </BuyerPrivateRoute>
+        ),
       },
       {
         path: "/userdeliveredorders",
-        element: <UserDeliveredOrders />,
+        element: (
+          <BuyerPrivateRoute>
+            <PrivateRoute>
+              <UserDeliveredOrders />
+            </PrivateRoute>
+          </BuyerPrivateRoute>
+        ),
       },
       {
         path: "/userpendingorders",
-        element: <UserPendingOrders />,
+        element: (
+          <BuyerPrivateRoute>
+            <PrivateRoute>
+              <UserPendingOrders />
+            </PrivateRoute>
+          </BuyerPrivateRoute>
+        ),
       },
     ],
   },
@@ -114,31 +168,83 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/vendordash",
-        element: <VendorDashPage />,
+        element: (
+          <VendorPrivateRoute>
+            <PrivateRoute>
+              <VendorDashPage />
+            </PrivateRoute>
+          </VendorPrivateRoute>
+        ),
       },
       {
         path: "/vendorpendingorders",
-        element: <VendorPendingOrders />,
+        element: (
+          <VendorPrivateRoute>
+            <PrivateRoute>
+              <VendorPendingOrders />
+            </PrivateRoute>
+          </VendorPrivateRoute>
+        ),
       },
       {
         path: "/vendorconfirmorders",
-        element: <VendorConfirmedOrders />,
+        element: (
+          <VendorPrivateRoute>
+            <PrivateRoute>
+              <VendorConfirmedOrders />
+            </PrivateRoute>
+          </VendorPrivateRoute>
+        ),
       },
       {
         path: "/vendordeliveredorders",
-        element: <VendorDeliveredOrders />,
+        element: (
+          <VendorPrivateRoute>
+            <PrivateRoute>
+              <VendorDeliveredOrders />
+            </PrivateRoute>
+          </VendorPrivateRoute>
+        ),
       },
       {
         path: "/vendorcancelledorders",
-        element: <VendorCancelledOrders />,
+        element: (
+          <VendorPrivateRoute>
+            <PrivateRoute>
+              <VendorCancelledOrders />
+            </PrivateRoute>
+          </VendorPrivateRoute>
+        ),
       },
       {
         path: "/vendoraddproduct",
-        element: <VendorAddAProduct />,
+        element: (
+          <VendorPrivateRoute>
+            <PrivateRoute>
+              <VendorAddAProduct />
+            </PrivateRoute>
+          </VendorPrivateRoute>
+        ),
       },
       {
         path: "/vendorproducts",
-        element: <VendorAllProducts />,
+        element: (
+          <VendorPrivateRoute>
+            <PrivateRoute>
+              <VendorAllProducts />
+            </PrivateRoute>
+          </VendorPrivateRoute>
+        ),
+      },
+      {
+        path: "/vendorshops",
+        element: (
+          <VendorPrivateRoute>
+            <PrivateRoute>
+              <VendorsShopPage />
+            </PrivateRoute>
+          </VendorPrivateRoute>
+        ),
       },
     ],
   },
@@ -148,51 +254,133 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/admindash",
-        element: <AdminDashHomePage />,
+        element: (
+          <AdminPrivateRoute>
+            <PrivateRoute>
+              <AdminDashHomePage />
+            </PrivateRoute>
+          </AdminPrivateRoute>
+        ),
       },
       {
         path: "allproducts",
-        element: <AdminAllProductsPage />,
+        element: (
+          <AdminPrivateRoute>
+            <PrivateRoute>
+              <AdminAllProductsPage />
+            </PrivateRoute>
+          </AdminPrivateRoute>
+        ),
       },
       {
         path: "allcategories",
-        element: <AdminAllCategoriesPage />,
+        element: (
+          <AdminPrivateRoute>
+            <PrivateRoute>
+              <AdminAllCategoriesPage />
+            </PrivateRoute>
+          </AdminPrivateRoute>
+        ),
+      },
+      {
+        path: "recommendations",
+        element: (
+          <AdminPrivateRoute>
+            <PrivateRoute>
+              <AminRecommendations />
+            </PrivateRoute>
+          </AdminPrivateRoute>
+        ),
       },
       {
         path: "allpendingorders",
-        element: <AdminAllPendingOrdersPage />,
+        element: (
+          <AdminPrivateRoute>
+            <PrivateRoute>
+              <AdminAllPendingOrdersPage />
+            </PrivateRoute>
+          </AdminPrivateRoute>
+        ),
       },
       {
         path: "allcancelledorders",
-        element: <AdminAllCancelledOrdersPage />,
+        element: (
+          <AdminPrivateRoute>
+            <PrivateRoute>
+              <AdminAllCancelledOrdersPage />
+            </PrivateRoute>
+          </AdminPrivateRoute>
+        ),
       },
       {
         path: "allconfirmedorders",
-        element: <AdminAllConfirmedOrdersPage />,
+        element: (
+          <AdminPrivateRoute>
+            <PrivateRoute>
+              <AdminAllConfirmedOrdersPage />
+            </PrivateRoute>
+          </AdminPrivateRoute>
+        ),
       },
       {
         path: "alldeliveredorders",
-        element: <AdminAllDeliveredOrdersPage />,
+        element: (
+          <AdminPrivateRoute>
+            <PrivateRoute>
+              <AdminAllDeliveredOrdersPage />
+            </PrivateRoute>
+          </AdminPrivateRoute>
+        ),
       },
       {
         path: "allfaq",
-        element: <AdminFAQ />,
+        element: (
+          <AdminPrivateRoute>
+            <PrivateRoute>
+              <AdminFAQ />
+            </PrivateRoute>
+          </AdminPrivateRoute>
+        ),
       },
       {
         path: "allreviews",
-        element: <AdminAllReviews />,
+        element: (
+          <AdminPrivateRoute>
+            <PrivateRoute>
+              <AdminAllReviews />
+            </PrivateRoute>
+          </AdminPrivateRoute>
+        ),
       },
       {
         path: "allusers",
-        element: <AdminAllUsersPage />,
+        element: (
+          <AdminPrivateRoute>
+            <PrivateRoute>
+              <AdminAllUsersPage />
+            </PrivateRoute>
+          </AdminPrivateRoute>
+        ),
       },
       {
         path: "allvendors",
-        element: <AdminAllVendorsPage />,
+        element: (
+          <AdminPrivateRoute>
+            <PrivateRoute>
+              <AdminAllVendorsPage />
+            </PrivateRoute>
+          </AdminPrivateRoute>
+        ),
       },
       {
         path: "alladmins",
-        element: <AdminAllAdminPage />,
+        element: (
+          <AdminPrivateRoute>
+            <PrivateRoute>
+              <AdminAllAdminPage />
+            </PrivateRoute>
+          </AdminPrivateRoute>
+        ),
       },
     ],
   },
@@ -203,6 +391,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <LoginPage />,
+  },
+  {
+    path: "/user-info-crt",
+    element: <CreateUserInfoPage />,
   },
 ]);
 

@@ -1,10 +1,10 @@
 const ShopsPage = () => {
   return (
-    <div className="h-[85vh] bg- py-[5vh] px-[10vw]">
+    <div className="mt-10 md:mt-0 h-[85vh] bg- py-[5vh] px-6 md:px-[10vw]">
       <div className="mx-10 text-primary">
-        <h1 className="font-extrabold text-5xl ">All ShopsPage and Address</h1>
+        <h1 className="font-extrabold text-2xl md:text-5xl text-center md:text-left">All ShopsPage and Address</h1>
       </div>
-      <div className="mt-10 grid grid-cols-3 gap-10 bg-white px-[2vw] py-[5vh] rounded-lg shadow-2xl border border-gray-100">
+      <div className="mt-0 md:mt-10 grid grid-cols-1 md:grid-cols-3 gap-10 bg-transparent md:bg-white px-1 md:px-[2vw] py-[5vh] rounded-none md:rounded-lg shadow-none md:shadow-2xl border-0 md:border border-gray-100">
         <div className="flex items-center gap-4 border border-gray-200 shadow-lg px-4 py-4 rounded-lg">
           <div>
             <img

@@ -16,7 +16,7 @@ const people = [
 export default function AdminDashRecentOrdersTable() {
   const [currentPage, setCurrentPage] = useState(1);
   const entriesPerPage = 5;
-  const totalPages = Math.ceil(people.length / entriesPerPage);
+  const totalPages = Math.ceil(people && people.length / entriesPerPage);
 
   // Slice the data for the current page
   const displayedPeople = people.slice(

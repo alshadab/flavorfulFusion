@@ -105,7 +105,7 @@ function classNames(...classes) {
 
 export default function UserDashLayouts() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { setUser } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -164,28 +164,34 @@ export default function UserDashLayouts() {
                     </div>
                   </TransitionChild>
                   {/* Sidebar component, swap this element with another sidebar if you like */}
-                  <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-orange-600 px-6 pb-4">
+                  <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-slate-800 px-6 pb-4">
                     <div className="flex h-16 shrink-0 items-center">
                       <img
                         className="h-8 w-auto"
                         src={logo}
                         alt="Flavourfull Fushion"
                       />
+                      <h1 className="text-white text-xl font-bold">
+                        <span className="text-orange-600">Flavourfull </span>{" "}
+                        Fushion
+                      </h1>
                     </div>
                     <nav className="flex flex-1 flex-col">
                       <ul role="list" className="flex flex-1 flex-col gap-y-7">
                         <li>
                           <ul role="list" className="-mx-2 space-y-1">
                             {navigation.map((item) => (
-                              <li key={item.name}>
-                                <a
-                                  href={item.href}
-                                  className={classNames(
-                                    item.current
-                                      ? "bg-orange-700 text-white"
-                                      : "text-orange-200 hover:text-white hover:bg-orange-700",
-                                    "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
-                                  )}
+                              <li>
+                                <NavLink
+                                  to={item.navigation}
+                                  className={({ isActive }) =>
+                                    classNames(
+                                      isActive
+                                        ? "bg-orange-700 text-white"
+                                        : "text-orange-200 hover:text-white hover:bg-orange-700",
+                                      "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                                    )
+                                  }
                                 >
                                   <item.icon
                                     className={classNames(
@@ -197,7 +203,7 @@ export default function UserDashLayouts() {
                                     aria-hidden="true"
                                   />
                                   {item.name}
-                                </a>
+                                </NavLink>
                               </li>
                             ))}
                           </ul>
@@ -206,17 +212,19 @@ export default function UserDashLayouts() {
                           E-Commerce Management
                         </p>
                         <li>
-                          <ul role="list" className="-mx-2 space-y-1">
+                          <ul role="list" className="-mx-2 -mt-5 space-y-1">
                             {navigationTwo.map((item) => (
-                              <li key={item.name}>
-                                <a
-                                  href={item.href}
-                                  className={classNames(
-                                    item.current
-                                      ? "bg-orange-700 text-white"
-                                      : "text-orange-200 hover:text-white hover:bg-orange-700",
-                                    "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
-                                  )}
+                              <li>
+                                <NavLink
+                                  to={item.navigation}
+                                  className={({ isActive }) =>
+                                    classNames(
+                                      isActive
+                                        ? "bg-orange-700 text-white"
+                                        : "text-orange-200 hover:text-white hover:bg-orange-700",
+                                      "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+                                    )
+                                  }
                                 >
                                   <item.icon
                                     className={classNames(
@@ -228,12 +236,12 @@ export default function UserDashLayouts() {
                                     aria-hidden="true"
                                   />
                                   {item.name}
-                                </a>
+                                </NavLink>
                               </li>
                             ))}
                           </ul>
                         </li>
-                        <li className="mt-auto">
+                        {/* <li className="mt-auto">
                           <p
                             href="#"
                             className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-orange-200 hover:bg-orange-700 hover:text-white"
@@ -244,7 +252,7 @@ export default function UserDashLayouts() {
                             />
                             Settings
                           </p>
-                        </li>
+                        </li> */}
                       </ul>
                     </nav>
                   </div>
@@ -330,7 +338,7 @@ export default function UserDashLayouts() {
                     ))}
                   </ul>
                 </li>
-                <li className="mt-auto">
+                {/* <li className="mt-auto">
                   <p
                     href="#"
                     className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-orange-600 hover:bg-orange-700 hover:text-white"
@@ -341,7 +349,7 @@ export default function UserDashLayouts() {
                     />
                     Settings
                   </p>
-                </li>
+                </li> */}
               </ul>
             </nav>
           </div>
@@ -383,15 +391,15 @@ export default function UserDashLayouts() {
               </form>
               <div className="flex items-center gap-x-4 lg:gap-x-6">
                 <Link to="/">
-                  <button className="px-4 py-2 rounded-3xl text-sm font-semibold bg-orange-600 text-white duration-200 hover:duration-200 hover:cursor-pointer hover:bg-orange-700">
+                  <button className="px-4 py-2 rounded-lg text-sm font-semibold bg-orange-600 text-white duration-200 hover:duration-200 hover:cursor-pointer hover:bg-orange-700">
                     Visit Site
                   </button>
                 </Link>
 
-                <button className="flex items-center gap-x-2 px-4 py-2 rounded-3xl text-sm font-semibold border border-orange-600 text-orange-600 duration-200 hover:duration-200 hover:cursor-pointer hover:bg-orange-500 hover:text-white">
+                {/* <button className="flex items-center gap-x-2 px-4 py-2 rounded-3xl text-sm font-semibold border border-orange-600 text-orange-600 duration-200 hover:duration-200 hover:cursor-pointer hover:bg-orange-500 hover:text-white">
                   <CiShop className="text-xl" />
                   Create Shop
-                </button>
+                </button> */}
 
                 <div
                   className="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-900/10"
@@ -402,17 +410,21 @@ export default function UserDashLayouts() {
                 <Menu as="div" className="relative">
                   <MenuButton className="-m-1.5 flex items-center p-1.5">
                     <span className="sr-only">Open user menu</span>
-                    <img
-                      className="h-8 w-8 rounded-full bg-gray-50"
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                      alt=""
-                    />
+                    <span className="inline-block h-10 w-10 overflow-hidden rounded-full bg-gray-100">
+                      <svg
+                        className="h-full w-full text-gray-300"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                      </svg>
+                    </span>
                     <span className="hidden lg:flex lg:items-center">
                       <span
                         className="ml-4 text-sm font-semibold leading-6 text-gray-900"
                         aria-hidden="true"
                       >
-                        Tom Cook
+                        {user?.userName}
                       </span>
                       <ChevronDownIcon
                         className="ml-2 h-5 w-5 text-gray-400"
@@ -434,7 +446,7 @@ export default function UserDashLayouts() {
                           <button
                             onClick={handleLogout}
                             className={classNames(
-                              focus ? "bg-gray-50" : "",
+                              focus ? "bg-transparent" : "",
                               "block px-3 py-1 text-sm leading-6 text-gray-900"
                             )}
                           >

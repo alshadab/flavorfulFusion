@@ -51,12 +51,12 @@ export default function AdminAllDeliveredOrdersTable({ deliveredOrders }) {
                     >
                       Customer Info
                     </th>
-                    <th
+                    {/* <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
                       Delivery Fee
-                    </th>
+                    </th> */}
                     {/* <th
                     scope="col"
                     className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
@@ -85,7 +85,7 @@ export default function AdminAllDeliveredOrdersTable({ deliveredOrders }) {
                           <div className="h-11 w-11 flex-shrink-0">
                             <img
                               className="h-11 w-11 rounded-full"
-                              src={order?.productThumb}
+                              src={`${process.env.REACT_APP_BackendURLIMG}/images/${order?.productThumb}`}
                               alt=""
                             />
                           </div>
@@ -108,12 +108,12 @@ export default function AdminAllDeliveredOrdersTable({ deliveredOrders }) {
                           </div>
                         </div>
                       </td>
-                      <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+                      {/* <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                         {order.deliveryFee} $
-                      </td>
-                      ]
+                      </td> */}
+                      
                       <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                        {order.allTotalPrice} $
+                        {order.allTotalPrice} Tk
                       </td>
                       {/* <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                     <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">

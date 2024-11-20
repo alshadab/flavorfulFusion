@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import useRequest from "../../../APIServices/useRequest";
+import React, { useEffect, useState } from 'react';
+import useRequest from '../../../APIServices/useRequest';
 
 function AdminDashPopularProductsTableItem({ prod }) {
   const [postRequest, getRequest] = useRequest();
@@ -22,8 +22,11 @@ function AdminDashPopularProductsTableItem({ prod }) {
     <tr>
       <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
         <div className="flex items-center">
-          <div className="h-11 w-11 flex-shrink-0">
-            <img className="h-11 w-11 rounded-lg" src={prod.image} alt="" />
+          <div className="h-11 w-11 flex items-center">
+            <img
+              src={`${process.env.REACT_APP_BackendURLIMG}/images/${prod?.productThumb}`}
+              alt="product_image"
+            />
           </div>
           <div className="ml-4">
             <div className="font-medium text-gray-900">{prod.productName}</div>
@@ -33,9 +36,9 @@ function AdminDashPopularProductsTableItem({ prod }) {
       <td className="whitespace-nowrap py-5 text-sm text-left pl-10 text-gray-500">
         {stock}
       </td>
-      <td className="whitespace-nowrap py-5 text-sm text-left pl-5 text-gray-500">
+      {/* <td className="whitespace-nowrap py-5 text-sm text-left pl-5 text-gray-500">
         <div className="mt-1 text-gray-500">{prod.shopCategory}</div>
-      </td>
+      </td> */}
       <td className="whitespace-nowrap pl-5 pr-3 py-5 text-sm text-gray-500">
         {prod.buyingPrice} $
       </td>
