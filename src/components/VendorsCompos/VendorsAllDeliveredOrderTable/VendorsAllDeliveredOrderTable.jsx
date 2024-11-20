@@ -108,7 +108,7 @@ export default function VendorsAllDeliveredOrderTable({ allDeliveredOrders }) {
                       {order?.productSellingPrice} TK
                     </td>
                     <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                      {order?.allTotalPrice} $
+                      {order?.allTotalPrice} TK
                     </td>
                     {/* <td className="relative whitespace-nowrap py-5 px-3.5 text-right text-sm font-medium sm:pr-0">
                       <div className="flex items-center justify-center gap-x-2">

@@ -118,10 +118,10 @@ function VendorSingleProductTableItem({
           </div>
         </td> */}
       <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-        {product?.buyingPrice} $
+        {product?.buyingPrice} Tk
       </td>
       <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-        {product?.sellingPrice} $
+        {product?.sellingPrice} Tk
       </td>
       <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
         {product && product.isActive === true && product.isDeleted === false ? (
