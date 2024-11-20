@@ -61,19 +61,19 @@ export default function AdminAllFaqTable({
             <div className="mt-4 flex justify-end space-x-4">
               <button
                 onClick={() => handleViewClick(faq)}
-                className="px-4 py-1 bg-blue-600 text-white text-xs rounded-lg hover:bg-blue-800"
+                className="px-4 py-1 bg-geen-600 text-white text-xs rounded hover:bg-green-800"
               >
                 View
               </button>
               <button
                 onClick={() => handleEditClick(faq)}
-                className="px-4 py-1 bg-indigo-600 text-white text-xs rounded-lg hover:bg-indigo-900"
+                className="px-4 py-1 bg-orange-600 text-white text-xs rounded hover:bg-orange-900"
               >
                 Edit
               </button>
               <button
                 onClick={() => handleDeleteFaq(faq?._id)}
-                className="px-4 py-1 bg-red-600 text-white text-xs rounded-lg hover:bg-red-800"
+                className="px-4 py-1 bg-red-600 text-white text-xs rounded hover:bg-red-800"
               >
                 Delete
               </button>

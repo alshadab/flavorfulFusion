@@ -40,42 +40,24 @@ export default function AdminCancelledOrdersPage({ allCancelledOrders }) {
                     >
                       Quantity
                     </th>
-                    {/* <th
-                    scope="col"
-                    className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
-                  >
-                    Vendor
-                  </th> */}
+                    <th
+                      scope="col"
+                      className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
+                    >
+                      Vendor
+                    </th>
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
                       Customer Info
                     </th>
-                    {/* <th
-                      scope="col"
-                      className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                    >
-                      Delivery Fee
-                    </th> */}
-                    {/* <th
-                    scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                  >
-                    Selling Price
-                  </th> */}
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                     >
                       Total
                     </th>
-                    {/* <th
-                    scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                  >
-                    Status
-                  </th> */}
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white">
@@ -88,7 +70,9 @@ export default function AdminCancelledOrdersPage({ allCancelledOrders }) {
                 </tbody>
               </table>
             ) : (
-              <div className="flex items-center justify-center text-2xl font-bold text-gray-400"><h1>No Cancelled Orders Available</h1></div>
+              <div className="flex items-center justify-center text-2xl font-bold text-gray-400">
+                <h1>No Cancelled Orders Available</h1>
+              </div>
             )}
             {displayedPeople && displayedPeople.length > 5 ? (
               <Paginations

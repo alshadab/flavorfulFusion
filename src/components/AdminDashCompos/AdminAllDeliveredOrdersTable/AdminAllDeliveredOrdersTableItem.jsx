@@ -1,10 +1,7 @@
-// import React, { useEffect, useState } from "react";
-// import useRequest from "../../../APIServices/useRequest";
-
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import useRequest from "../../../APIServices/useRequest";
 
-function AdminCancelledOrdersTableItem({ order }) {
+function AdminAllDeliveredOrdersTableItem({ order, index }) {
   const [postRequest, getRequest] = useRequest();
   const [vendorData, setVendorData] = useState([]);
 
@@ -20,6 +17,7 @@ function AdminCancelledOrdersTableItem({ order }) {
   useEffect(() => {
     fetchVendorData();
   }, []);
+
 
   return (
     <tr>
@@ -39,7 +37,7 @@ function AdminCancelledOrdersTableItem({ order }) {
           </div>
         </div>
       </td>
-      <td className="whitespace-nowrap py-5 text-sm text-left pl-8 text-gray-500">
+      <td className="whitespace-nowrap py-5 text-sm text-left pl-10 text-gray-500">
         {order?.totalQuantity}
       </td>
       <td className="whitespace-nowrap py-5 text-sm text-left pl-0 text-gray-500">
@@ -54,9 +52,6 @@ function AdminCancelledOrdersTableItem({ order }) {
           </div>
         </div>
       </td>
-      {/* <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-        {order.deliveryFee} $
-      </td> */}
       <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
         {order.allTotalPrice} Tk
       </td>
@@ -64,4 +59,4 @@ function AdminCancelledOrdersTableItem({ order }) {
   );
 }
 
-export default AdminCancelledOrdersTableItem;
+export default AdminAllDeliveredOrdersTableItem;

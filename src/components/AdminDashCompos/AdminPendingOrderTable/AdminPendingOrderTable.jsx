@@ -18,8 +18,6 @@ export default function AdminPendingOrderTable({ pendingOrdersList }) {
   const handleNextPage = () =>
     setCurrentPage((prev) => Math.min(prev + 1, totalPages));
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
-
-  console.log("pending orders list", pendingOrdersList);
   
   return (
     <div className="px-4 sm:px-6 lg:px-8">
@@ -41,23 +39,11 @@ export default function AdminPendingOrderTable({ pendingOrdersList }) {
                   >
                     Quantity
                   </th>
-                  {/* <th
-                    scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                  >
-                    Category
-                  </th> */}
                   <th
                     scope="col"
                     className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
                   >
                     Vendor
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                  >
-                    Delivery Fee
                   </th>
                   <th
                     scope="col"
@@ -71,18 +57,6 @@ export default function AdminPendingOrderTable({ pendingOrdersList }) {
                   >
                     Total
                   </th>
-                  {/* <th
-                    scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                  >
-                    Status
-                  </th> */}
-                  {/* <th
-                    scope="col"
-                    className="px-3 py-3.5 text-right text-sm font-semibold text-gray-900"
-                  >
-                    Action
-                  </th> */}
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">

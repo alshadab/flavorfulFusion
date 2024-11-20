@@ -3,7 +3,7 @@ import { FaSearch } from "react-icons/fa";
 
 function GlobalHeaders({ title, searchFilter }) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 items-center pb-10 border-b-2">
+    <div className="grid grid-cols-1 md:grid-cols-2 items-center pb-5 border-b-2">
       <h1 className="font-extrabold pl-5 border-l-4 border-orange-600">
         {title}
       </h1>

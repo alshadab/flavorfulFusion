@@ -56,7 +56,7 @@ function AdminAllVendorsPage() {
       <div className="w-full bg-white rounded px-10 pt-10">
         <GlobalHeaders
           title={"All Vendors/Sellers/Shoppers"}
-          searchFilter={"User Full Name"}
+          // searchFilter={"User Full Name"}
         />
       </div>
 
