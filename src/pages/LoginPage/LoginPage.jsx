@@ -195,7 +195,9 @@ function LoginPage() {
               </Link>
             </div>
 
-            <div className="flex items-center justify-center mt-10">
+            {/* //Login with google// */}
+
+            {/* <div className="flex items-center justify-center mt-10">
               <button
                 onClick={handleGoogleLogin}
                 className="flex items-center gap-x-2 px-4 py-2 rounded bg-blue-500 text-white font-bold duration-200 hover:duration-200 hover:bg-blue-600"
@@ -203,7 +205,7 @@ function LoginPage() {
                 <FcGoogle className="bg-white text-2xl" />
                 Sign In With Google Account
               </button>
-            </div>
+            </div> */}
           </div>
         </form>
       </div>
