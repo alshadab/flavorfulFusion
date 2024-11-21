@@ -288,10 +288,10 @@ function SignUpPage() {
                   Login
                 </Link>
               </div>
-              <button className="flex items-center justify-center gap-x-2 px-4 py-2 mt-5 rounded bg-blue-500 text-white font-bold hover:bg-blue-600">
+              {/* <button className="flex items-center justify-center gap-x-2 px-4 py-2 mt-5 rounded bg-blue-500 text-white font-bold hover:bg-blue-600">
                 <FcGoogle className="text-2xl" />
                 Sign In With Google Account
-              </button>
+              </button> */}
             </div>
           </form>
           <div className="hidden lg:flex justify-center items-center p-5">

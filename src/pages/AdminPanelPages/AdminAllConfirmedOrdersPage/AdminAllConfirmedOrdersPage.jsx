@@ -21,11 +21,11 @@ useEffect(()=>{
 },[])
 
   return (
-    <div className="w-full h-full rounded-lg shadow-md px-10 py-10 bg-white">
+    <div className="w-full h-full rounded-lg shadow-md px-10 pb-10 bg-white">
       <div className="w-full bg-white rounded px-10 pt-10">
         <GlobalHeaders
           title={"All Confirmed Orders"}
-          searchFilter={"Customer Name"}
+          // searchFilter={"Customer Name"}
         />
       </div>
 

@@ -1,10 +1,7 @@
-// import React, { useEffect, useState } from "react";
-// import useRequest from "../../../APIServices/useRequest";
-
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import useRequest from "../../../APIServices/useRequest";
 
-function AdminCancelledOrdersTableItem({ order }) {
+function AdminAllConfirmedOrdersTableItems({ order }) {
   const [postRequest, getRequest] = useRequest();
   const [vendorData, setVendorData] = useState([]);
 
@@ -55,13 +52,24 @@ function AdminCancelledOrdersTableItem({ order }) {
         </div>
       </td>
       {/* <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-        {order.deliveryFee} $
-      </td> */}
+                        {order.deliveryFee} $
+                      </td> */}
+
       <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
         {order.allTotalPrice} Tk
       </td>
+      {/* <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+                    <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                      Active
+                    </span>
+                  </td>
+                  <td className="relative whitespace-nowrap py-5 pl-3 text-center text-sm font-medium sm:pr-0">
+                    <p className="text-indigo-600 hover:text-indigo-900">
+                      Edit<span className="sr-only">, {order.name}</span>
+                    </p>
+                  </td> */}
     </tr>
   );
 }
 
-export default AdminCancelledOrdersTableItem;
+export default AdminAllConfirmedOrdersTableItems;

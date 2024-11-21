@@ -1,22 +1,23 @@
 import React, { useState } from "react";
 import Paginations from "../../GlobalComponents/Paginations/Paginations";
+import AdminAllDeliveredOrdersTableItem from "./AdminAllDeliveredOrdersTableItem";
 
 export default function AdminAllDeliveredOrdersTable({ deliveredOrders }) {
   const [currentPage, setCurrentPage] = useState(1);
+ 
   const entriesPerPage = 5;
   const totalPages = Math.ceil(deliveredOrders.length / entriesPerPage);
 
-  // Slice the data for the current page
   const displayedPeople = deliveredOrders.slice(
     (currentPage - 1) * entriesPerPage,
     currentPage * entriesPerPage
   );
 
-  // Pagination handler functions
   const handlePrevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
   const handleNextPage = () =>
     setCurrentPage((prev) => Math.min(prev + 1, totalPages));
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
+
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
@@ -39,12 +40,12 @@ export default function AdminAllDeliveredOrdersTable({ deliveredOrders }) {
                     >
                       Quantity
                     </th>
-                    {/* <th
+                    <th
                     scope="col"
                     className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
                   >
                     Vendor
-                  </th> */}
+                  </th>
                     <th
                       scope="col"
                       className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
@@ -79,53 +80,7 @@ export default function AdminAllDeliveredOrdersTable({ deliveredOrders }) {
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white">
                   {displayedPeople.map((order, index) => (
-                    <tr>
-                      <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
-                        <div className="flex items-center">
-                          <div className="h-11 w-11 flex-shrink-0">
-                            <img
-                              className="h-11 w-11 rounded-full"
-                              src={`${process.env.REACT_APP_BackendURLIMG}/images/${order?.productThumb}`}
-                              alt=""
-                            />
-                          </div>
-                          <div className="ml-4">
-                            <div className="font-medium text-gray-900">
-                              {order?.productName}
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="whitespace-nowrap py-5 text-sm text-center text-gray-500">
-                        {order?.totalQuantity}
-                      </td>
-                      <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm sm:pl-0">
-                        <div className="flex items-center">
-                          <div className="ml-4">
-                            <div className="font-medium text-gray-900">
-                              {order.userFullName}
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      {/* <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                        {order.deliveryFee} $
-                      </td> */}
-                      
-                      <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                        {order.allTotalPrice} Tk
-                      </td>
-                      {/* <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                    <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                      Active
-                    </span>
-                  </td>
-                  <td className="relative whitespace-nowrap py-5 pl-3 text-center text-sm font-medium sm:pr-0">
-                    <p className="text-indigo-600 hover:text-indigo-900">
-                      Edit<span className="sr-only">, {order.name}</span>
-                    </p>
-                  </td> */}
-                    </tr>
+                    <AdminAllDeliveredOrdersTableItem order={order} index={index}/>
                   ))}
                 </tbody>
               </table>

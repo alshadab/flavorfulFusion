@@ -100,7 +100,7 @@ function AdminFAQ() {
         </div>
 
         <div className="flex items-center gap-x-5">
-          <div className="relative">
+          {/* <div className="relative">
             <input
               type="text"
               placeholder="Search by Title"
@@ -109,7 +109,7 @@ function AdminFAQ() {
             <span className="absolute inset-y-0 left-3 flex items-center text-gray-400">
               🔍
             </span>
-          </div>
+          </div> */}
 
           <button
             onClick={handleOpenCreateModal}
