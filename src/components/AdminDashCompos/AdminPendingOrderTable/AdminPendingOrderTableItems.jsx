@@ -31,7 +31,7 @@ function AdminPendingOrderTableItems({ person }) {
         </div>
       </td>
       <td className="whitespace-nowrap py-5 text-sm text-left pl-8 text-gray-500">
-        {person?.totalQuantity ? person?.totalQuantity : 0}
+        {person?.totalQuantity ? person?.totalQuantity : 0} Kg
       </td>
       <td className="whitespace-nowrap py-5 pr-3 text-sm sm:pl-0">
         <div className="flex items-center">

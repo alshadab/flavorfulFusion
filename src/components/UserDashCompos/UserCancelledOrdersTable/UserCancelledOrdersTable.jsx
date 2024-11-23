@@ -77,7 +77,7 @@ export default function UserCancelledOrdersTable({ cancelOrderList }) {
                           />
                         </div>
                         <div className="ml-4">
-                          <div className="font-medium text-gray-900">
+                          <div className="font-mediFFum text-gray-900">
                             {product.productName}
                           </div>
                           {/* <div className="mt-1 text-gray-500">
@@ -87,7 +87,7 @@ export default function UserCancelledOrdersTable({ cancelOrderList }) {
                       </div>
                     </td>
                     <td className="whitespace-nowrap py-5 text-sm text-left pl-10 text-gray-500">
-                      {product?.totalQuantity}
+                      {product?.totalQuantity} Kg
                     </td>
                     <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                       {product && product?.deliveryFee

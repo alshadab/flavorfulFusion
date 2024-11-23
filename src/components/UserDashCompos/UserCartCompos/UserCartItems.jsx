@@ -11,9 +11,6 @@ function UserCartItems({ item, removeFromCart, confirmCartItem }) {
           src={`${process.env.REACT_APP_BackendURLIMG}/images/${item?.productImage}`}
           alt="Apples"
         />
-        {/* <span class="absolute top-2 right-2 bg-yellow-400 text-white text-sm font-semibold px-2 py-1 rounded-full">
-          20%
-        </span> */}
       </div>
 
       <div class="mt-5 text-left">
@@ -21,9 +18,9 @@ function UserCartItems({ item, removeFromCart, confirmCartItem }) {
         <p class="mt-2 text-md text-gray-900">
           Quantity:{' '}
           <span className="italic text-orange-500 font-extrabold">
-            {item?.quantity}
+            {item?.quantity} 
           </span>{' '}
-          pieces
+          Kg
         </p>
         <div class="flex items-end justify-between">
           <div className="flex items-start gap-x-2">

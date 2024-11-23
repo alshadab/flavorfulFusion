@@ -6,26 +6,52 @@ import UserUpdateInformationCompo from "../../../components/UserDashCompos/UserD
 import Swal from "sweetalert2";
 
 function UserDashHomePage() {
-  const { user } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
+  const [formData, setFormData] = useState({
+    userName: "",
+    userFullName: "",
+    userEmail: "",
+    phoneNumber: "",
+    gender: "",
+    shippingAddress: "",
+    shippingState: "",
+    shippingPostalCode: "",
+  });
+
+  // console.log(user);
 
   const [postRequest, getRequest] = useRequest();
   const [customerDetails, setCustomerDetails] = useState();
   const [uptUserInfo, setUptUserInfo] = useState(false);
 
-  const updateUserInfo = async (updatedInfo) =>{
-    try{
-      const updateData = postRequest(`/users/upt/${user?._id}`, {updatedInfo});
-      console.log(updateData, "Update Data");
-      if(updateData){
+  const updateUserInfo = async (updatedInfo) => {
+    try {
+      const getCookie = JSON.parse(localStorage.getItem("userCreds"));
+
+      const updatedData = {
+        ...getCookie,
+        userName: formData.userName,
+        userEmail: formData.userEmail,
+        phoneNumber: formData.phoneNumber,
+        userFullName: formData.userFullName,
+        gender: formData.gender,
+      };
+
+      const updateData = postRequest(`/users/upt/${user?._id}`, {
+        updatedInfo,
+      });
+      if (updateData) {
+        setUser(updatedData);
         Swal.fire(`Successfully Update`);
         setUptUserInfo(!uptUserInfo);
-      }else{
+        localStorage.setItem("userCreds", JSON.stringify(updatedData));
+      } else {
         Swal.fire("Failed to Update");
       }
-    }catch(error){
+    } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const fetchCustomerDetails = async () => {
     try {
@@ -37,7 +63,6 @@ function UserDashHomePage() {
       console.log(error);
     }
   };
-
 
   useEffect(() => {
     fetchCustomerDetails();
@@ -52,7 +77,13 @@ function UserDashHomePage() {
         <UserPersonalInfo customerDetails={customerDetails} user={user} />
       </div>
       <div className="mt-10">
-        <UserUpdateInformationCompo customerDetails={customerDetails} user={user} updateUserInfo={updateUserInfo}/>
+        <UserUpdateInformationCompo
+          formData={formData}
+          setFormData={setFormData}
+          customerDetails={customerDetails}
+          user={user}
+          updateUserInfo={updateUserInfo}
+        />
       </div>
     </div>
   );

@@ -1,17 +1,18 @@
-import React, { useContext, useState } from 'react';
-import useRequest from '../../../APIServices/useRequest';
-import { AuthContext } from '../../../providers/AuthProviders';
-import { FaRegTrashCan } from 'react-icons/fa6';
-import Swal from 'sweetalert2';
+import React, { useContext, useEffect, useState } from "react";
+import useRequest from "../../../APIServices/useRequest";
+import { AuthContext } from "../../../providers/AuthProviders";
+import { FaRegTrashCan } from "react-icons/fa6";
+import Swal from "sweetalert2";
 
 function UserDashAllCarts() {
-  const { cartItem, setLoading, loading, removeFromCart, setCartItem } =
+  const { cartItem, setLoading, loading, removeFromCart, setCartItem, user } =
     useContext(AuthContext);
 
   const [postRequest, getRequest] = useRequest();
   const [items, setItems] = useState(cartItem);
   const [loadingTwo, setLoadingTwo] = useState(false);
   const [stocks, setStocks] = useState([]);
+  const [orderIds, setOrderIds] = useState([]);
 
   // Calculate total price
   const calculateTotalPrice = () =>
@@ -48,7 +49,7 @@ function UserDashAllCarts() {
       setLoading(false);
     } catch (error) {
       console.log(error);
-      Swal.fire('Failed to remove the item from the cart');
+      Swal.fire("Failed to remove the item from the cart");
       setLoading(false);
     }
   };
@@ -57,24 +58,58 @@ function UserDashAllCarts() {
   const placeOrder = async () => {
     try {
       setLoadingTwo(true);
-      const orderPromises = items.map((item) =>
-        postRequest('/orders/crt', { cartId: item?._id })
-      );
+
+      const orderPromises = items.map(async (item) => {
+        const response = await postRequest("/orders/crt", {
+          cartId: item?._id,
+        });
+
+        if (response?.data?.data) {
+          setOrderIds((prevOrderIds) => [
+            ...prevOrderIds,
+            response?.data?.data?._id,
+          ]);
+        }
+
+        return response;
+      });
+
       const orderConfirm = await Promise.all(orderPromises);
+
       if (orderConfirm) {
         setCartItem([]);
-        Swal.fire('Successfull Placed the Order');
+        Swal.fire("Successfully Placed the Order and Created the Receipts");
         setItems([]);
-
         setLoadingTwo(false);
       }
-
-      setLoadingTwo(false);
     } catch (error) {
-      console.log('Error placing order:', error);
+      console.log("Error placing order:", error);
+    } finally {
       setLoadingTwo(false);
     }
   };
+
+  const createReceipt = async () => {
+    if (orderIds.length > 0) {
+      try {
+        const response = await postRequest("/receipts/crt", {
+          buyerId: user?._id,
+          orderIds: orderIds,
+        });
+        if (response?.data?.success) {
+          Swal.fire("Receipt Created Successfully");
+        }
+      } catch (error) {
+        console.log("Error creating receipt:", error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (orderIds.length > 0) {
+      createReceipt();
+    }
+  }, [orderIds]);
 
   return (
     <>
@@ -91,7 +126,7 @@ function UserDashAllCarts() {
                 <div className="flex items-start justify-between text-xl pb-5 border-b-2 border-gray-300">
                   <h1 className="font-extrabold">Shopping Cart</h1>
                   <p className="font-semibold">
-                    Total Items:{' '}
+                    Total Items:{" "}
                     <span className="font-normal">{items.length}</span>
                   </p>
                 </div>
@@ -168,7 +203,7 @@ function UserDashAllCarts() {
 
                         <div className="col-span-2 text-left text-sm">
                           <p>
-                            TK {(item.productPrice * item.quantity).toFixed(2)}
+                            TK {(item.productPrice * item.quantity).toFixed(2)}  
                           </p>
                         </div>
 
@@ -203,11 +238,11 @@ function UserDashAllCarts() {
                         <div className="flex items-center gap-x-2">
                           <p>{index + 1}.</p>
                           <p>
-                            {item.productName} x {item.quantity}
+                            {item.productName} x {item.quantity} Kg
                           </p>
                         </div>
                         <p>
-                          TK {(item.productPrice * item.quantity).toFixed(2)}
+                          TK {(item.productPrice * item.quantity).toFixed(2)} Kg
                         </p>
                       </div>
                     ))}

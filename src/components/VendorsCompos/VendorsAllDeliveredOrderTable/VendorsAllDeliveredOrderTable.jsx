@@ -96,7 +96,7 @@ export default function VendorsAllDeliveredOrderTable({ allDeliveredOrders }) {
                       {order?.userFullName}
                     </td>
                     <td className="whitespace-nowrap py-5 text-sm text-left pl-10 text-gray-500">
-                      {order?.totalQuantity}
+                      {order?.totalQuantity} Kg
                     </td>
                     {/* <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                       {product && product?.deliveryFee

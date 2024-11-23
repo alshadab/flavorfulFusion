@@ -1,16 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function UserUpdateInformationCompo({ customerDetails, user, updateUserInfo }) {
-  const [formData, setFormData] = useState({
-    userName: "",
-    userFullName: "",
-    userEmail: "",
-    phoneNumber: "",
-    gender: "",
-    shippingAddress: "",
-    shippingState: "",
-    shippingPostalCode: "",
-  });
+function UserUpdateInformationCompo({ customerDetails, user, updateUserInfo, formData, setFormData }) {
 
   const [hasChanged, setHasChanged] = useState({});
   const [isAnyFieldChanged, setIsAnyFieldChanged] = useState(false);

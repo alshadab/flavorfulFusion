@@ -108,7 +108,7 @@ function UserOrdersDetailsCompo({ order, index, handleOrderDelivered }) {
             </div>
             <div className="flex items-center justify-between">
               <h1 className="">Product Quantity: </h1>
-              <p className="">{order?.totalQuantity}</p>
+              <p className="">{order?.totalQuantity} Kg</p>
             </div>
             <div className="mt-4 flex items-center justify-between">
               <h1 className="">Sub Total: </h1>
@@ -156,7 +156,7 @@ function UserOrdersDetailsCompo({ order, index, handleOrderDelivered }) {
             </thead>
             <tbody>
               <tr className="border-b hover:bg-gray-50">
-                <td className="p-4 flex items-center h-20 md:h-0">
+                <td className="p-4 flex items-center">
                   <img
                     src={`${process.env.REACT_APP_BackendURLIMG}/images/${order?.productThumb}`}
                     alt="Product"
@@ -164,7 +164,7 @@ function UserOrdersDetailsCompo({ order, index, handleOrderDelivered }) {
                   />
                   <span>{order?.productName}</span>
                 </td>
-                <td className="p-4 pl-5 md:pl-0">{order?.totalQuantity}</td>
+                <td className="p-4 pl-5 md:pl-0">{order?.totalQuantity} Kg</td>
                 <td className="p-4">TK {order?.productSellingPrice}</td>
                 {/* <td className="p-4">TK {order?.deliveryFee}</td> */}
                 <td className="p-4">TK {order?.allTotalPrice}</td>
