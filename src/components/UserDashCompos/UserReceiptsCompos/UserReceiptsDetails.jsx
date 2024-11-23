@@ -98,7 +98,7 @@ function UserReceiptsDetails({ receipt, receiptIndex, userDetails }) {
               <div className="font-semibold mt-2 py-2 bg-orange-600 px-5 text-center">
                 <h1 className="text-xl font-extrabold text-white">
                   {" "}
-                  Total: <span className="font-normal">{20} Tk</span>
+                  Total: <span className="font-normal">{receipt?.totalOrderPrice} Tk</span>
                 </h1>
               </div>
             </div>
