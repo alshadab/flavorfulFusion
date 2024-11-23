@@ -66,8 +66,8 @@ function UserDashAllOrders() {
   return (
     <>
       {ordersList && ordersList.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-12">
-          <div className="col-span-3 h-[85vh] overflow-y-scroll pr-5">
+        <div className="h-[86vh] grid grid-cols-1 md:grid-cols-12">
+          <div className="col-span-3 h-full overflow-y-auto pr-5">
             <h1 className="text-xl font-bold">
               Orders List{" "}
               <span className="text-orange-600">({ordersList.length})</span>

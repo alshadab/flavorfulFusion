@@ -37,7 +37,7 @@ function AdminAllConfirmedOrdersTableItems({ order }) {
         </div>
       </td>
       <td className="whitespace-nowrap py-5 text-sm text-left pl-8 text-gray-500">
-        {order?.totalQuantity}
+        {order?.totalQuantity} Kg
       </td>
       <td className="whitespace-nowrap py-5 text-sm text-left pl-0 text-gray-500">
         {vendorData?.userFullName}

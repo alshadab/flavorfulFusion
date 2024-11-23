@@ -16,7 +16,7 @@ import {
 import {
   Bars3Icon,
   ShoppingBagIcon,
-  Cog6ToothIcon,
+  ReceiptPercentIcon,
   XMarkIcon,
   ArchiveBoxIcon,
   StarIcon,
@@ -92,12 +92,16 @@ const navigationTwo = [
     accordion: false,
     navigation: "/userdeliveredorders",
   },
+  {
+    name: "Receipts",
+    href: "#",
+    icon: ReceiptPercentIcon,
+    current: false,
+    accordion: false,
+    navigation: "/userallreceipts",
+  },
 ];
 
-const userNavigation = [
-  { name: "Your profile", href: "#" },
-  { name: "Sign out", href: "#" },
-];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");

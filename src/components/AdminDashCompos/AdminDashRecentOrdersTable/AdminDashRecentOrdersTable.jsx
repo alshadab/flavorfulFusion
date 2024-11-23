@@ -108,7 +108,7 @@ export default function AdminDashRecentOrdersTable() {
                       </div>
                     </td>
                     <td className="whitespace-nowrap py-5 text-sm text-center text-gray-500">
-                      6
+                      6 Kg
                     </td>
                     <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                       October 25th, 2024

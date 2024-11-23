@@ -46,6 +46,7 @@ import AdminPrivateRoute from "./AdminPrivateRoute";
 import VendorPrivateRoute from "./VendorPrivateRoute";
 import BuyerPrivateRoute from "./BuyerPrivateRoute";
 import AminRecommendations from "../pages/AdminPanelPages/AdminRecommendations/AminRecommendations";
+import UserRecieptsPage from "../pages/UserPanelPages/UserReceiptsPage/UserRecieptsPage";
 
 const router = createBrowserRouter([
   {
@@ -156,6 +157,16 @@ const router = createBrowserRouter([
           <BuyerPrivateRoute>
             <PrivateRoute>
               <UserPendingOrders />
+            </PrivateRoute>
+          </BuyerPrivateRoute>
+        ),
+      },
+      {
+        path: "/userallreceipts",
+        element: (
+          <BuyerPrivateRoute>
+            <PrivateRoute>
+              <UserRecieptsPage />
             </PrivateRoute>
           </BuyerPrivateRoute>
         ),

@@ -77,7 +77,7 @@ function UserOrdersList({ order, index, onSelect, isSelected }) {
         </div>
         <div className="mb-2 flex items-center justify-between">
           <p>Total Quantity:</p>
-          <p>{order.totalQuantity}</p>
+          <p>{order.totalQuantity} Kg</p>
         </div>
         <div className="mb-2 flex items-center justify-between">
           <p>Order Placing Date:</p>

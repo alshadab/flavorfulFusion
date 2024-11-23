@@ -112,7 +112,7 @@ function HomePageIndividualProduct({ product }) {
         </div>
 
         <p className="text-sm text-gray-500">
-          Quantity Remaining: <span className="italic">{stock}</span> pieces
+          Quantity Remaining: <span className="italic">{stock}</span> Kg
         </p>
         {user && user.userType === 103 ? (
           <div className="mt-3 flex items-center space-x-2">
