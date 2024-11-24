@@ -18,7 +18,6 @@ function UserDashHomePage() {
     shippingPostalCode: "",
   });
 
-  // console.log(user);
 
   const [postRequest, getRequest] = useRequest();
   const [customerDetails, setCustomerDetails] = useState();

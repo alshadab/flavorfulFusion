@@ -15,6 +15,7 @@ import {
 import {
   Bars3Icon,
   Cog6ToothIcon,
+  UserCircleIcon,
   HomeIcon,
   XMarkIcon,
   ArchiveBoxIcon,
@@ -40,6 +41,14 @@ const navigation = [
     current: false,
     accordion: false,
     navigation: '/vendordash',
+  },
+  {
+    name: 'Profile',
+    href: '#',
+    icon: UserCircleIcon,
+    current: false,
+    accordion: false,
+    navigation: '/vendorprofile',
   },
   {
     name: 'My Products',

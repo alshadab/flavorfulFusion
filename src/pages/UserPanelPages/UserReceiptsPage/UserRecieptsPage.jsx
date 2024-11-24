@@ -62,7 +62,7 @@ function UserRecieptsPage() {
                   </div>
                   <div className="mt-1 flex items-center justify-between">
                     <h1 className="font-bold text-sm">Product Quantity: </h1>
-                    <p className="text-xs">{receipt?.totalProductQuantity} Kg</p>
+                    <p className="text-xs">{receipt?.totalProductQuantity}</p>
                   </div>
                 </div>
               </div>
