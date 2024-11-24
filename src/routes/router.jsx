@@ -47,6 +47,7 @@ import VendorPrivateRoute from "./VendorPrivateRoute";
 import BuyerPrivateRoute from "./BuyerPrivateRoute";
 import AminRecommendations from "../pages/AdminPanelPages/AdminRecommendations/AminRecommendations";
 import UserRecieptsPage from "../pages/UserPanelPages/UserReceiptsPage/UserRecieptsPage";
+import VendorProfilePage from "../pages/VendorPanelPages/VendorProfilePage/VendorProfilePage";
 
 const router = createBrowserRouter([
   {
@@ -177,6 +178,16 @@ const router = createBrowserRouter([
     path: "/",
     element: <VendorDashLayout />,
     children: [
+      {
+        path: "/vendorprofile",
+        element: (
+          <VendorPrivateRoute>
+            <PrivateRoute>
+              <VendorProfilePage />
+            </PrivateRoute>
+          </VendorPrivateRoute>
+        ),
+      },
       {
         path: "/vendordash",
         element: (

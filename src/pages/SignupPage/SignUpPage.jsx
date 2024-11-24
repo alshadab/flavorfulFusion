@@ -37,6 +37,7 @@ function SignUpPage() {
   };
 
   const handleSignUpUser = async (event) => {
+    try{
     setLoading(true);
     event.preventDefault();
     // console.log("image", image);
@@ -92,6 +93,10 @@ function SignUpPage() {
       Swal.fire('Created User');
       navigate('/login');
     }
+  }catch(error){
+    console.log(error?.response?.data?.message);
+    Swal.fire(error?.response?.data?.message);
+  }
   };
 
   return (

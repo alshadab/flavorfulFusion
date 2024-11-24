@@ -48,14 +48,9 @@ function UserRecieptsPage() {
                 } hover:cursor-pointer`}
               >
                 <div>
-                  <div className="text-xs">
-                    <h1 className="font-extrabold">
-                      Receipt Number: <span>{index + 1}</span>
-                    </h1>
-                  </div>
                   <div className="">
-                    <h1 className="font-extrabold text-sm">Receipt Key: </h1>
-                    <p className="text-xs">{receipt?.uniqueKeyId}</p>
+                    <h1 className="font-extrabold text-sm">Invoice Number: </h1>
+                    <p className="text-sm">{receipt?.uniqueKeyId}</p>
                   </div>
                 </div>
                 <div>
@@ -67,7 +62,7 @@ function UserRecieptsPage() {
                   </div>
                   <div className="mt-1 flex items-center justify-between">
                     <h1 className="font-bold text-sm">Product Quantity: </h1>
-                    <p className="text-xs">{receipt?.totalProductQuantity} Kg</p>
+                    <p className="text-xs">{receipt?.totalProductQuantity}</p>
                   </div>
                 </div>
               </div>

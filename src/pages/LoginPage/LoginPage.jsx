@@ -38,6 +38,7 @@ function LoginPage() {
       // Redirect after successful login
       setTimeout(() => navigate("/"), 2000);
     } catch (error) {
+      console.log(error);
       Swal.fire({
         icon: "error",
         title: "Login Failed",
@@ -140,43 +141,6 @@ function LoginPage() {
               />
             </div>
 
-            {/* Role Selection Section */}
-            {/* <div className="mt-5 flex justify-between">
-              <button
-                type="button"
-                className={`w-full py-1 mr-2 rounded-lg ${
-                  selectedRole === 103
-                    ? "bg-orange-600 text-white"
-                    : "bg-white text-black"
-                } font-bold duration-200 hover:cursor-pointer`}
-                onClick={() => setSelectedRole(103)}
-              >
-                As Buyer
-              </button>
-              <button
-                type="button"
-                className={`w-full py-1 ml-2 rounded-lg ${
-                  selectedRole === 101
-                    ? "bg-orange-600 text-white"
-                    : "bg-white text-black"
-                } font-bold duration-200 hover:cursor-pointer`}
-                onClick={() => setSelectedRole(101)}
-              >
-                As Vendor
-              </button>
-              <button
-                type="button"
-                className={`w-full py-1 ml-2 rounded-lg ${
-                  selectedRole === 109
-                    ? "bg-orange-600 text-white"
-                    : "bg-white text-black"
-                } font-bold duration-200 hover:cursor-pointer`}
-                onClick={() => setSelectedRole(109)}
-              >
-                As Admin
-              </button>
-            </div> */}
-
             <div>
               <input
                 type="submit"
@@ -194,10 +158,6 @@ function LoginPage() {
                 </p>
               </Link>
             </div>
-
-            {/* //Login with google// */}
-
-            
           </div>
         </form>
       </div>
