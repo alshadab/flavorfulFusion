@@ -242,7 +242,7 @@ function UserDashAllCarts() {
                           </p>
                         </div>
                         <p>
-                          TK {(item.productPrice * item.quantity).toFixed(2)} Kg
+                          TK {(item.productPrice * item.quantity).toFixed(2)}
                         </p>
                       </div>
                     ))}

@@ -28,12 +28,8 @@ function UserReceiptsDetails({ receipt, receiptIndex, userDetails }) {
     <div>
       <div className="grid grid-cols-2 items-center mt-5 pb-2 border-b-2 border-orange-600">
         <div>
-          <h1 className="font-semibold">
-            Invoice Number: <span className="font-normal">{receiptIndex}</span>
-          </h1>
-          <h1 className="font-semibold">
-            Receipt Key:{" "}
-            <span className="font-normal">{receipt?.uniqueKeyId}</span>
+          <h1 className="font-semibold text-sm">
+            Invoice Number: <span className="font-normal">{receipt?.uniqueKeyId}</span>
           </h1>
         </div>
         <div className="w-full h-full bg-orange-600 flex justify-center items-center">
@@ -93,7 +89,7 @@ function UserReceiptsDetails({ receipt, receiptIndex, userDetails }) {
             <div className="w-full"></div>
             <div className="w-full">
               <h1 className="font-semibold text-cenrter">
-                Product Amount: <span className="font-normal">{receipt.orderIds.length}</span>
+                Product Quantity: <span className="font-normal">{receipt.orderIds.length}</span>
               </h1>
               <div className="font-semibold mt-2 py-2 bg-orange-600 px-5 text-center">
                 <h1 className="text-xl font-extrabold text-white">
