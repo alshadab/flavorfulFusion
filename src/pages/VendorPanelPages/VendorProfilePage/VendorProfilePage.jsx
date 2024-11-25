@@ -76,7 +76,7 @@ function VendorProfilePage() {
               {
                 label: "Contact",
                 value: user?.phoneNumber,
-                field: "userNumber",
+                field: "phoneNumber",
               },
               { label: "Username", value: user?.userName, field: "userName" },
               { label: "Gender", value: user?.gender, field: "gender" },
