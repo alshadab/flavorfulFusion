@@ -94,7 +94,6 @@ function UserUpdateInformationCompo({ customerDetails, user, updateUserInfo, for
         />
       </div>
 
-      {/* PhoneNumber Field */}
       <div className="relative flex flex-col">
         <label htmlFor="phoneNumber" className="mb-1 text-gray-600 capitalize">
           Phone Number
