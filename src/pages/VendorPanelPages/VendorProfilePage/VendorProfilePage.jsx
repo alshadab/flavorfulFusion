@@ -22,6 +22,8 @@ function VendorProfilePage() {
   const handleSave = async () => {
     setIsLoading(true);
 
+    const getCookie = JSON.parse(localStorage.getItem("userCreds"));
+
     if (!modalData || !inputValue || !modalData.field) {
       Swal.fire("Error", "Missing field data", "error");
       setIsLoading(false);
@@ -29,12 +31,18 @@ function VendorProfilePage() {
     }
 
     const payload = { [modalData.field]: inputValue };
-
+    // console.log(payload, "Modal Data");
     try {
       const response = await postRequest(`/users/upt/${user._id}`, {
         updatedInfo: payload,
       });
 
+      const newData = {
+        ...getCookie,
+        ...payload
+      }
+
+      localStorage.setItem("userCreds", JSON.stringify(newData));
       if (response && response.status === 200) {
         setUser({ ...user, ...payload });
         Swal.fire("Update Successful", "", "success");
