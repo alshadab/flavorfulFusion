@@ -15,7 +15,7 @@ function CategorySelector({fetchProductByCategory, fetchAllProds}) {
             <BsShop className="text-4xl md:text-6xl text-white" />
             <div>
               <h1 className="text-lg md:text-3xl font-bold text-white text-center md:text-left">All Groceries</h1>
-              <p className="font-semibold text-sm text-white">
+              <p className="font-semibold text-sm text-white md:text-left">
                 Collection of All Products
               </p>
             </div>
@@ -28,7 +28,7 @@ function CategorySelector({fetchProductByCategory, fetchAllProds}) {
             <LuVegan className="text-4xl md:text-6xl text-white" />
             <div>
               <h1 className="text-lg md:text-3xl font-bold text-white text-center md:text-left">Vegetables</h1>
-              <p className="font-semibold text-sm text-white">
+              <p className="font-semibold text-sm text-white md:text-left">
                 Fresh And Affordable
               </p>
             </div>
@@ -41,7 +41,7 @@ function CategorySelector({fetchProductByCategory, fetchAllProds}) {
             <GiFruitTree className="text-4xl md:text-6xl text-white" />
             <div>
               <h1 className="text-lg md:text-3xl font-bold text-white text-center md:text-left">Fruits</h1>
-              <p className="font-semibold text-sm text-white">
+              <p className="font-semibold text-sm text-white md:text-left">
                 Delicious and Flavourable
               </p>
             </div>
@@ -54,7 +54,7 @@ function CategorySelector({fetchProductByCategory, fetchAllProds}) {
             <GiFruitBowl className="text-4xl md:text-6xl text-white" />
             <div>
               <h1 className="text-lg md:text-3xl font-bold text-white text-center md:text-left">Others</h1>
-              <p className="font-semibold text-sm text-white">
+              <p className="font-semibold text-sm text-white md:text-left">
                 Supplementary Daily Needs
               </p>
             </div>
